@@ -5165,6 +5165,7 @@ ac0b30355fab5a54 plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 3eb69ebe112e7530 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/urf/img/ready-check-background.png
 e962dbbefe687a60 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/urf/sound/music-cs-allrandom-urf.ogg
 b4b87074818e112b plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/urf/sound/music-inqueue-loop-urf.ogg
+bae9a39b6fb65b21 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/champ-select-background.jpg
 180cf87d15b74860 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/champ-select-flyout-background.jpg
 1a70f4de97f6dcb2 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/game-select-icon-default.png
 2c1f7a9041f9d830 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/game-select-icon-disabled.png
@@ -5175,6 +5176,7 @@ a69768ab56cbba7b plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 3a3cbdb85d5b588c plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/icon-leaver.png
 5da0a9bd00b648dc plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/icon-victory.png
 9e372712eeb1c4fd plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/parties-background.jpg
+db166c6d293bce82 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/postgame-background.jpg
 d9762f99f851d16e plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/social-icon-leaver.png
 2649a4dfff440dbc plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/img/social-icon-victory.png
 4c928e7f395c8de3 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/sound/champ-select-background.ogg
@@ -5186,6 +5188,7 @@ bbfb6196fb92669b plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 31e5178a573b6918 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/video/game-select-icon-intro.webm
 95b1eef2de6abd65 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/video/icon-defeat.webm
 224f3d9502dba858 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map10/video/icon-victory.webm
+79b91a1555979366 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/champ-select-background.jpg
 c29065ac428faa95 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/champ-select-flyout-background.jpg
 1494e09d0883f03a plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/champ-select-planning-intro.jpg
 d81c9dc80fd54733 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/game-select-icon-default.png
@@ -5197,6 +5200,7 @@ a1305f70361f4432 plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 29cf4fe9a0e5d0bc plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/icon-leaver.png
 438c61907e6a711a plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/icon-victory.png
 f053838d67488bdd plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/parties-background.jpg
+da61cc2946a2ad9a plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/postgame-background.jpg
 7e145d4f5c33affb plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/social-icon-leaver.png
 09c9a18fc08355fe plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/img/social-icon-victory.png
 13cfe9e73ae38077 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/sound/champ-select-background.ogg
@@ -5208,6 +5212,7 @@ f8bb1fe2adfa5d5b plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 217cf484afa424a4 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/video/game-select-icon-intro.webm
 eafcf7358a3f78ec plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/video/icon-defeat.webm
 ee3d27e589bdf986 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map11/video/icon-victory.webm
+a36e1244f603589a plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/champ-select-background.jpg
 7fba880d31afdfad plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/champ-select-flyout-background.png
 4ce7b65143c63814 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/game-select-icon-default.png
 17e69931819e7719 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/game-select-icon-disabled.png
@@ -5218,6 +5223,7 @@ fca6a276a5994975 plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 4357323d517e9f22 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/icon-leaver.png
 9b69b2125ddd14fe plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/icon-victory.png
 b143e964ec872640 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/parties-background.jpg
+2c09beaf5926234b plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/postgame-background.jpg
 a120e7a61f446343 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/social-icon-leaver.png
 1330061d539539f8 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/img/social-icon-victory.png
 5de7dabb4955222a plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/sound/champ-select-background.ogg
@@ -5229,6 +5235,7 @@ e51fbb569de6479b plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 4f68ecc77c9eaa1c plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/video/game-select-icon-intro.webm
 70e5107e7d2890b5 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/video/icon-defeat.webm
 c982dd148b513ab7 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map12/video/icon-victory.webm
+1e52337f613aa357 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/champ-select-background.jpg
 9ee1d23ce2efb5ce plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/champ-select-flyout-background.jpg
 58d981be9f95cb71 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/game-select-icon-default.png
 af68f494dbee0288 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/game-select-icon-disabled.png
@@ -5239,6 +5246,7 @@ c4dc3b5b617a3a51 plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 abd0645d2d5bbbea plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/icon-leaver.png
 7d25bdf8b878928b plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/icon-victory.png
 9c4eb2feea25de33 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/parties-background.jpg
+68b94b1c660ed373 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/postgame-background.jpg
 5ddc42e9f54dce4c plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/social-icon-leaver.png
 9b447aee5f87cba8 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/img/social-icon-victory.png
 1ed397481c670305 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/mapassets/map8/sound/champ-select-background.ogg
