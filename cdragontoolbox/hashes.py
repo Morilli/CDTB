@@ -6,6 +6,7 @@ import itertools
 import signal
 import time
 import json
+import struct
 import logging
 from contextlib import contextmanager
 from typing import Dict
@@ -683,7 +684,12 @@ class GameHashGuesser(HashGuesser):
                     # preload files
                     data = wadfile.read_data(f)
                     fmt = os.path.dirname(wadfile.path) + '/%s.preload'
-                    self.check_iter(fmt % m.group(1).lower().decode('ascii') for m in re.finditer(br'Name="([^"]+)"', data))
+                    for m in re.finditer(br'Name="([^"]+)"', data):
+                        path = m.group(1).lower().decode('ascii')
+                        if path.endswith('.lua'):
+                            self.check(path[:-4] + '.luabin')
+                        else:
+                            self.check(fmt % path)
 
                 elif wadfile.ext in ('hls', 'ps_2_0', 'ps_3_0', 'vs_2_0', 'vs_3_0'):
                     # shader: search for includes
@@ -701,7 +707,20 @@ class GameHashGuesser(HashGuesser):
     def grep_file(self, path):
         with open(path, "rb") as f:
             # find strings based on prefix, then parse the length
-            for m in re.finditer(br'((?:ASSETS|DATA)/[0-9a-zA-Z_. /-]+)', f.read()):
-                path = m.group(1)
-                self.check(path.lower().decode('ascii'))
+            paths = set()
+            for m in re.finditer(br'(..\x00\x00|.[\x00-\x02])?((?:ASSETS|DATA)/[0-9a-zA-Z_. /-]+)', f.read()):
+                prefix, path = m.groups()
+                path = path.lower().decode('ascii')
+                paths.add(path)
+                if prefix:
+                    if len(prefix) == 4:
+                        paths.add(path[:struct.unpack('<L', prefix)[0]])
+                    elif len(prefix) == 2:
+                        paths.add(path[:struct.unpack('<H', prefix)[0]])
+
+        for p in paths:
+            if p.endswith('.lua'):
+                self.check(p[:-4] + '.luabin')
+            else:
+                self.check(p)
 
