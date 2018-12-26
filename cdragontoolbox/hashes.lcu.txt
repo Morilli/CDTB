@@ -28755,6 +28755,7 @@ ab7b9d80b2e2291a plugins/rcp-fe-lol-honor/global/default/assets/celebration/3_le
 885d10d4c848cbbf plugins/rcp-fe-lol-honor/global/default/assets/celebration/3_levelup_low_spec_shadowless.png
 6101b3e662170c6f plugins/rcp-fe-lol-honor/global/default/assets/celebration/3_levelup_swirls_intro.webm
 26eafe271e362a61 plugins/rcp-fe-lol-honor/global/default/assets/celebration/3_levelup_swirls_loop.webm
+9ed22d955855b729 plugins/rcp-fe-lol-honor/global/default/assets/celebration/3_transition.webm
 312e73339adc3df4 plugins/rcp-fe-lol-honor/global/default/assets/celebration/4-1_checkpoint_intro.webm
 2625e18417062553 plugins/rcp-fe-lol-honor/global/default/assets/celebration/4-1_checkpoint_loop.webm
 76a76b00c22f26aa plugins/rcp-fe-lol-honor/global/default/assets/celebration/4-1_checkpoint_low_spec.png
@@ -28773,6 +28774,7 @@ fbed95e516fbeb4b plugins/rcp-fe-lol-honor/global/default/assets/celebration/4_fr
 b3f28c4cbfc9268c plugins/rcp-fe-lol-honor/global/default/assets/celebration/4_levelup_low_spec_shadowless.png
 79feb69f76d8933f plugins/rcp-fe-lol-honor/global/default/assets/celebration/4_levelup_swirls_intro.webm
 1e1d8a42847a7ef2 plugins/rcp-fe-lol-honor/global/default/assets/celebration/4_levelup_swirls_loop.webm
+ee862b500a3102b7 plugins/rcp-fe-lol-honor/global/default/assets/celebration/4_transition.webm
 ac372e8ff1ad2b85 plugins/rcp-fe-lol-honor/global/default/assets/celebration/5_checkpoint_outro.webm
 9c834caace4c194f plugins/rcp-fe-lol-honor/global/default/assets/celebration/5_levelup_intro.webm
 4aa18d1840b62135 plugins/rcp-fe-lol-honor/global/default/assets/celebration/5_levelup_loop.webm
@@ -28780,6 +28782,7 @@ cbc7e7256da35176 plugins/rcp-fe-lol-honor/global/default/assets/celebration/5_le
 ce6b234584e781d0 plugins/rcp-fe-lol-honor/global/default/assets/celebration/5_levelup_low_spec_shadowless.png
 4aabeafbfa64038b plugins/rcp-fe-lol-honor/global/default/assets/celebration/5_levelup_swirls_intro.webm
 be95452d44e0e322 plugins/rcp-fe-lol-honor/global/default/assets/celebration/5_levelup_swirls_loop.webm
+53ec395d0f36961a plugins/rcp-fe-lol-honor/global/default/assets/celebration/5_transition.webm
 f9234116d15c34d5 plugins/rcp-fe-lol-honor/global/default/assets/celebration/background.png
 efdb11a6b179e135 plugins/rcp-fe-lol-honor/global/default/assets/celebration/eog_looping_bgmagic.webm
 dbdde52db13be456 plugins/rcp-fe-lol-honor/global/default/assets/celebration/eog_rewardoutro_magic.webm
@@ -28835,6 +28838,7 @@ bdc7555c2c9f0428 plugins/rcp-fe-lol-honor/global/default/assets/mograph/eog_shot
 81b90148e71e5e5e plugins/rcp-fe-lol-honor/global/default/assets/mograph/eog_shotcaller_4.webm
 246563216101df12 plugins/rcp-fe-lol-honor/global/default/assets/mograph/eog_sidebar_beam.webm
 d98a08569db42075 plugins/rcp-fe-lol-honor/global/default/assets/mograph/eog_teamchoice_intro.webm
+354fb00d350ef5b3 plugins/rcp-fe-lol-honor/global/default/assets/mograph/honor_selected.webm
 3b3545de513947ed plugins/rcp-fe-lol-honor/global/default/assets/mograph/honor_selected_2_player.webm
 525e5ee766439557 plugins/rcp-fe-lol-honor/global/default/assets/mograph/honor_selected_3_player.webm
 9069b71dd9483631 plugins/rcp-fe-lol-honor/global/default/assets/mograph/honor_selected_4_player.webm
