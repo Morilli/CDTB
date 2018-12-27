@@ -27931,6 +27931,8 @@ fa33f477563ef80a plugins/rcp-fe-lol-collectibles/global/tr_tr/trans.json
 182a736699e1ae19 plugins/rcp-fe-lol-collectibles/global/zh_my/trans.json
 50e0ac9072f9b764 plugins/rcp-fe-lol-collectibles/global/zh_tw/trans.json
 b0d4ad547985ead9 plugins/rcp-fe-lol-collections/description.json
+11abd5a65a4cb7cf plugins/rcp-fe-lol-collections/global/ar_eg/styles.css
+b112d8cc39f9adbf plugins/rcp-fe-lol-collections/global/ar_eg/trans.json
 0ca668283b352324 plugins/rcp-fe-lol-collections/global/cs_cz/trans.json
 ea25e999e036430e plugins/rcp-fe-lol-collections/global/de_de/trans.json
 354317fe2bb536e4 plugins/rcp-fe-lol-collections/global/default/1.bundle.js
