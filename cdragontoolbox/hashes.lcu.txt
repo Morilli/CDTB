@@ -30642,6 +30642,7 @@ db6b9f5c2900f744 plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/materi
 74ee1ec820d50b9d plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/material_rare.png
 54078720003bda23 plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/portal_chest_generic.png
 18edddbee90bb158 plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/portal_material_key.png
+42835417a84b8ca6 plugins/rcp-fe-lol-loot/global/default/assets/tutorial_images/day_one_chest.png
 43e0872b40c499b5 plugins/rcp-fe-lol-loot/global/default/assets/tutorial_images/new_player_chest.png
 e71d841d8075c034 plugins/rcp-fe-lol-loot/global/default/assets/videos/background_ambient.webm
 ce01bb7c2bd1805b plugins/rcp-fe-lol-loot/global/default/assets/videos/crafter_slot_complete.webm
@@ -33016,6 +33017,7 @@ fef6466705d53740 plugins/rcp-fe-lol-perks/global/default/images/construct/8400/s
 e791fe90b2d1a3bb plugins/rcp-fe-lol-perks/global/default/images/domination/vfx-d.png
 1d077ff5354b8ddf plugins/rcp-fe-lol-perks/global/default/images/dot.png
 8532610862e22bd6 plugins/rcp-fe-lol-perks/global/default/images/exclamation.svg
+4b1e228722316a17 plugins/rcp-fe-lol-perks/global/default/images/horizontal_div.svg
 9b2ed0dc9a277393 plugins/rcp-fe-lol-perks/global/default/images/inspiration/glow-i.png
 629aa1dc3b75ecab plugins/rcp-fe-lol-perks/global/default/images/inspiration/icon-i.png
 b61d42fe3e6d2551 plugins/rcp-fe-lol-perks/global/default/images/inspiration/inspiration_icon.svg
