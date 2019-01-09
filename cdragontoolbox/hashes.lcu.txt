@@ -21702,6 +21702,7 @@ f650814abecaebec plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-ban-vo/5.
 589b528f1341cd32 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-ban-vo/50.ogg
 726fcdba530fd8e7 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-ban-vo/51.ogg
 014fd3bdff790721 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-ban-vo/516.ogg
+4d41655f7dfe5a54 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-ban-vo/517.ogg
 b1664e9891564636 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-ban-vo/518.ogg
 af8b9148363d883d plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-ban-vo/53.ogg
 b31a6d3684cededc plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-ban-vo/54.ogg
@@ -21844,6 +21845,7 @@ a2ca2cf7abc523e3 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-choose-vo
 2e6c251cbf4b8697 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-choose-vo/50.ogg
 4a683e826fe25ec7 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-choose-vo/51.ogg
 727750354dc744b9 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-choose-vo/516.ogg
+f0ba49db74781076 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-choose-vo/517.ogg
 28eaebc643aa3d0b plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-choose-vo/518.ogg
 8bd0217d798d2442 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-choose-vo/53.ogg
 6c484e53772d150b plugins/rcp-be-lol-game-data/global/ja_jp/v1/champion-choose-vo/54.ogg
