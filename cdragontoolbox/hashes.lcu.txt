@@ -30299,6 +30299,8 @@ f8d92c8473999dd5 plugins/rcp-fe-lol-license-agreement/global/th_th/trans.json
 f650b57392a10b0d plugins/rcp-fe-lol-license-agreement/global/zh_my/trans.json
 1b92590a4897e077 plugins/rcp-fe-lol-license-agreement/global/zh_tw/trans.json
 c8beef801b2b0b63 plugins/rcp-fe-lol-license-settings/description.json
+df2ce5791661d4cc plugins/rcp-fe-lol-license-settings/global/ar_eg/style.css
+0e80f2c580b25dbf plugins/rcp-fe-lol-license-settings/global/ar_eg/trans.json
 166626c13ed13c32 plugins/rcp-fe-lol-license-settings/global/cs_cz/trans.json
 58591e3c65d4fabb plugins/rcp-fe-lol-license-settings/global/de_de/trans.json
 bfcaf39e3a167c31 plugins/rcp-fe-lol-license-settings/global/default/bundle.js
@@ -31175,6 +31177,7 @@ cf7b8b3df6853163 plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/materi
 064f4c47fb5112a1 plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/material_283.png
 d9ce06b2a7c6d4a5 plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/material_285.png
 9936e30682adc67f plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/material_287.png
+1ccfa8f36c988267 plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/material_292.png
 6fedfba016e084cf plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/material_89.png
 993be0ad0b097d40 plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/material_90.png
 db6b9f5c2900f744 plugins/rcp-fe-lol-loot/global/default/assets/tray_icons/material_key.png
