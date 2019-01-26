@@ -36361,6 +36361,7 @@ ba0c83b3fb149c6c plugins/rcp-fe-lol-skins-viewer/global/default/images/universe/
 687b04010cb7d308 plugins/rcp-fe-lol-skins-viewer/global/default/index.html
 4379f1df794951f6 plugins/rcp-fe-lol-skins-viewer/global/default/license.json
 294e7796db9572d2 plugins/rcp-fe-lol-skins-viewer/global/default/rcp-fe-lol-skins-viewer.js
+e4fe595d1b0bb177 plugins/rcp-fe-lol-skins-viewer/global/default/styles.css
 826731dbf678625f plugins/rcp-fe-lol-skins-viewer/global/default/trans.json
 e09ac44546a9661b plugins/rcp-fe-lol-skins-viewer/global/default/video/collection/21016.webm
 ef16288962bb5fbb plugins/rcp-fe-lol-skins-viewer/global/default/video/collection/37006.webm
