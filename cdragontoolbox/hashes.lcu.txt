@@ -5054,9 +5054,11 @@ ef8087b6391cb96f plugins/rcp-be-lol-game-data/global/default/assets/loot/yasuo-i
 296c20e84b730d58 plugins/rcp-be-lol-game-data/global/default/assets/missions/a-spooky-intermission.png
 4deb041040b74efd plugins/rcp-be-lol-game-data/global/default/assets/missions/clash-hextech.png
 c2a5f47a1403b5f6 plugins/rcp-be-lol-game-data/global/default/assets/missions/costume-party.png
+41a8340288563dd9 plugins/rcp-be-lol-game-data/global/default/assets/missions/daily_series_icon.svg
 ebb33d89ac6a6c76 plugins/rcp-be-lol-game-data/global/default/assets/missions/definitely-not-summoners-rift.png
 1b225909e9c69fb5 plugins/rcp-be-lol-game-data/global/default/assets/missions/eog/rewards/leveling/features/feature_fwotd.png
 ceaad0f75e79c926 plugins/rcp-be-lol-game-data/global/default/assets/missions/eos_8_rewards_background.png
+3cfc83008e0dffbb plugins/rcp-be-lol-game-data/global/default/assets/missions/esports_watch_series_icon.svg
 9bbcaf46c9b51e80 plugins/rcp-be-lol-game-data/global/default/assets/missions/lunar_revel2019_background.png
 03eb76d26ca2cfcf plugins/rcp-be-lol-game-data/global/default/assets/missions/lunar_revel2019_induction.png
 628666e42d8d341e plugins/rcp-be-lol-game-data/global/default/assets/missions/lunar_revel2019_luck.png
@@ -5064,6 +5066,7 @@ ceaad0f75e79c926 plugins/rcp-be-lol-game-data/global/default/assets/missions/eos
 0c835b40a210d657 plugins/rcp-be-lol-game-data/global/default/assets/missions/lunar_revel2019_noodles.png
 d51f0856a9156702 plugins/rcp-be-lol-game-data/global/default/assets/missions/lunar_revel2019_noods.png
 1a72b4a5174c8252 plugins/rcp-be-lol-game-data/global/default/assets/missions/lunar_revel2019_pig.png
+d429b4a84e039b31 plugins/rcp-be-lol-game-data/global/default/assets/missions/lunar_revel_series_icon.svg
 d550d26ab4ec7bb6 plugins/rcp-be-lol-game-data/global/default/assets/missions/missioninductioncard_worlds2018-sm.png
 029b3300a052750a plugins/rcp-be-lol-game-data/global/default/assets/missions/missions_2018.png
 e527cc99bcca203e plugins/rcp-be-lol-game-data/global/default/assets/missions/no-tricks-just-treats.png
@@ -5071,6 +5074,7 @@ e527cc99bcca203e plugins/rcp-be-lol-game-data/global/default/assets/missions/no-
 9d1f932a95803f22 plugins/rcp-be-lol-game-data/global/default/assets/missions/pickems.png
 c9df58d759dc9732 plugins/rcp-be-lol-game-data/global/default/assets/missions/play-ems.png
 691c84632b220c6f plugins/rcp-be-lol-game-data/global/default/assets/missions/preseason2018-thumbnail.png
+cf5977eeb08f1cde plugins/rcp-be-lol-game-data/global/default/assets/missions/ranked_series_icon.svg
 ec20c510218fdf31 plugins/rcp-be-lol-game-data/global/default/assets/missions/season-start-2019.png
 45b45eea59f0c292 plugins/rcp-be-lol-game-data/global/default/assets/missions/snowdown2018-all-stars.png
 b76ab3f1ab6c643a plugins/rcp-be-lol-game-data/global/default/assets/missions/snowdown2018-bardle-royale.png
@@ -35090,6 +35094,7 @@ cc81b0faf6188244 plugins/rcp-fe-lol-profiles/global/default/sounds/sfx-banners-u
 730023fbab7e9817 plugins/rcp-fe-lol-profiles/global/default/sounds/sfx-profile-flyout-close-click.ogg
 ca6d89a0113ac587 plugins/rcp-fe-lol-profiles/global/default/sounds/sfx-profile-flyout-open-click.ogg
 d4c54544d5026349 plugins/rcp-fe-lol-profiles/global/default/sounds/sfx-profile-summoner-big-click.ogg
+9c8c481e94f2c084 plugins/rcp-fe-lol-profiles/global/default/styles.css
 53f209a15c157b0a plugins/rcp-fe-lol-profiles/global/default/trans.json
 bc77d9fc9400d50a plugins/rcp-fe-lol-profiles/global/el_gr/leaguenames.json
 60e2cf892e7f9778 plugins/rcp-fe-lol-profiles/global/el_gr/trans.json
