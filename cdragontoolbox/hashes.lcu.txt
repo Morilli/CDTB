@@ -34814,6 +34814,10 @@ eacf04781cb46baf plugins/rcp-fe-lol-npe-rewards/global/default/images/intro-butt
 10a82a6737b88ef7 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-blue-essence.png
 43c635b061f60cc5 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-fighter-champion.png
 8746765689d6a708 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-1-spells.png
+339265e4dc22dd28 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-4-garen-spells.png
+e4e4f4fe9db7ec54 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-5-brand-tt.png
+08630a36693eca60 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-7-loot-tt.png
+3c1f4563d1144bef plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-8-loot-runes.png
 aaf8c0c81ee90e03 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-9-loot-spells.png
 1bd7e97f0cfdc28f plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-mage-champion.png
 176fe9d46913392a plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-marksman-champion.png
@@ -34835,6 +34839,10 @@ eeb84cc533712d98 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-maj
 a1636fd3d1a06976 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-icon-marksman-champion.png
 eb4b8a4fe5fff041 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-icon-support-champion.png
 3d71335b617146da plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-1-spells.png
+ced478e99d269c5c plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-4-garen-spells.png
+c6ffc9e50d7e505c plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-5-brand-tt.png
+4c0dcac9423758b4 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-7-loot-tt.png
+c4a6d6ee4f4fcf5e plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-8-loot-runes.png
 8cd77e57d3e5945d plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-9-loot-spells.png
 cc38bf3ef5f8e42f plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-mage-champion.png
 36b1b132ec1ee97c plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-marksman-champion.png
@@ -36601,6 +36609,9 @@ d00fec7aa5307fee plugins/rcp-fe-lol-postgame/global/default/images/bronze_2.png
 df233512e5344a2b plugins/rcp-fe-lol-postgame/global/default/images/bronze_3.png
 b20f501086a3f4d0 plugins/rcp-fe-lol-postgame/global/default/images/bronze_4.png
 6c04387f420de1f3 plugins/rcp-fe-lol-postgame/global/default/images/bronze_5.png
+be8f0d616250d689 plugins/rcp-fe-lol-postgame/global/default/images/btn-gift-up.png
+795060635943b894 plugins/rcp-fe-lol-postgame/global/default/images/btn-honor-up.png
+0ba2822053cdbb10 plugins/rcp-fe-lol-postgame/global/default/images/btn-report-up.png
 9091f6b1a40dfa82 plugins/rcp-fe-lol-postgame/global/default/images/button_close.png
 a6856bdaba3c7f6e plugins/rcp-fe-lol-postgame/global/default/images/button_close_click.png
 dc37782c82d70cf2 plugins/rcp-fe-lol-postgame/global/default/images/button_close_hover.png
