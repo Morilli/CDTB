@@ -28486,6 +28486,7 @@ bbd17f812ed8d15a plugins/rcp-fe-lol-champ-select/global/default/rightdisabled.pn
 42ea7127c16972b0 plugins/rcp-fe-lol-champ-select/global/default/righthover.png
 415d7eb192cf2269 plugins/rcp-fe-lol-champ-select/global/default/sounds/95-bpm-click-track.ogg
 349a598cfbc9f052 plugins/rcp-fe-lol-champ-select/global/default/sounds/champselect-champ-select.ogg
+65f081a237104403 plugins/rcp-fe-lol-champ-select/global/default/sounds/champselect-start.ogg
 a31c7b37abbe7cd1 plugins/rcp-fe-lol-champ-select/global/default/sounds/music-champselect-aram.ogg
 a11739b8ab097bf1 plugins/rcp-fe-lol-champ-select/global/default/sounds/music-cs-draft-ban-base-layer-01.ogg
 e15f0766f6693964 plugins/rcp-fe-lol-champ-select/global/default/sounds/music-cs-draft-ban-intensity-layer-01.ogg
@@ -30268,6 +30269,7 @@ baca878548dafb38 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/caps
 847bd37401ce56b1 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/capsules/chest_generic.png
 86aa2b0d72543d9a plugins/rcp-fe-lol-clash/global/default/assets/placeholder/end-of-game-brackets-background.png
 ad0a180bee5fadf9 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/end-of-game-brackets-overlay.png
+cf115a1b8654d6e4 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/frames/chest_champion_mastery-frame.png
 ac97eee97bea810f plugins/rcp-fe-lol-clash/global/default/assets/placeholder/frames/chest_clash_16_1-frame.png
 daea08c182397da6 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/frames/chest_clash_16_10-frame.png
 c5a994f5939e08cf plugins/rcp-fe-lol-clash/global/default/assets/placeholder/frames/chest_clash_16_12-frame.png
@@ -30286,6 +30288,7 @@ f47bb0cbdb9a8b44 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/fram
 e9a0ec7c372271f8 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/frames/chest_clash_8_5-frame.png
 f5a969ed6b31f306 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/frames/chest_clash_8_6-frame.png
 7028dc97b9846dce plugins/rcp-fe-lol-clash/global/default/assets/placeholder/frames/chest_clash_8_8-frame.png
+e599d800912fb03d plugins/rcp-fe-lol-clash/global/default/assets/placeholder/frames/chest_generic-frame.png
 976869964c95771c plugins/rcp-fe-lol-clash/global/default/assets/placeholder/general/logo.png
 cebf73ae3561ddd5 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/general/theme-5-ring.png
 0eec85214b1211a1 plugins/rcp-fe-lol-clash/global/default/assets/placeholder/general/theme-6-ring.png
@@ -33809,7 +33812,14 @@ ab8f44967d9bec01 plugins/rcp-fe-lol-loot/global/zh_tw/trans.json
 725fb753aaf57419 plugins/rcp-fe-lol-loyalty/description.json
 68ab7231de3fcd92 plugins/rcp-fe-lol-loyalty/global/cs_cz/trans.json
 20e02ab7efdec020 plugins/rcp-fe-lol-loyalty/global/de_de/trans.json
+565ed7e269326dd2 plugins/rcp-fe-lol-loyalty/global/default/badge-pcbrewards.png
 f9de2aad93e415b5 plugins/rcp-fe-lol-loyalty/global/default/css/main.css
+45b2972671fcde1c plugins/rcp-fe-lol-loyalty/global/default/icon-league-unlock.png
+51d5f8666cb9bf99 plugins/rcp-fe-lol-loyalty/global/default/icon-lolcafe-diamond.png
+3eb8332af1127567 plugins/rcp-fe-lol-loyalty/global/default/icon-lolcafe-gold.png
+67263b09b506714b plugins/rcp-fe-lol-loyalty/global/default/icon-lolcafe-platinum.png
+9ffe58c65f536453 plugins/rcp-fe-lol-loyalty/global/default/icon-lolcafe-silver.png
+13a265d3f32a70b0 plugins/rcp-fe-lol-loyalty/global/default/icon-lolcafe.png
 40cbe1bcf5f335d5 plugins/rcp-fe-lol-loyalty/global/default/images/badge-pcbrewards.png
 cd69947544d75b05 plugins/rcp-fe-lol-loyalty/global/default/images/icon-league-unlock.png
 722cfd5ae323953a plugins/rcp-fe-lol-loyalty/global/default/images/icon-lolcafe-diamond.png
