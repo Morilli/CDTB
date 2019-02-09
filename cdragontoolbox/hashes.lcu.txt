@@ -28396,6 +28396,7 @@ af5d8328340dd482 plugins/rcp-fe-lol-champ-select/global/default/images/emotes/ed
 d0e665179cc817e4 plugins/rcp-fe-lol-champ-select/global/default/images/emotes/edit-emotes-normal-off.png
 97512b83acaba2a1 plugins/rcp-fe-lol-champ-select/global/default/images/emotes/edit-emotes-normal-on.png
 87d0c22c17d8fda0 plugins/rcp-fe-lol-champ-select/global/default/images/emotes/emotes-background.png
+513782d2135ec2e1 plugins/rcp-fe-lol-champ-select/global/default/images/entitled-features/golden_spatula_club/cell-portrait.png
 28ebe178129ef98e plugins/rcp-fe-lol-champ-select/global/default/images/entitled-features/golden_spatula_club/dice-click.png
 784a0a65391076e0 plugins/rcp-fe-lol-champ-select/global/default/images/entitled-features/golden_spatula_club/dice-disable.png
 ae18bac8ac9bd8a6 plugins/rcp-fe-lol-champ-select/global/default/images/entitled-features/golden_spatula_club/dice-hover.png
@@ -28814,6 +28815,14 @@ fb5cc900ad623f01 plugins/rcp-fe-lol-champion-mastery-notifications/global/defaul
 0fda5079a419a450 plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/cm_rank_up/sfx-5.ogg
 bb3e24c5c7a74d77 plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/cm_rank_up/sfx-6.ogg
 c785037af31d053f plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/cm_rank_up/sfx-7.ogg
+8eba907eb33ae5f2 plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/loot_grants/chest_champion_mastery/sfx-video.ogg
+bcc5aff41f45fe6b plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/loot_grants/chest_champion_mastery/static-content.png
+26dfe4ad454b018a plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/loot_grants/chest_champion_mastery/video-intro.webm
+ba8599419d2ac8a4 plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/loot_grants/chest_champion_mastery/video-loop.webm
+04ff1a296e28b06a plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/loot_grants/material_key_fragment/sfx-video.ogg
+14a991b3d05a9d27 plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/loot_grants/material_key_fragment/static-content.png
+5198eaa9716ac479 plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/loot_grants/material_key_fragment/video-intro.webm
+bdf291aa74036339 plugins/rcp-fe-lol-champion-mastery-notifications/global/default/assets/loot_grants/material_key_fragment/video-loop.webm
 47a3eaecc6a2131b plugins/rcp-fe-lol-champion-mastery-notifications/global/default/champion-mastery-trans.json
 d85fdb8dfff8f133 plugins/rcp-fe-lol-champion-mastery-notifications/global/default/index.html
 68b30d1b7d76450f plugins/rcp-fe-lol-champion-mastery-notifications/global/default/init.js
@@ -28985,6 +28994,7 @@ ab5e8e45f1a53da7 plugins/rcp-fe-lol-clash/global/default/assets/animations/lotti
 7801a5ed0060d43a plugins/rcp-fe-lol-clash/global/default/assets/animations/lottie/roster/ticket_entry/images/img_1.png
 302c0b5e56dcf41b plugins/rcp-fe-lol-clash/global/default/assets/animations/lottie/scouting-start.json
 4ab4f73880c19c7e plugins/rcp-fe-lol-clash/global/default/assets/animations/videos/brackets/checkmark_large_blue.webm
+018a3d3d14d44f0c plugins/rcp-fe-lol-clash/global/default/assets/animations/videos/brackets/slash_fx.webm
 bbfe29ed255f1883 plugins/rcp-fe-lol-clash/global/default/assets/animations/videos/brackets/xmark_large.webm
 fbebb6179d598075 plugins/rcp-fe-lol-clash/global/default/assets/animations/videos/celebration/capsules/payout_capsule_16_0.webm
 362f2f879ce4ab2e plugins/rcp-fe-lol-clash/global/default/assets/animations/videos/celebration/capsules/payout_capsule_16_1.webm
@@ -34308,10 +34318,15 @@ ad2d159d8a5a37e8 plugins/rcp-fe-lol-missions/global/default/events/images/missio
 3a5a3bfd8906a4e1 plugins/rcp-fe-lol-missions/global/default/events/images/missions/msi18/2018msi_missionthumbnail_takeupthebanner.png
 2d6fe3a57d6d61aa plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npe_mission_annihilation.png
 91b921e788a1e69d plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npe_mission_dragons.png
+4036ea4f3dfdad55 plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npe_mission_earnyourway.png
 fc2c5318ca80fe86 plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npe_mission_flash.png
 46ef40c4fda93d2e plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npe_mission_jungle.png
 1f9eb4d098d8abd0 plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npe_mission_mastery.png
 1db7671c6f0c0c36 plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npe_mission_teamwork.png
+5269c3b2b05572e5 plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npemission_aram.png
+f204a6780f4f60d7 plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npemission_getingame.png
+c956415e8e6421f8 plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npemission_srblind.png
+7d458db9e5e11412 plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/npemission_srdraft.png
 b14ffb189e15da4e plugins/rcp-fe-lol-missions/global/default/events/images/missions/newplayerexperience/teach_a_friend.png
 b8939e64bf46a93a plugins/rcp-fe-lol-missions/global/default/events/images/missions/osm/osm_fizz.png
 b768d5e0e0cf0053 plugins/rcp-fe-lol-missions/global/default/events/images/missions/osm/osm_teemo.png
