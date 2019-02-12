@@ -32860,6 +32860,12 @@ c93fa972b7d76d6f plugins/rcp-fe-lol-leagues/global/default/images/rewards/progre
 47b0553ba18bbe1c plugins/rcp-fe-lol-leagues/global/default/images/rewards/reward_thumbnail.png
 cd934c25d33ec86e plugins/rcp-fe-lol-leagues/global/default/images/rewards/rewards_background.jpg
 c7c613d9a2c1dc75 plugins/rcp-fe-lol-leagues/global/default/images/rewards/rewards_panel_bg.png
+873020636e51eaa9 plugins/rcp-fe-lol-leagues/global/default/images/rewards/split_reward_level_1.jpg
+ff5ff846709ce20c plugins/rcp-fe-lol-leagues/global/default/images/rewards/split_reward_level_1_small.png
+6d3d3f79c22e0c29 plugins/rcp-fe-lol-leagues/global/default/images/rewards/split_reward_level_2.jpg
+af0821b543ae8a6f plugins/rcp-fe-lol-leagues/global/default/images/rewards/split_reward_level_2_small.png
+7a97912afc674ff8 plugins/rcp-fe-lol-leagues/global/default/images/rewards/split_reward_level_3.jpg
+0c2082b01e8429a9 plugins/rcp-fe-lol-leagues/global/default/images/rewards/split_reward_level_3_small.png
 9179a6d006fd7052 plugins/rcp-fe-lol-leagues/global/default/images/rightclick.png
 5fb1e7cbe1f8b3aa plugins/rcp-fe-lol-leagues/global/default/images/rightcompleted.png
 498f0bc95a5f610a plugins/rcp-fe-lol-leagues/global/default/images/rightdefault.png
@@ -36272,6 +36278,7 @@ b69b46baca34004f plugins/rcp-fe-lol-parties/global/default/banner-privileges-gra
 11f8c33f358f990d plugins/rcp-fe-lol-parties/global/default/banner-promote-click.png
 f6327ca7b6adc26b plugins/rcp-fe-lol-parties/global/default/banner-promote-hover.png
 879f2110929db951 plugins/rcp-fe-lol-parties/global/default/banner-promote.png
+8abecb10efe8cab0 plugins/rcp-fe-lol-parties/global/default/banner-ring-main.png
 6394ecd0eee6b475 plugins/rcp-fe-lol-parties/global/default/battletraining-active-video.webm
 ba3640cae9f94e83 plugins/rcp-fe-lol-parties/global/default/battletraining-active.png
 df5c1b9a7013d3ca plugins/rcp-fe-lol-parties/global/default/battletraining-default.png
@@ -36430,6 +36437,9 @@ a187980361e87680 plugins/rcp-fe-lol-parties/global/default/fb9a8837daae66e553046
 c4ddf13bd2c4adbf plugins/rcp-fe-lol-parties/global/default/footermetaldecorationright.png
 b0a9ae8299c4350a plugins/rcp-fe-lol-parties/global/default/hover-border.png
 e69fff72f1c7df7b plugins/rcp-fe-lol-parties/global/default/hover.png
+50d9610054793b29 plugins/rcp-fe-lol-parties/global/default/icon-add-player-active.png
+806a451bafc474d2 plugins/rcp-fe-lol-parties/global/default/icon-add-player-default.png
+982acc09a811bc73 plugins/rcp-fe-lol-parties/global/default/icon-add-player-hover.png
 54c872ffe74abba3 plugins/rcp-fe-lol-parties/global/default/icon-add.png
 4ef4e50188c4d9bc plugins/rcp-fe-lol-parties/global/default/icon-boost-disabled.png
 9efe195e45de5363 plugins/rcp-fe-lol-parties/global/default/icon-boost.png
@@ -36444,6 +36454,7 @@ bd4e9887029fb6e3 plugins/rcp-fe-lol-parties/global/default/icon-mastery.png
 b2046b55dce5a809 plugins/rcp-fe-lol-parties/global/default/icon-menu.png
 53ddfee8e22453fd plugins/rcp-fe-lol-parties/global/default/icon-party-info.png
 b35ceba63a6d5d5f plugins/rcp-fe-lol-parties/global/default/icon-person-group.png
+dd4efcae3e0defca plugins/rcp-fe-lol-parties/global/default/icon-position-autofill-protection.png
 533fba5608052fd7 plugins/rcp-fe-lol-parties/global/default/icon-position-bottom-blue-hover.png
 583747e5370fbf93 plugins/rcp-fe-lol-parties/global/default/icon-position-bottom-blue.png
 4f7b111a198e1ba1 plugins/rcp-fe-lol-parties/global/default/icon-position-bottom-disabled.png
@@ -36511,6 +36522,8 @@ e353f8431c28b3e8 plugins/rcp-fe-lol-parties/global/default/invite-accepted-icon.
 adda0f8e711d5e8a plugins/rcp-fe-lol-parties/global/default/invite-declined-icon.png
 4bec5c3305761a8a plugins/rcp-fe-lol-parties/global/default/invite-kicked-icon.png
 6cfb2e1346d689d7 plugins/rcp-fe-lol-parties/global/default/invited-banner.png
+3e1362805f9801fd plugins/rcp-fe-lol-parties/global/default/kick-player-icon-hover.png
+dc2f19e1f1d65529 plugins/rcp-fe-lol-parties/global/default/kick-player-icon.png
 1c3cc9ab37b09397 plugins/rcp-fe-lol-parties/global/default/leftclick.png
 c5161fe3cac7bf37 plugins/rcp-fe-lol-parties/global/default/leftcompleted.png
 d2d44cf4a1c6a032 plugins/rcp-fe-lol-parties/global/default/leftdefault.png
@@ -36534,8 +36547,10 @@ db589ec8966888a2 plugins/rcp-fe-lol-parties/global/default/midcompleted.png
 3ccf790900243bb4 plugins/rcp-fe-lol-parties/global/default/middisabled.png
 c475fa3924b03de2 plugins/rcp-fe-lol-parties/global/default/midhover.png
 a1146e4493b1c686 plugins/rcp-fe-lol-parties/global/default/normal.png
+379744156a667f6f plugins/rcp-fe-lol-parties/global/default/parties/banner/current-player-owner-intro.webm
 c38a82d3c71dcc7a plugins/rcp-fe-lol-parties/global/default/parties/banner/current-player-position-fx-intro.webm
 82391a47df30e663 plugins/rcp-fe-lol-parties/global/default/parties/banner/invited-banner.webm
+2dd887ca2de3c498 plugins/rcp-fe-lol-parties/global/default/parties/banner/member-owner-intro.webm
 a66c6d742026ba19 plugins/rcp-fe-lol-parties/global/default/parties/banner/position-icon-disabled-intro.webm
 0f61f927eefbab9c plugins/rcp-fe-lol-parties/global/default/parties/banner/position-icon-intro.webm
 d303ad4ab44c3481 plugins/rcp-fe-lol-parties/global/default/party-captain-icon.png
@@ -36626,6 +36641,7 @@ e5ba49991249dff8 plugins/rcp-fe-lol-parties/global/default/social-panel-bg-loop.
 cab0def2dc71c45f plugins/rcp-fe-lol-parties/global/default/summoner-icon-ring-hover.png
 a6d0cb780d88ad80 plugins/rcp-fe-lol-parties/global/default/summoner-icon-ring.png
 f63a90828b9006f7 plugins/rcp-fe-lol-parties/global/default/table_hover_border_top_bottom.png
+5eb544355e688606 plugins/rcp-fe-lol-parties/global/default/team-player-separator.png
 781cdaa8fd574481 plugins/rcp-fe-lol-parties/global/default/toggle-button-click.png
 37ec489c3ab776cf plugins/rcp-fe-lol-parties/global/default/toggle-button-disabled.png
 962af1b169ff64df plugins/rcp-fe-lol-parties/global/default/toggle-button-hover.png
@@ -40082,6 +40098,7 @@ a3623b02079d4db2 plugins/rcp-fe-lol-social/global/default/sfx-soc-ui-statuswindo
 34feaae06584253f plugins/rcp-fe-lol-social/global/default/social.html
 2a4993b03c8aeb0e plugins/rcp-fe-lol-social/global/default/social.js
 d75df85f6592e494 plugins/rcp-fe-lol-social/global/default/social_panel_level_ring.png
+cf364619aeadefb5 plugins/rcp-fe-lol-social/global/default/socialpanel_join_disabled.png
 be84dd656ec5f99f plugins/rcp-fe-lol-social/global/default/sort_mask.png
 63b09b4ddf13a246 plugins/rcp-fe-lol-social/global/default/sounds/index.js
 9cce87e7ba23694f plugins/rcp-fe-lol-social/global/default/sounds/sfx-lobby-notif-bad-invite.ogg
