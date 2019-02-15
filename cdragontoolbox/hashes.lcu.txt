@@ -32844,6 +32844,8 @@ f29238ddbf3235fa plugins/rcp-fe-lol-leagues/global/default/images/miniseries-not
 858ecdef069030c1 plugins/rcp-fe-lol-leagues/global/default/images/miniseries_big.png
 121bb51f2e1df35a plugins/rcp-fe-lol-leagues/global/default/images/miniseries_small.png
 0c8e2182b375fee9 plugins/rcp-fe-lol-leagues/global/default/images/normal.png
+8a2875efb1d35999 plugins/rcp-fe-lol-leagues/global/default/images/parallax-smoke-background/parallax-smoke-bg.png
+77a7815b42bfeed4 plugins/rcp-fe-lol-leagues/global/default/images/parallax-smoke-background/parallax-smoke-foreground.png
 5759bddbdef531a6 plugins/rcp-fe-lol-leagues/global/default/images/position-swap-icon.svg
 74129b7fc6574b48 plugins/rcp-fe-lol-leagues/global/default/images/promo-to-master-position-combine.jpg
 2532f21a77642d0e plugins/rcp-fe-lol-leagues/global/default/images/provisional-banner-static.png
@@ -36021,6 +36023,7 @@ ae55ebbb761a1ba4 plugins/rcp-fe-lol-parties/global/default/0d9156ab450edad43a5ec
 226a23305f830883 plugins/rcp-fe-lol-parties/global/default/0f03134059457b32f8a723475433fddb.png
 d7fa372414d96ac4 plugins/rcp-fe-lol-parties/global/default/0f365f209759f3a10e5f45bc1a1e840e.png
 5c56ba00c239c2a6 plugins/rcp-fe-lol-parties/global/default/0fefea28034200db49de465f2f644c78.png
+7152f6a403c17d6c plugins/rcp-fe-lol-parties/global/default/1017a7e1d4861a73aa54dab22c6e8e92.png
 de042b61bcf02214 plugins/rcp-fe-lol-parties/global/default/104e95123ecadd083c76c25c068d942b.png
 24fcb39b85c6ea67 plugins/rcp-fe-lol-parties/global/default/109edea439dd6e8192e0cc8f225af5f5.png
 b5b6521164ffc161 plugins/rcp-fe-lol-parties/global/default/10c5031c4ddac7fda97ddcb4a61dd2cd.png
@@ -36044,6 +36047,7 @@ f5b83216664f48b3 plugins/rcp-fe-lol-parties/global/default/1a615c263a75533650b54
 d089811bd044f439 plugins/rcp-fe-lol-parties/global/default/1b8ced3defcfb90180c32b758be5d901.png
 a28440d384d6aaac plugins/rcp-fe-lol-parties/global/default/1db02f0d089bfc68873aec1e9d7ebbad.ogg
 050684b4ff47b8d9 plugins/rcp-fe-lol-parties/global/default/1e811f0ee1c419b8c41b9f0e09ebe590.png
+cc8e4c4e2329cda3 plugins/rcp-fe-lol-parties/global/default/1ebd62ff32fb3c73b59297235645c287.png
 d9b3f03f2ffe7dca plugins/rcp-fe-lol-parties/global/default/1ecc28c02ee0ca1fa909ac388c72471a.png
 227ee4de556f17e8 plugins/rcp-fe-lol-parties/global/default/1f01b17647bee279a73877d8890e95d3.png
 b96f9c73c9d6699b plugins/rcp-fe-lol-parties/global/default/1f47ce35548403fd815ee63615c7f14b.png
@@ -36061,6 +36065,7 @@ fc6212a515a12635 plugins/rcp-fe-lol-parties/global/default/27062f733dfeb3f89e034
 e96871279f082214 plugins/rcp-fe-lol-parties/global/default/29034c378e29b040c88837d30b685728.png
 df12adbd8534b22d plugins/rcp-fe-lol-parties/global/default/2971c9f9ccbeebc0d920da5c2a632e8a.png
 bc4453a555722b7b plugins/rcp-fe-lol-parties/global/default/2995b907b0702f0f3aa5446f1cdd6748.png
+03cd43d8ecb13217 plugins/rcp-fe-lol-parties/global/default/2b577dde17fd7b0b99d5c7849a9ce9f3.png
 971b6ac3929423f2 plugins/rcp-fe-lol-parties/global/default/2bf847bea03ef5ba18e174127758f273.png
 c184544e97bd1f31 plugins/rcp-fe-lol-parties/global/default/2ce280c98a9c118025cafbf8cb548b48.png
 baee46c5b1806c60 plugins/rcp-fe-lol-parties/global/default/2d36ce751f799e4309487080af666995.png
@@ -36073,6 +36078,7 @@ f8f05577feb0647d plugins/rcp-fe-lol-parties/global/default/31f32c74c8ae425b8baad
 b2133063f6c53abb plugins/rcp-fe-lol-parties/global/default/358478fe43cc262bc3745a4cb23c6faa.webm
 8eb437feea2fa036 plugins/rcp-fe-lol-parties/global/default/358d5cc2858368c7cf529972e9cb93a3.png
 75dd79199ce651bb plugins/rcp-fe-lol-parties/global/default/35da24ddc561ca20619184ef6ea4130b.png
+7ce1d42fd74724db plugins/rcp-fe-lol-parties/global/default/36b1eeb1467193f7f25600e689446e23.png
 091a3fdf6ff9ab8f plugins/rcp-fe-lol-parties/global/default/3785000cb3b8def61e6662d851a3e286.png
 8b0d8888397487cb plugins/rcp-fe-lol-parties/global/default/37d18e0ed159c98b34991813128aa373.webm
 8a7f8b232e0c5513 plugins/rcp-fe-lol-parties/global/default/385ea2dbbfb1f1010a1680fab6cf94ed.ogg
@@ -36217,6 +36223,7 @@ a263620790daaf76 plugins/rcp-fe-lol-parties/global/default/9b633128c5ad9e12c10e4
 d8d992a6e69a9a6b plugins/rcp-fe-lol-parties/global/default/9b66912e9118889cce96f46b1eba3df6.png
 e2cb7766e2d22507 plugins/rcp-fe-lol-parties/global/default/9b9cd9001d3a93cbb2194eac171701d3.png
 f178f71452aa40a6 plugins/rcp-fe-lol-parties/global/default/9bcc66075d1e86166c556177a13df006.png
+a8972b6bde7c3394 plugins/rcp-fe-lol-parties/global/default/9c0150f3d091cbe16024342484a61f08.png
 bc037a203f29ba71 plugins/rcp-fe-lol-parties/global/default/9c95b6cdb0ef49d23fd66fccb18b7102.png
 cc5127add84deedc plugins/rcp-fe-lol-parties/global/default/9d75a697a49a91522dc95fb89d873dc7.png
 534c38073f076d91 plugins/rcp-fe-lol-parties/global/default/9e8490164ad9c4c80448c4ef6d85f893.png
@@ -36232,6 +36239,7 @@ e136551628a7b4ef plugins/rcp-fe-lol-parties/global/default/a60bf23046bed4b6ff4cc
 36e5c7c8e43ee7d1 plugins/rcp-fe-lol-parties/global/default/a7a1977118d1636334fe86a56b293817.png
 afa6b62ef818b3b8 plugins/rcp-fe-lol-parties/global/default/a8867b5977e3f52db4bdc7dc51c5568b.png
 7ff7fd7e6ed3a1ec plugins/rcp-fe-lol-parties/global/default/a961552f75ebf317855b058b517660dd.png
+74eb0e35bf400cf2 plugins/rcp-fe-lol-parties/global/default/a9f281813bb619cc42e15346746e33d9.png
 2337a1e471c8278a plugins/rcp-fe-lol-parties/global/default/a9f284a49f93095ae96d8889eb129e38.png
 b94a17ca3e15de91 plugins/rcp-fe-lol-parties/global/default/aa2e45c7527d7dbaf526d84ebf5f5fe9.webm
 5da362256f517808 plugins/rcp-fe-lol-parties/global/default/af038f572c159473167ced482414f06c.png
@@ -36385,6 +36393,7 @@ c467c8404323842c plugins/rcp-fe-lol-parties/global/default/dce03ca5f827f0c3e7323
 f69a22903ef06ef4 plugins/rcp-fe-lol-parties/global/default/dd250accd7e0016d077640a94d36e169.png
 0b0fa1767a413b7f plugins/rcp-fe-lol-parties/global/default/ddd635f623055ef1b4e3fc7471ce26f9.png
 ad840682022bb629 plugins/rcp-fe-lol-parties/global/default/default.png
+4831bdd5943c6395 plugins/rcp-fe-lol-parties/global/default/df42613f165fbe1a383f621cf6b7b7a6.png
 3be793138773eaa7 plugins/rcp-fe-lol-parties/global/default/dfff336971e3c4789896c9cee4c914e7.png
 8baf1c97c7f0b6d6 plugins/rcp-fe-lol-parties/global/default/diamond-locked.png
 656a0f0d646c7c42 plugins/rcp-fe-lol-parties/global/default/diamond-selected.png
@@ -38354,6 +38363,7 @@ a3bdf5386edd4919 plugins/rcp-fe-lol-profiles/global/default/06fee847d106396d2aef
 9e75115c6b9218ef plugins/rcp-fe-lol-profiles/global/default/0a692bfa7427951130fa3caa806f3e76.png
 c901d7a06cc80585 plugins/rcp-fe-lol-profiles/global/default/10d24856d1bf0a439ff4bda003056034.png
 ec9d8d193a5ea985 plugins/rcp-fe-lol-profiles/global/default/15e6fec65c08f977d78b52c9baccdf79.png
+4f1cf66513372ccd plugins/rcp-fe-lol-profiles/global/default/164e1ab0d57698d6ed04ee5b5896a65a.png
 e9b44f39b0f601e4 plugins/rcp-fe-lol-profiles/global/default/17831dcf1d95fc8f225f4e15019f20ef.png
 93ec6015c0b987ff plugins/rcp-fe-lol-profiles/global/default/1ad4c7321799f6b530ec12ca9601984c.png
 f32ff8b5f8960e7e plugins/rcp-fe-lol-profiles/global/default/1c68b4917392f2b9e9cf64105250e6ca.png
@@ -38366,6 +38376,7 @@ fec6494e3ed08284 plugins/rcp-fe-lol-profiles/global/default/22c297aa5099f4daa6a1
 dbd7a503f0a7e1ba plugins/rcp-fe-lol-profiles/global/default/2411c6f09baf3c86fcd9931eaeb8f659.png
 21ffec7449950d62 plugins/rcp-fe-lol-profiles/global/default/24b45437f29f67de8652f70c883b0b9b.png
 8254dcd21b4c7513 plugins/rcp-fe-lol-profiles/global/default/276c458c3146be965096b1b287a55aff.png
+3fafc46ebe01cb86 plugins/rcp-fe-lol-profiles/global/default/27f26217f3c31065b4fe7f607d2551ed.png
 7b7b5fb64db3d480 plugins/rcp-fe-lol-profiles/global/default/281ac6e158e67ddcb826b57722ee5899.png
 02d095537add7228 plugins/rcp-fe-lol-profiles/global/default/29c7967307bc38e0189433f526a43e3d.png
 7a6e38adec2fec06 plugins/rcp-fe-lol-profiles/global/default/2a68d976dc8d74f8f774844f47717885.png
@@ -38375,8 +38386,10 @@ fe9329b5c4f099b3 plugins/rcp-fe-lol-profiles/global/default/2af6dbdb7e4fdca5ac89
 a15be6437eb2e50e plugins/rcp-fe-lol-profiles/global/default/2e1d117a5c015f2293a9074bff3631f9.png
 81fbfe3c6399fb0b plugins/rcp-fe-lol-profiles/global/default/2ef9ed5bf6d6b051735134688fdadf2f.png
 a10e9c0355eb81a0 plugins/rcp-fe-lol-profiles/global/default/3189902183881d6709dd0a841f820c51.png
+e506aca494ba775a plugins/rcp-fe-lol-profiles/global/default/31cd057ddd0cddda5c9879f1ff466dd1.png
 0d631041465f1f28 plugins/rcp-fe-lol-profiles/global/default/31d4f19a91a751b0acd6cc6a712af5e3.png
 418bcc8d7cc0a19c plugins/rcp-fe-lol-profiles/global/default/32ee515a100a89fc745ac19d3c2396d4.png
+5be19a4a324133ab plugins/rcp-fe-lol-profiles/global/default/3438c05383ef625ecb00968b4fd206b7.png
 9a2fed8cc2fd03ae plugins/rcp-fe-lol-profiles/global/default/35e9c856705fe621077f085b323695dd.png
 44d71edccc1ca216 plugins/rcp-fe-lol-profiles/global/default/399164f8a34e88c7a1ab042e79111446.png
 f830e187f02f770a plugins/rcp-fe-lol-profiles/global/default/3d54cf4daf81cff2bab57f5c13d47335.png
@@ -38394,6 +38407,7 @@ f6f93bda2f0dded5 plugins/rcp-fe-lol-profiles/global/default/4bcdf657bf961a232959
 2d04a3903910daa3 plugins/rcp-fe-lol-profiles/global/default/4cf51f6233cccfb42843aea922827270.png
 bf49e94461c536d3 plugins/rcp-fe-lol-profiles/global/default/4d01773c1b72cfd1abe4972af547f34a.png
 2f9c1904337b54e5 plugins/rcp-fe-lol-profiles/global/default/4e42b4d88db30bf0de1723578c047d57.png
+9c1b18187f07321c plugins/rcp-fe-lol-profiles/global/default/4e8264e59f99c737dbe2f08fa47ec847.png
 476b2ed05cacda7a plugins/rcp-fe-lol-profiles/global/default/4e83afc55a8eb28d3450dcf0913a38f8.png
 494bcbf3ce5963ab plugins/rcp-fe-lol-profiles/global/default/5088f4148305dc53316cce801267ce2f.png
 f0e38ce404c32489 plugins/rcp-fe-lol-profiles/global/default/51837d835c1670165c09f4d38bbe2444.png
@@ -38441,6 +38455,7 @@ dd12fa2b54b165e7 plugins/rcp-fe-lol-profiles/global/default/904e37aa4190a549d0a1
 dbe884e7224eab3c plugins/rcp-fe-lol-profiles/global/default/9173846b5a416aabb9adc345da936f8e.png
 d8ec99c21324a81f plugins/rcp-fe-lol-profiles/global/default/94159d3d80a937cc12ceb606b4a916ad.png
 7a424cca09e9879c plugins/rcp-fe-lol-profiles/global/default/95c252cc8549599c3a356c5367e2df5d.png
+21e81e377f5832cb plugins/rcp-fe-lol-profiles/global/default/97017eacdc061d047731a70293602486.png
 67bcf3767173e3f4 plugins/rcp-fe-lol-profiles/global/default/97b016cfa3abb2bcbd186bc31a727c31.png
 5e91adde8408e0a6 plugins/rcp-fe-lol-profiles/global/default/97eda7ef0866467a8f40e248f2ebea3d.png
 ef0cb6e2a82e6907 plugins/rcp-fe-lol-profiles/global/default/98ca1e9a34a284ffbc8652641442e105.png
@@ -38453,6 +38468,7 @@ c0e11cc715afc0b5 plugins/rcp-fe-lol-profiles/global/default/9fcfb6787c81086163a9
 1006ee9f66f89d57 plugins/rcp-fe-lol-profiles/global/default/a1ddadf04598e8ef2aefb44cbf11d3e3.png
 ab0d5d2b1cbd0ad5 plugins/rcp-fe-lol-profiles/global/default/a3ad352475d8104f121f0892ca524119.png
 b1959686752f5403 plugins/rcp-fe-lol-profiles/global/default/a466d8ee8c1d96d5a3f0cc56c94da00a.png
+32addab4c19027f6 plugins/rcp-fe-lol-profiles/global/default/a4caa1a47ccb53083940f91fdd6ef158.png
 422e9dcab1695089 plugins/rcp-fe-lol-profiles/global/default/a6eac78182b7b088acf81b1b74743101.png
 cfc46e827ad5b4bf plugins/rcp-fe-lol-profiles/global/default/a712946db21cb2699958f31f0f3ca7fc.png
 22f151327a491826 plugins/rcp-fe-lol-profiles/global/default/a7140ce90da84eebe20573177ca2d7ac.png
@@ -38532,6 +38548,7 @@ a1a85de0aff8b5a0 plugins/rcp-fe-lol-profiles/global/default/e58f4010861457456298
 4905026f26940706 plugins/rcp-fe-lol-profiles/global/default/e74e96b610652f8830165a9cedb8c61a.png
 db7725217d11890b plugins/rcp-fe-lol-profiles/global/default/e79ec044e875530a52e52560a2ad4110.png
 773a29aaa14980ae plugins/rcp-fe-lol-profiles/global/default/e7ef6408605b29615192ae10966c87b4.png
+46a6ae9a80a95eca plugins/rcp-fe-lol-profiles/global/default/ea28482b2781420171f1639a3aa03e83.png
 34b0a078d94a10d8 plugins/rcp-fe-lol-profiles/global/default/ea75e7d3b5a5341dc325cc5fcb6ce0d0.png
 0f5d67f15138d649 plugins/rcp-fe-lol-profiles/global/default/ec491123f19ca4a46fcc0a5fc9a3ce5e.png
 58c12a437613efc2 plugins/rcp-fe-lol-profiles/global/default/ecc2fa0ba07deb7ca57b7bbdace67555.png
@@ -38872,6 +38889,7 @@ f6611f69268e390e plugins/rcp-fe-lol-reconnect-notification/global/zh_tw/trans.js
 c7f6083eeeac0c60 plugins/rcp-fe-lol-regalia/global/cs_cz/trans.json
 b6bf6c7b5fb34973 plugins/rcp-fe-lol-regalia/global/de_de/trans.json
 142b3c36dc226d30 plugins/rcp-fe-lol-regalia/global/default/05c626a40d2c1778775084bd1c02a4be.png
+f94fad1f7f6f65d7 plugins/rcp-fe-lol-regalia/global/default/0ba4351578183712aa52280d2437a828.png
 15a12133e2cbb01f plugins/rcp-fe-lol-regalia/global/default/1aea38d36ff0a4febe326e4fbc2166e8.png
 25eba76cdc899bb6 plugins/rcp-fe-lol-regalia/global/default/23de520c0ff012b3bc5e485ee75cf714.png
 e4d4d570a705550f plugins/rcp-fe-lol-regalia/global/default/38f196e871c3c7084e8ad2ae479bd213.webm
@@ -38897,6 +38915,7 @@ fce3aa4167c8d26a plugins/rcp-fe-lol-regalia/global/default/b03a6cd1e37e9e579b76b
 72d30c64b159cfc3 plugins/rcp-fe-lol-regalia/global/default/b1b527c36edb45c7d287a87ff0c3a7ba.png
 822dbfbc2b3a5d36 plugins/rcp-fe-lol-regalia/global/default/b1ea6e8a609e97ab805fd78918fef304.png
 48fa6f5d0999e452 plugins/rcp-fe-lol-regalia/global/default/b5d65cf623dd7e1e4a821b8084df63c9.webm
+0a70855b555cefc7 plugins/rcp-fe-lol-regalia/global/default/b7ebf19b168d579ef796191f1091e672.png
 fa56e8462e29ad4a plugins/rcp-fe-lol-regalia/global/default/banner_ally.webm
 38787e987dd13088 plugins/rcp-fe-lol-regalia/global/default/banner_primary.webm
 312ba5df41559e03 plugins/rcp-fe-lol-regalia/global/default/be226fdb68c6ee30ba4b66195b3817ee.webm
@@ -38907,9 +38926,11 @@ e15d47b360ce0146 plugins/rcp-fe-lol-regalia/global/default/c72494c7317c7b974bdab
 140c91f5b7d6fae0 plugins/rcp-fe-lol-regalia/global/default/d39511fd1ff6d9afaa0b2e427cdfe831.png
 dec5533b1909be31 plugins/rcp-fe-lol-regalia/global/default/d5243a87b9b73373665f96cc1cbf7a80.webm
 574b5d5971322cea plugins/rcp-fe-lol-regalia/global/default/df454516e3a1da25031f1bcbb8318700.png
+bcbe998686e0f704 plugins/rcp-fe-lol-regalia/global/default/ea28482b2781420171f1639a3aa03e83.png
 c89c37806bd3ad74 plugins/rcp-fe-lol-regalia/global/default/editsummoner_click.png
 9f08a38b07a6357e plugins/rcp-fe-lol-regalia/global/default/editsummoner_hover.png
 14128ffdbe7a2bd5 plugins/rcp-fe-lol-regalia/global/default/eog-solid-ring.png
+396a7e7965c71b49 plugins/rcp-fe-lol-regalia/global/default/f38ce59fefc209a5cb129d1ba987dc2c.png
 2a591cbe777d8a86 plugins/rcp-fe-lol-regalia/global/default/icon-mask-30.png
 1c3d06f7f3680c1e plugins/rcp-fe-lol-regalia/global/default/images/empty-icon.png
 65baae2c0211a35b plugins/rcp-fe-lol-regalia/global/default/index.html
