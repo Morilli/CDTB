@@ -5929,6 +5929,7 @@ ef8087b6391cb96f plugins/rcp-be-lol-game-data/global/default/assets/loot/yasuo-i
 3b93238280f78921 plugins/rcp-be-lol-game-data/global/default/assets/loot/zed-border-icon-490px.png
 29e0ef32ae369577 plugins/rcp-be-lol-game-data/global/default/assets/loot/zed-gold-chroma-490px.png
 296c20e84b730d58 plugins/rcp-be-lol-game-data/global/default/assets/missions/a-spooky-intermission.png
+7730688f1335b331 plugins/rcp-be-lol-game-data/global/default/assets/missions/champion_series_icon.svg
 4deb041040b74efd plugins/rcp-be-lol-game-data/global/default/assets/missions/clash-hextech.png
 c2a5f47a1403b5f6 plugins/rcp-be-lol-game-data/global/default/assets/missions/costume-party.png
 41a8340288563dd9 plugins/rcp-be-lol-game-data/global/default/assets/missions/daily_series_icon.svg
