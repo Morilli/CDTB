@@ -31102,6 +31102,7 @@ ae5f508b6720b28f plugins/rcp-fe-lol-club-tag-components/global/default/input.js
 8b5b9bab6cadae5f plugins/rcp-fe-lol-club-tag-components/global/en_us/trans.json
 9a6fa10181b9a58b plugins/rcp-fe-lol-clubs/description.json
 3d8e529f6bea26e1 plugins/rcp-fe-lol-clubs/global/ar_ae/rcp-fe-lol-clubs.css
+5f375c69bc04a4c2 plugins/rcp-fe-lol-clubs/global/ar_ae/trans.json
 d0ad54b606ee52f9 plugins/rcp-fe-lol-clubs/global/cs_cz/trans.json
 f2c3cba46c517603 plugins/rcp-fe-lol-clubs/global/de_de/trans.json
 a4e1e3e4e16c3581 plugins/rcp-fe-lol-clubs/global/default/anchor-underline.png
