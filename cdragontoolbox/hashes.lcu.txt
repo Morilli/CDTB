@@ -2930,6 +2930,7 @@ d48f14086eec664b plugins/rcp-be-lol-game-data/global/default/assets/characters/m
 c42a0aedc54ebeea plugins/rcp-be-lol-game-data/global/default/assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.dds
 7917771d8ab73b05 plugins/rcp-be-lol-game-data/global/default/assets/characters/morgana/hud/icons2d/fallenangel_tormentedsoil.png
 6505a162ea36e616 plugins/rcp-be-lol-game-data/global/default/assets/characters/morgana/skins/base/morganaloadscreen.jpg
+c660b8ffb682ae3d plugins/rcp-be-lol-game-data/global/default/assets/characters/morgana/skins/base/morganaloadscreen.kayle_rework.jpg
 09ca6ca580ce343f plugins/rcp-be-lol-game-data/global/default/assets/characters/morgana/skins/base/morganaloadscreen.morgana_rework.jpg
 ff0053bc5ec23ea6 plugins/rcp-be-lol-game-data/global/default/assets/characters/morgana/skins/base/morganaloadscreen.png
 519c7e927f0229ba plugins/rcp-be-lol-game-data/global/default/assets/characters/morgana/skins/skin01/morganaloadscreen_1.jpg
@@ -36475,6 +36476,7 @@ b5a034b2ccc66b40 plugins/rcp-fe-lol-parties/global/default/e2f4146fc057b645030e8
 e7ed32abc89e3828 plugins/rcp-fe-lol-parties/global/default/exit_default.png
 96f9b94b8ba47938 plugins/rcp-fe-lol-parties/global/default/exit_disabled.png
 4866a45486ac0460 plugins/rcp-fe-lol-parties/global/default/exit_hover.png
+36483835cabef198 plugins/rcp-fe-lol-parties/global/default/external-link-mask.png
 b811556dda2d5fd9 plugins/rcp-fe-lol-parties/global/default/f04754046ed1198b5d8e89221dcbd11d.png
 1f3eb8d8bc73eec3 plugins/rcp-fe-lol-parties/global/default/f07a1f7399d12d5960e3c0e1cfb74ce2.png
 e6e7491312c5f223 plugins/rcp-fe-lol-parties/global/default/f10bff54b33c58d2dd628bbaf93b1880.png
@@ -36496,6 +36498,9 @@ a187980361e87680 plugins/rcp-fe-lol-parties/global/default/fb9a8837daae66e553046
 439c29d47c798016 plugins/rcp-fe-lol-parties/global/default/fcca4d2b7887eb921509653d66e0c313.png
 6d2e186aa0b0f6a0 plugins/rcp-fe-lol-parties/global/default/footermetaldecorationleft.png
 c4ddf13bd2c4adbf plugins/rcp-fe-lol-parties/global/default/footermetaldecorationright.png
+aacca983927bae54 plugins/rcp-fe-lol-parties/global/default/golden-spatula-club-icon-disabled.png
+e7042b8eb02c4b20 plugins/rcp-fe-lol-parties/global/default/golden-spatula-club-icon-enabled.png
+97a14128767835ca plugins/rcp-fe-lol-parties/global/default/golden-spatula-club-icon-hover.png
 b0a9ae8299c4350a plugins/rcp-fe-lol-parties/global/default/hover-border.png
 e69fff72f1c7df7b plugins/rcp-fe-lol-parties/global/default/hover.png
 50d9610054793b29 plugins/rcp-fe-lol-parties/global/default/icon-add-player-active.png
