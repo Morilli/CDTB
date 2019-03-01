@@ -40418,6 +40418,12 @@ e6cb1bf6f55a49dc plugins/rcp-fe-lol-splash/global/default/splash-assets/kaisa/im
 b8ace5ba4ef95065 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaisa/intro-video-splash-kaisa.webm
 9240e0180fbb3302 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaisa/music-splash-kaisa.ogg
 2939a21cf81af6e2 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaisa/video-splash-kaisa.webm
+a801253ef6f10142 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaylemorg/config.json
+2841fc390af11f1a plugins/rcp-fe-lol-splash/global/default/splash-assets/kaylemorg/image-splash-kaylemorg.jpg
+74636072f557f0d2 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaylemorg/intro-sound-splash-kaylemorg.ogg
+d661d6a464f1afe5 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaylemorg/intro-video-splash-kaylemorg.webm
+a7d9317ba3fa8fe7 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaylemorg/music-splash-kaylemorg.ogg
+b7b00440caa71e5a plugins/rcp-fe-lol-splash/global/default/splash-assets/kaylemorg/video-splash-kaylemorg.webm
 6250571610f9739e plugins/rcp-fe-lol-splash/global/default/splash-assets/kaynassassin/config.json
 ee0d72f97ec8f5f0 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaynslayer/config.json
 f4d30a7f49104d6f plugins/rcp-fe-lol-splash/global/default/splash-assets/leesinheavensfist/config.json
