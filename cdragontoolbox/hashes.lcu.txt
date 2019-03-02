@@ -26176,6 +26176,11 @@ ab81880a5536dbe4 plugins/rcp-be-lol-game-data/global/ru_ru/v1/summoner-trophies.
 9c4482cf453a6bdb plugins/rcp-be-lol-game-data/global/ru_ru/v1/universes.json
 d25cdf79080d4eb0 plugins/rcp-be-lol-game-data/global/ru_ru/v1/ward-skin-sets.json
 00d22e54c395026f plugins/rcp-be-lol-game-data/global/ru_ru/v1/ward-skins.json
+55cdceca85551a93 plugins/rcp-be-lol-game-data/global/th_th/content/src/leagueclient/clashvo/th_th/vo-anncr-fem1-tournaments-lockin-10min-01.ogg
+c6bdd06595edc570 plugins/rcp-be-lol-game-data/global/th_th/content/src/leagueclient/clashvo/th_th/vo-anncr-fem1-tournaments-lockin-3min-01.ogg
+ed5b9db281f765f5 plugins/rcp-be-lol-game-data/global/th_th/content/src/leagueclient/clashvo/th_th/vo-anncr-fem1-tournaments-lockin-5min-01.ogg
+7b91146920ccc474 plugins/rcp-be-lol-game-data/global/th_th/content/src/leagueclient/clashvo/th_th/vo-anncr-fem1-tournaments-round-start-01.ogg
+b657afca35140041 plugins/rcp-be-lol-game-data/global/th_th/content/src/leagueclient/clashvo/th_th/vo-anncr-fem1-tournaments-win-bracket-generic-01.ogg
 f1ff17a87c73d732 plugins/rcp-be-lol-game-data/global/th_th/v1/champion-summary.json
 cd7cc5cad3e7120d plugins/rcp-be-lol-game-data/global/th_th/v1/champions/-1.json
 31f8223b7bbade0f plugins/rcp-be-lol-game-data/global/th_th/v1/champions/1.json
@@ -26813,6 +26818,11 @@ e34c9a898d6fdd34 plugins/rcp-be-lol-game-data/global/tr_tr/v1/summoner-spells.js
 3fd9571d36f9a6fe plugins/rcp-be-lol-game-data/global/tr_tr/v1/universes.json
 59078fb41642583e plugins/rcp-be-lol-game-data/global/tr_tr/v1/ward-skin-sets.json
 5d256b18fb838239 plugins/rcp-be-lol-game-data/global/tr_tr/v1/ward-skins.json
+78367a0a1d3e0161 plugins/rcp-be-lol-game-data/global/vn_vn/content/src/leagueclient/clashvo/vn_vn/vo-anncr-fem1-tournaments-lockin-10min-01.ogg
+7a3f4ef5901d0aa6 plugins/rcp-be-lol-game-data/global/vn_vn/content/src/leagueclient/clashvo/vn_vn/vo-anncr-fem1-tournaments-lockin-3min-01.ogg
+378b22b94b7cf2f1 plugins/rcp-be-lol-game-data/global/vn_vn/content/src/leagueclient/clashvo/vn_vn/vo-anncr-fem1-tournaments-lockin-5min-01.ogg
+99a8cddf7b5a22b9 plugins/rcp-be-lol-game-data/global/vn_vn/content/src/leagueclient/clashvo/vn_vn/vo-anncr-fem1-tournaments-round-start-01.ogg
+8a8118e2da964545 plugins/rcp-be-lol-game-data/global/vn_vn/content/src/leagueclient/clashvo/vn_vn/vo-anncr-fem1-tournaments-win-bracket-generic-01.ogg
 5ed3efb13c027de4 plugins/rcp-be-lol-game-data/global/vn_vn/v1/champion-summary.json
 b0e43fbe512d7d94 plugins/rcp-be-lol-game-data/global/vn_vn/v1/champions/-1.json
 ed630a29ab9f0bc7 plugins/rcp-be-lol-game-data/global/vn_vn/v1/champions/1.json
@@ -26981,6 +26991,11 @@ ebb6c1915fe0c1ba plugins/rcp-be-lol-game-data/global/vn_vn/v1/perkstyles.json
 ecb6defed61d8770 plugins/rcp-be-lol-game-data/global/vn_vn/v1/universes.json
 83a3cc558022c41d plugins/rcp-be-lol-game-data/global/vn_vn/v1/ward-skin-sets.json
 ac86b48378de6754 plugins/rcp-be-lol-game-data/global/vn_vn/v1/ward-skins.json
+4e56a0cab527e4c7 plugins/rcp-be-lol-game-data/global/zh_cn/content/src/leagueclient/clashvo/zh_cn/vo-anncr-fem1-tournaments-lockin-10min-01.ogg
+c63ad74fba0a502c plugins/rcp-be-lol-game-data/global/zh_cn/content/src/leagueclient/clashvo/zh_cn/vo-anncr-fem1-tournaments-lockin-3min-01.ogg
+769425f59d59ad80 plugins/rcp-be-lol-game-data/global/zh_cn/content/src/leagueclient/clashvo/zh_cn/vo-anncr-fem1-tournaments-lockin-5min-01.ogg
+07d21db6bd186753 plugins/rcp-be-lol-game-data/global/zh_cn/content/src/leagueclient/clashvo/zh_cn/vo-anncr-fem1-tournaments-round-start-01.ogg
+fab7143e5de65f5d plugins/rcp-be-lol-game-data/global/zh_cn/content/src/leagueclient/clashvo/zh_cn/vo-anncr-fem1-tournaments-win-bracket-generic-01.ogg
 160e59f39baf8564 plugins/rcp-be-lol-game-data/global/zh_cn/v1/champion-ban-vo/1.ogg
 d8c904330ac32e37 plugins/rcp-be-lol-game-data/global/zh_cn/v1/champion-ban-vo/10.ogg
 dd98d8d670b38288 plugins/rcp-be-lol-game-data/global/zh_cn/v1/champion-ban-vo/101.ogg
@@ -27603,6 +27618,11 @@ f039400bd05a1000 plugins/rcp-be-lol-game-data/global/zh_my/v1/summoner-spells.js
 4296842b98c66dab plugins/rcp-be-lol-game-data/global/zh_my/v1/universes.json
 f32e47435676e88f plugins/rcp-be-lol-game-data/global/zh_my/v1/ward-skin-sets.json
 a9ab91074b77fd75 plugins/rcp-be-lol-game-data/global/zh_my/v1/ward-skins.json
+21a40380d7df977e plugins/rcp-be-lol-game-data/global/zh_tw/content/src/leagueclient/clashvo/zh_tw/vo-anncr-fem1-tournaments-lockin-10min-01.ogg
+57729e71e6c2545e plugins/rcp-be-lol-game-data/global/zh_tw/content/src/leagueclient/clashvo/zh_tw/vo-anncr-fem1-tournaments-lockin-3min-01.ogg
+0b6d74ad4fcf2a07 plugins/rcp-be-lol-game-data/global/zh_tw/content/src/leagueclient/clashvo/zh_tw/vo-anncr-fem1-tournaments-lockin-5min-01.ogg
+be64b30ec45c4fe9 plugins/rcp-be-lol-game-data/global/zh_tw/content/src/leagueclient/clashvo/zh_tw/vo-anncr-fem1-tournaments-round-start-01.ogg
+70c81acae7465cbf plugins/rcp-be-lol-game-data/global/zh_tw/content/src/leagueclient/clashvo/zh_tw/vo-anncr-fem1-tournaments-win-bracket-generic-01.ogg
 a829de03a20b5f71 plugins/rcp-be-lol-game-data/global/zh_tw/v1/champion-summary.json
 5fb59d8247439589 plugins/rcp-be-lol-game-data/global/zh_tw/v1/champions/-1.json
 83accc06e1ebb8e1 plugins/rcp-be-lol-game-data/global/zh_tw/v1/champions/1.json
@@ -27955,8 +27975,10 @@ da9385573a668108 plugins/rcp-be-lol-license-agreement/riot/ro_ro/tou.txt
 b0b3cf1ea32ce5d9 plugins/rcp-be-lol-license-agreement/ru/ru_ru/eula.txt
 998ff7bacea8bf38 plugins/rcp-be-lol-license-agreement/ru/ru_ru/tou.txt
 224ad211cc09a452 plugins/rcp-be-lol-license-agreement/tr/tr_tr/tou.txt
+e73ccb726c986e8f plugins/rcp-be-sanitizer/global/default/1.filter.country.br.csv
 0dab7a02dc66d7d1 plugins/rcp-be-sanitizer/global/default/1.filter.country.es.csv
 f6c1651a59f36429 plugins/rcp-be-sanitizer/global/default/1.filter.country.mx.csv
+15c4c2fa766f0b29 plugins/rcp-be-sanitizer/global/default/1.filter.country.tw.csv
 ec6bece0aad7ad49 plugins/rcp-be-sanitizer/global/default/1.filter.csv
 189ac628cd631d1e plugins/rcp-be-sanitizer/global/default/1.filter.language.cs.csv
 945f5e3d6ab54645 plugins/rcp-be-sanitizer/global/default/1.filter.language.de.csv
@@ -31330,6 +31352,7 @@ c86ff3898753b30d plugins/rcp-fe-lol-collections/global/default/images/item-eleme
 88a6f0126c9f6dc1 plugins/rcp-fe-lol-collections/global/default/images/item-element/borders/linger-effect-background.png
 f6312dd281e23387 plugins/rcp-fe-lol-collections/global/default/images/item-element/borders/linger-effect-left-side.png
 8b8289ef3194afd9 plugins/rcp-fe-lol-collections/global/default/images/item-element/borders/linger-effect-right-side.png
+99f4d0dd8983ea87 plugins/rcp-fe-lol-collections/global/default/images/item-element/hextech-chest.png
 b264b118d4a5e095 plugins/rcp-fe-lol-collections/global/default/images/item-element/sale-badge.png
 c343d38fadd1a9df plugins/rcp-fe-lol-collections/global/default/images/on-boarding/button-light.png
 21f4b44f48435f43 plugins/rcp-fe-lol-collections/global/default/images/on-boarding/collect-slot.png
@@ -34474,6 +34497,7 @@ fa8b9587e9618b7f plugins/rcp-fe-lol-loot/global/vn_vn/summonericon.json
 aca96ebb459c79b1 plugins/rcp-fe-lol-loot/global/zh_tw/summonericon.json
 ab8f44967d9bec01 plugins/rcp-fe-lol-loot/global/zh_tw/trans.json
 725fb753aaf57419 plugins/rcp-fe-lol-loyalty/description.json
+e7d2a557d0d5617e plugins/rcp-fe-lol-loyalty/global/ar_ae/rcp-fe-lol-loyalty.css
 68ab7231de3fcd92 plugins/rcp-fe-lol-loyalty/global/cs_cz/trans.json
 20e02ab7efdec020 plugins/rcp-fe-lol-loyalty/global/de_de/trans.json
 565ed7e269326dd2 plugins/rcp-fe-lol-loyalty/global/default/badge-pcbrewards.png
@@ -35931,6 +35955,8 @@ cf70de7112e678c4 plugins/rcp-fe-lol-npe-rewards/global/ru_ru/trans.json
 870dbc731b7d467c plugins/rcp-fe-lol-npe-rewards/global/th_th/trans.json
 c15531eb916d6da0 plugins/rcp-fe-lol-npe-rewards/global/tr_tr/trans.json
 7822bebc2152c4e4 plugins/rcp-fe-lol-npe-rewards/global/vi_vn/trans.json
+aaf48c49c2db0b40 plugins/rcp-fe-lol-npe-rewards/global/vn_vn/trans.json
+9b2c240a7aec1a33 plugins/rcp-fe-lol-npe-rewards/global/zh_cn/trans.json
 b0ff93a71acf1442 plugins/rcp-fe-lol-npe-rewards/global/zh_my/trans.json
 2e2b301d9c83c32c plugins/rcp-fe-lol-npe-rewards/global/zh_tw/trans.json
 494f8a07017c5a97 plugins/rcp-fe-lol-npe-who-to-play/description.json
@@ -36501,6 +36527,7 @@ c4ddf13bd2c4adbf plugins/rcp-fe-lol-parties/global/default/footermetaldecoration
 aacca983927bae54 plugins/rcp-fe-lol-parties/global/default/golden-spatula-club-icon-disabled.png
 e7042b8eb02c4b20 plugins/rcp-fe-lol-parties/global/default/golden-spatula-club-icon-enabled.png
 97a14128767835ca plugins/rcp-fe-lol-parties/global/default/golden-spatula-club-icon-hover.png
+fcb512e25a0b61ab plugins/rcp-fe-lol-parties/global/default/golden-spatula-club-icon.png
 b0a9ae8299c4350a plugins/rcp-fe-lol-parties/global/default/hover-border.png
 e69fff72f1c7df7b plugins/rcp-fe-lol-parties/global/default/hover.png
 50d9610054793b29 plugins/rcp-fe-lol-parties/global/default/icon-add-player-active.png
@@ -41368,6 +41395,7 @@ c3a5cb99ab1e7210 plugins/rcp-fe-lol-user-experience-settings/global/vn_vn/trans.
 71868a323653305b plugins/rcp-fe-lol-voice-settings/description.json
 6884fe4799f70752 plugins/rcp-fe-lol-voice-settings/global/.ds_store
 3badb9a9045ec71b plugins/rcp-fe-lol-voice-settings/global/ar_ae/rcp-fe-lol-voice-settings.css
+aad0c50bc366d608 plugins/rcp-fe-lol-voice-settings/global/ar_ae/trans.json
 b7bcff4f7c10d7c8 plugins/rcp-fe-lol-voice-settings/global/cs_cz/trans.json
 ba7cef4e721a49f2 plugins/rcp-fe-lol-voice-settings/global/de_de/trans.json
 2e8d9187bb2784cf plugins/rcp-fe-lol-voice-settings/global/default/.ds_store
