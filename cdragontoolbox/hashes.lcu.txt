@@ -35964,7 +35964,10 @@ d8bbb17a34f06ca1 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-cal
 e9bb44dd972b093b plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-icon-marksman-champion.png
 8634121c4886aaeb plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-icon-support-champion.png
 4161149350563812 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-1-spells.png
+1e15204e185cbff2 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-10-loot-modes.png
 29a5b13391786a19 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-2-first-champion.png
+2d7451b95d439b48 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-2-starting-champion.png
+d711853ee35eae6a plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-3-caitlyn-sr-loot.png
 450ebcbf56b55d4b plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-4-garen-spells.png
 7f6f06dec582d923 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-4-spells.png
 2f372628f8a3f847 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-5-brand-tt.png
@@ -35983,6 +35986,7 @@ df515743a236c47c plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-cal
 88961315a8773b74 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-twisted-treeline-test.png
 4e4541d836db65bb plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-twisted-treeline.png
 0eab5d2b29531a52 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-ward-skin.png
+14d44f8940d6c624 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-waterloo-miss-fortune-skin.png
 cf00e36134fe065c plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar/calendar-detail-frame.png
 75667bf8ed563c65 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar/frame-fancy-completed.png
 7cce9a3f344bfb49 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar/frame-fancy-locked-hover.png
@@ -36001,7 +36005,10 @@ b3ddeb3486f6e9a4 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-cal
 c85c8a851079285e plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-blue-essence.png
 2591787c81e00c4c plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-fighter-champion.png
 acd6ab9689763850 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-1-spells.png
+f7290a8cf8bdf004 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-10-loot-modes.png
 baef7de9fb5c488e plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-2-first-champion.png
+0583c37413c9a3dc plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-2-starting-champion.png
+0f6bb8ba3232010f plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-3-caitlyn-sr-loot.png
 06c112aac73f3c8b plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-4-garen-spells.png
 2596c653be9ca301 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-4-spells.png
 7a063070221e4b8e plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-5-brand-tt.png
@@ -36018,9 +36025,14 @@ aea1bae30f4430a5 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-cir
 2c21f328a9ba9f73 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-support-champion.png
 33f3147e009214a8 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-twisted-treeline.png
 5bf7c03ea307315e plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-ward-skin.png
+d796644e7393fe04 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-waterloo-miss-fortune-skin.png
 8746765689d6a708 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-1-spells.png
+bf6daa5ca7117cfe plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-10-loot-modes.png
+51a7a0ca2e633489 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-2-starting-champion.png
+e9930692b9af7b2f plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-3-caitlyn-sr-loot.png
 339265e4dc22dd28 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-4-garen-spells.png
 e4e4f4fe9db7ec54 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-5-brand-tt.png
+310818d6e9c5d2d6 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-6-loot-spells-aram.png
 08630a36693eca60 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-7-loot-tt.png
 3c1f4563d1144bef plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-8-loot-runes.png
 aaf8c0c81ee90e03 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-level-9-loot-spells.png
@@ -36034,6 +36046,7 @@ a86fc12890faa3be plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-cir
 67df5212ead65cb5 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-support-champion.png
 19715769d9fcad89 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-twisted-treeline.png
 8a0f7db1a0f5f4a8 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-ward-skin.png
+68f18351521b4b83 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-waterloo-miss-fortune-skin.png
 cb3ba3f7f4045242 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-detail-sr-blind-aram.png
 8275dbe71194325a plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-assassin-champion.png
 c944efd82d5c4a31 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-blue-essence.png
@@ -36044,8 +36057,12 @@ eeb84cc533712d98 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-maj
 a1636fd3d1a06976 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-icon-marksman-champion.png
 eb4b8a4fe5fff041 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-icon-support-champion.png
 3d71335b617146da plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-1-spells.png
+da064908fa0eb155 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-10-loot-modes.png
+ec2c8e280682f315 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-2-starting-champion.png
+cc9008930118dd3b plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-3-caitlyn-sr-loot.png
 ced478e99d269c5c plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-4-garen-spells.png
 c6ffc9e50d7e505c plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-5-brand-tt.png
+3996ada549f2b7d0 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-6-loot-spells-aram.png
 4c0dcac9423758b4 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-7-loot-tt.png
 c4a6d6ee4f4fcf5e plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-8-loot-runes.png
 8cd77e57d3e5945d plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-level-9-loot-spells.png
@@ -36061,6 +36078,7 @@ cfcb2e853d35eade plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-maj
 255fc1ab5301307a plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-twisted-treeline-test.png
 886f8feb6e91a10d plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-twisted-treeline.png
 7894351821b9e201 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-ward-skin.png
+64e18dd17cbf5f39 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-major-waterloo-miss-fortune-skin.png
 71e57a6c646bbe62 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-minor-blue-essence.png
 5c3f8edd27fdd12a plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-minor-hextech-chest.png
 5b535a9a536234f4 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-minor-hextech-key-fragment.png
