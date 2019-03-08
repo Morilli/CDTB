@@ -5735,6 +5735,9 @@ b20b71eae08e6512 plugins/rcp-be-lol-game-data/global/default/assets/loadouts/sum
 4f6cedb9e9323399 plugins/rcp-be-lol-game-data/global/default/assets/loadouts/summonertrophies/trophies/zaun/leagueclient/trophy_zaun_4_inventory.png
 e4e3b66c09e499d7 plugins/rcp-be-lol-game-data/global/default/assets/loadouts/summonertrophies/trophies/zaun/leagueclient/trophy_zaun_8_inventory.png
 59fd8808e67b030f plugins/rcp-be-lol-game-data/global/default/assets/loot/animatedmpenguemote.png
+0fe7be6421e3e210 plugins/rcp-be-lol-game-data/global/default/assets/loot/aprilfools2019_bag_256x256.png
+183e439b30c9519f plugins/rcp-be-lol-game-data/global/default/assets/loot/aprilfools2019_bag_490x490.png
+62b7dd2a0c4a1ce6 plugins/rcp-be-lol-game-data/global/default/assets/loot/aprilfools2019_capsule_490x490.png
 b94abd10c63e43e3 plugins/rcp-be-lol-game-data/global/default/assets/loot/aprilfoolsbag_256x256j.png
 35d729e95ac3f313 plugins/rcp-be-lol-game-data/global/default/assets/loot/aprilfoolsbag_490x490.png
 eba55a764b97bce5 plugins/rcp-be-lol-game-data/global/default/assets/loot/aprilfoolsbag_490x490j.png
@@ -5941,6 +5944,10 @@ ef8087b6391cb96f plugins/rcp-be-lol-game-data/global/default/assets/loot/yasuo-i
 3b93238280f78921 plugins/rcp-be-lol-game-data/global/default/assets/loot/zed-border-icon-490px.png
 29e0ef32ae369577 plugins/rcp-be-lol-game-data/global/default/assets/loot/zed-gold-chroma-490px.png
 296c20e84b730d58 plugins/rcp-be-lol-game-data/global/default/assets/missions/a-spooky-intermission.png
+41069eedddc23919 plugins/rcp-be-lol-game-data/global/default/assets/missions/aprilfools2019_cat-icon.png
+e124513980ba8b2d plugins/rcp-be-lol-game-data/global/default/assets/missions/aprilfools2019_corki-icon.png
+03e190f8a6a538ad plugins/rcp-be-lol-game-data/global/default/assets/missions/aprilfools2019_dog-icon.png
+2e3cb58e76bdf190 plugins/rcp-be-lol-game-data/global/default/assets/missions/aprilfools2019_dog-licking-cat.png
 7730688f1335b331 plugins/rcp-be-lol-game-data/global/default/assets/missions/champion_series_icon.svg
 4deb041040b74efd plugins/rcp-be-lol-game-data/global/default/assets/missions/clash-hextech.png
 c2a5f47a1403b5f6 plugins/rcp-be-lol-game-data/global/default/assets/missions/costume-party.png
