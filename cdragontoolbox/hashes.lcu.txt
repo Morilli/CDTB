@@ -1709,6 +1709,7 @@ c0a99988163b939d plugins/rcp-be-lol-game-data/global/default/assets/characters/c
 14eadb62dc1c7b98 plugins/rcp-be-lol-game-data/global/default/assets/characters/corki/skins/skin07/corkiloadscreen_7.jpg
 a5e988c3e61d517e plugins/rcp-be-lol-game-data/global/default/assets/characters/corki/skins/skin08/corkiloadscreen_8.jpg
 c04cd62b7a4f2a7e plugins/rcp-be-lol-game-data/global/default/assets/characters/corki/skins/skin18/corkiloadscreen_18.skins_aprilfools_2019.jpg
+dd813a9322b87974 plugins/rcp-be-lol-game-data/global/default/assets/characters/corki/skins/skin18/corkiloadscreen_18_le.skins_corki_skin18.jpg
 22ad169a53f9013e plugins/rcp-be-lol-game-data/global/default/assets/characters/darius/hud/icons2d/darius_icon_axe_grab.dds
 a5722bd013b6b1d0 plugins/rcp-be-lol-game-data/global/default/assets/characters/darius/hud/icons2d/darius_icon_axe_grab.png
 28d4cce9176055d3 plugins/rcp-be-lol-game-data/global/default/assets/characters/darius/hud/icons2d/darius_icon_decimate.png
@@ -1960,6 +1961,7 @@ c532cd312abe2288 plugins/rcp-be-lol-game-data/global/default/assets/characters/f
 9fdd8a4bda5ceecd plugins/rcp-be-lol-game-data/global/default/assets/characters/fizz/skins/skin09/fizzloadscreen_9.jpg
 6c67b78ae315428e plugins/rcp-be-lol-game-data/global/default/assets/characters/fizz/skins/skin10/fizzloadscreen_10.jpg
 759f80d9fe2ac11e plugins/rcp-be-lol-game-data/global/default/assets/characters/fizz/skins/skin14/fizzloadscreen_14.skins_aprilfools_2019.jpg
+2819de50dbe385bb plugins/rcp-be-lol-game-data/global/default/assets/characters/fizz/skins/skin14/fizzloadscreen_14_le.skins_fizz_skin14.jpg
 c9c627b1e4989e11 plugins/rcp-be-lol-game-data/global/default/assets/characters/galio/hud/icons2d/galio_e.dds
 8173b62fcf0b609e plugins/rcp-be-lol-game-data/global/default/assets/characters/galio/hud/icons2d/galio_e.png
 6dab7db8a996fd86 plugins/rcp-be-lol-game-data/global/default/assets/characters/galio/hud/icons2d/galio_passive.png
@@ -3292,6 +3294,7 @@ a8baa01803742df0 plugins/rcp-be-lol-game-data/global/default/assets/characters/r
 cf9722fe655f2030 plugins/rcp-be-lol-game-data/global/default/assets/characters/rengar/skins/skin03/rengarloadscreen_3.jpg
 7970168ad4fe05cd plugins/rcp-be-lol-game-data/global/default/assets/characters/rengar/skins/skin08/rengarloadscreen_8.jpg
 b4f75f12c63efc51 plugins/rcp-be-lol-game-data/global/default/assets/characters/rengar/skins/skin15/rengarloadscreen_15.skins_aprilfools_2019.jpg
+08637195ff66f2d3 plugins/rcp-be-lol-game-data/global/default/assets/characters/rengar/skins/skin15/rengarloadscreen_15_le.skins_rengar_skin15.jpg
 59e533851210aab2 plugins/rcp-be-lol-game-data/global/default/assets/characters/riven/hud/icons2d/rivenbladeoftheexile.dds
 0e9833bb51af1c4f plugins/rcp-be-lol-game-data/global/default/assets/characters/riven/hud/icons2d/rivenbladeoftheexile.png
 1f1183a83ddae16f plugins/rcp-be-lol-game-data/global/default/assets/characters/riven/hud/icons2d/rivenbrokenwings.png
@@ -4076,6 +4079,7 @@ ac5d4bfc387c57c5 plugins/rcp-be-lol-game-data/global/default/assets/characters/y
 38af9681d638efe1 plugins/rcp-be-lol-game-data/global/default/assets/characters/yorick/skins/skin02/yorickloadscreen_2.jpg
 9479278604e9227a plugins/rcp-be-lol-game-data/global/default/assets/characters/yorick/skins/skin03/yorickloadscreen_3.jpg
 bece5c60fe7d739c plugins/rcp-be-lol-game-data/global/default/assets/characters/yorick/skins/skin04/yorickloadscreen_4.skins_aprilfools_2019.jpg
+e0aa232e662d75b4 plugins/rcp-be-lol-game-data/global/default/assets/characters/yorick/skins/skin04/yorickloadscreen_4_le.skins_yorick_skin04.jpg
 fd6ef94a359acbbe plugins/rcp-be-lol-game-data/global/default/assets/characters/zac/hud/icons2d/zace.dds
 e588616bd09e1cc5 plugins/rcp-be-lol-game-data/global/default/assets/characters/zac/hud/icons2d/zace.png
 68971328899f4a28 plugins/rcp-be-lol-game-data/global/default/assets/characters/zac/hud/icons2d/zacpassive.png
@@ -12288,6 +12292,14 @@ d030d4550e601f94 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-
 89d9c66d6bbeb686 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/81/81015.png
 111b15ae8acfbe15 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/81/81016.png
 44863e10fc74b0df plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/81/81017.png
+3c85f42564e54577 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/83/83004.png
+7892af23e3151b18 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/83/83005.png
+3b4ddd192dbbd085 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/83/83006.png
+a904d6dfb29b9c52 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/83/83007.png
+0f1d6396d10bd11f plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/83/83008.png
+eced14eecc246b57 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/83/83009.png
+340f977c12887886 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/83/83010.png
+5447b5503ef1f20b plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/83/83011.png
 4d1f3fb3da93d243 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/84/84007.png
 a27776d5f70d72fe plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/84/84010.png
 55511dac8e408f94 plugins/rcp-be-lol-game-data/global/default/v1/champion-chroma-images/84/84011.png
