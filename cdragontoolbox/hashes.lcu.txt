@@ -40594,6 +40594,10 @@ fc55f47a3ecae76d plugins/rcp-fe-lol-splash/global/default/splash-assets/allstars
 cee936d3e301be33 plugins/rcp-fe-lol-splash/global/default/splash-assets/aprilfools2018/image-splash-aprilfools2018.jpg
 c6138bd9a32dac20 plugins/rcp-fe-lol-splash/global/default/splash-assets/aprilfools2018/music-splash-aprilfools2018.ogg
 74c8608f4728f516 plugins/rcp-fe-lol-splash/global/default/splash-assets/aprilfools2018/video-splash-aprilfools2018.webm
+cd1ed560cbe42ab9 plugins/rcp-fe-lol-splash/global/default/splash-assets/aprilfools2019/config.json
+039992d1f999b44f plugins/rcp-fe-lol-splash/global/default/splash-assets/aprilfools2019/image-splash-aprilfools2019.jpg
+fd77048151609b1b plugins/rcp-fe-lol-splash/global/default/splash-assets/aprilfools2019/music-splash-aprilfools2019.ogg
+302745a5fa9e118f plugins/rcp-fe-lol-splash/global/default/splash-assets/aprilfools2019/video-splash-aprilfools2019.webm
 ed2f6e596c56da94 plugins/rcp-fe-lol-splash/global/default/splash-assets/arcade2017/config.json
 d7d953a5b937b7af plugins/rcp-fe-lol-splash/global/default/splash-assets/arcade2017/image-splash-arcade2017.jpg
 1ccbaab1a6c2adc0 plugins/rcp-fe-lol-splash/global/default/splash-assets/arcade2017/music-splash-arcade2017.ogg
