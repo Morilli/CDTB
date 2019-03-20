@@ -6216,6 +6216,7 @@ bfeeedcd19f30031 plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 67a04750e9ef6a43 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/bilgewater/img/notification-background.jpg
 65baf6a3b41a3c7b plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/bilgewater/img/parties-background.jpg
 9309146d7225e1d8 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/bilgewater/img/ready-check-background.png
+40a58272869aac75 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/bilgewater/sound/music-cs-allrandom-banphase-butchersbridge.ogg
 98ba856689c5992a plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/bilgewater/sound/music-cs-allrandom-butchersbridge.ogg
 07462a5b1408354c plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/bilgewater/sound/sfx-ambience-loop-butchersbridge.ogg
 a31c4c7e69bff31d plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/classic_sru/img/champ-select-background.jpg
