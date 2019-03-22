@@ -5903,6 +5903,7 @@ af5eb1d6237ebd14 plugins/rcp-be-lol-game-data/global/default/assets/loot/skinper
 2be424f78a9d4456 plugins/rcp-be-lol-game-data/global/default/assets/loot/soraka-icon-border-490px.png
 1283bc5f38126f63 plugins/rcp-be-lol-game-data/global/default/assets/loot/stocking-stuffer-490x490.png
 c8954e3c08822aef plugins/rcp-be-lol-game-data/global/default/assets/loot/summonerscrowncapsule_490x490.png
+e54d9b806633d29b plugins/rcp-be-lol-game-data/global/default/assets/loot/summonerscrownpack_490x490.png
 1e66f167eea4659f plugins/rcp-be-lol-game-data/global/default/assets/loot/support-orb-256px.png
 2fe8cfaaabd61fb0 plugins/rcp-be-lol-game-data/global/default/assets/loot/support-orb-490px.png
 ef6897bd6aa00724 plugins/rcp-be-lol-game-data/global/default/assets/loot/support-pumpkin-490px.png
@@ -6159,6 +6160,7 @@ f43d0b2bcfa6a78d plugins/rcp-be-lol-game-data/global/default/content/src/leaguec
 d7d8d02290a16998 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/aram/img/social-icon-victory.png
 bc6c75bb498ddb08 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/aram/sound/champ-select-background.ogg
 b7a0220bfb260aec plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/aram/sound/gameselect-button-hover.ogg
+9ff77e03d7c99d64 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/aram/sound/music-cs-allrandom-banphase-howlingabyss.ogg
 b00570bbb79e3607 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/aram/sound/music-cs-allrandom-howlingabyss.ogg
 904208b80b085794 plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/aram/sound/music-inqueue-loop-howlingabyss.ogg
 8901b5f57542076f plugins/rcp-be-lol-game-data/global/default/content/src/leagueclient/gamemodeassets/aram/sound/music-inqueue-loop.ogg
@@ -18505,6 +18507,7 @@ d3b664194acd3d12 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/40
 5bd144f255d499c0 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4052.jpg
 e643c572064c7926 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4053.jpg
 1990c00663b893e5 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4054.jpg
+14afaa942fef224c plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4057.jpg
 ccfcd2803d9c9c9f plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4058.jpg
 319dbd56e8ee8e7f plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4059.jpg
 c26cc6c74e7391ab plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4060.jpg
@@ -18512,6 +18515,7 @@ c26cc6c74e7391ab plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/40
 8ec2b6c12d3d4d16 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4062.jpg
 820414d31b93ca03 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4063.jpg
 4b5ea11a359fbf85 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4064.jpg
+8ce9e01721337f8c plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4080.jpg
 e6403044cebc1d72 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/5.jpg
 99692a45d94b2617 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/50.jpg
 caa155f1eb684fca plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/501.jpg
@@ -40724,6 +40728,10 @@ a7d9317ba3fa8fe7 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaylemor
 b7b00440caa71e5a plugins/rcp-fe-lol-splash/global/default/splash-assets/kaylemorg/video-splash-kaylemorg.webm
 6250571610f9739e plugins/rcp-fe-lol-splash/global/default/splash-assets/kaynassassin/config.json
 ee0d72f97ec8f5f0 plugins/rcp-fe-lol-splash/global/default/splash-assets/kaynslayer/config.json
+9842ce627217c21d plugins/rcp-fe-lol-splash/global/default/splash-assets/lecspring2019/config.json
+2dfe8ee5b91e833b plugins/rcp-fe-lol-splash/global/default/splash-assets/lecspring2019/image-splash-lecspring2019.jpg
+18871919a69fb9f9 plugins/rcp-fe-lol-splash/global/default/splash-assets/lecspring2019/music-splash-lecspring2019.ogg
+189df1ea3d49679b plugins/rcp-fe-lol-splash/global/default/splash-assets/lecspring2019/video-splash-lecspring2019.webm
 f4d30a7f49104d6f plugins/rcp-fe-lol-splash/global/default/splash-assets/leesinheavensfist/config.json
 3d6f771ceffd1ff2 plugins/rcp-fe-lol-splash/global/default/splash-assets/leesinheavensfist/image-splash-leesinheavensfist.jpg
 399c01c875bf7466 plugins/rcp-fe-lol-splash/global/default/splash-assets/leesinheavensfist/music-splash-leesinheavensfist.ogg
