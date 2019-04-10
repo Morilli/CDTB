@@ -41134,6 +41134,12 @@ c26cce053429b5ef plugins/rcp-fe-lol-splash/global/default/splash-assets/worlds20
 9debe41840f47a75 plugins/rcp-fe-lol-splash/global/default/splash-assets/xinzhaodragonslayer/image-splash-xinzhaodragonslayer.jpg
 e3a9f85ff4127f79 plugins/rcp-fe-lol-splash/global/default/splash-assets/xinzhaodragonslayer/music-splash-xinzhaodragonslayer.ogg
 a3e105109416fed4 plugins/rcp-fe-lol-splash/global/default/splash-assets/xinzhaodragonslayer/video-splash-xinzhaodragonslayer.webm
+6c6dc61a83ee7202 plugins/rcp-fe-lol-splash/global/default/splash-assets/zedgalaxyslayer/config.json
+c5c04afa065dd217 plugins/rcp-fe-lol-splash/global/default/splash-assets/zedgalaxyslayer/image-splash-zedgalaxyslayer.jpg
+2b3778a856bdbe86 plugins/rcp-fe-lol-splash/global/default/splash-assets/zedgalaxyslayer/intro-sound-splash-zedgalaxyslayer.ogg
+53a0acb9a742b9dd plugins/rcp-fe-lol-splash/global/default/splash-assets/zedgalaxyslayer/intro-video-splash-zedgalaxyslayer.webm
+2ba7206df589e52d plugins/rcp-fe-lol-splash/global/default/splash-assets/zedgalaxyslayer/music-splash-zedgalaxyslayer.ogg
+c2733facd05431c3 plugins/rcp-fe-lol-splash/global/default/splash-assets/zedgalaxyslayer/video-splash-zedgalaxyslayer.webm
 b25809b4088df372 plugins/rcp-fe-lol-splash/global/default/splash-assets/zoe/config.json
 682f34c1297b809c plugins/rcp-fe-lol-splash/global/default/splash-assets/zoe/image-splash-zoe.jpg
 487d0cb06f2b6f92 plugins/rcp-fe-lol-splash/global/default/splash-assets/zoe/music-splash-zoe.ogg
