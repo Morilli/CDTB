@@ -6065,6 +6065,7 @@ fff1f938d705af26 plugins/rcp-be-lol-game-data/global/default/assets/missions/tri
 328248c6ae2cdc07 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_faceless_icon.jpg
 e170ffb5ceb1b0df plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_faceless_spawnin.png
 9ae7f46ce6e86da1 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_generic_celebration.png
+72a4537c07addce2 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_icon.jpg
 d3c87084bfd2ab72 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_tracker_icon.svg
 a4ee5cabaf6ac616 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_united.svg
 0a41d1c29c275176 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_united_finisher.png
