@@ -6057,10 +6057,12 @@ e5cb40390ad5d0f4 plugins/rcp-be-lol-game-data/global/default/assets/missions/the
 b18be4f9a9b7260e plugins/rcp-be-lol-game-data/global/default/assets/missions/the-diva.png
 7c885eddca481268 plugins/rcp-be-lol-game-data/global/default/assets/missions/the-leader.png
 df272202511e75d8 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_council.svg
+90c21da9763ad7d7 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_council_celebration.jpg
 503b934697515856 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_council_finisher.png
 fe6ef96fc1dc3971 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_council_icon.jpg
 4c4a871a2c7c144e plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_council_spawnin.png
 fff1f938d705af26 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_faceless.svg
+7243c6f4287d55dc plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_faceless_celebration.jpg
 406a29c79317175d plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_faceless_finisher.png
 328248c6ae2cdc07 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_faceless_icon.jpg
 e170ffb5ceb1b0df plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_faceless_spawnin.png
@@ -6068,10 +6070,15 @@ e170ffb5ceb1b0df plugins/rcp-be-lol-game-data/global/default/assets/missions/tri
 72a4537c07addce2 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_icon.jpg
 d3c87084bfd2ab72 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_tracker_icon.svg
 a4ee5cabaf6ac616 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_united.svg
+c793f4d2335ad28d plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_induction_background.jpg
+d3c87084bfd2ab72 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_tracker_icon.svg
+a4ee5cabaf6ac616 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_united.svg
+2406c3570d612eb9 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_united_celebration.jpg
 0a41d1c29c275176 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_united_finisher.png
 66d068c2997082ec plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_united_icon.jpg
 914df1bb72439b90 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_united_spawnin.png
 3b94bc285816881f plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_warband.svg
+91d9b07f81a6fc09 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_warband_celebration.jpg
 78528e8d7be9052e plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_warband_finisher.png
 89a0b0834d4a126d plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_warband_icon.jpg
 54e520074cdd9337 plugins/rcp-be-lol-game-data/global/default/assets/missions/trials2019_warband_spawnin.png
@@ -18650,6 +18657,8 @@ f16fe4e2805153d6 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/40
 299350f4056737ae plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4094.jpg
 4a205eb23fa53f09 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4095.jpg
 8b40bd50c6abe258 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4096.jpg
+b93fe7ec41d86bf3 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4097.jpg
+cf7a1b18eaba45ad plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/4153.jpg
 e6403044cebc1d72 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/5.jpg
 99692a45d94b2617 plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/50.jpg
 caa155f1eb684fca plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/501.jpg
@@ -36519,6 +36528,7 @@ d711853ee35eae6a plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-cal
 e421566093062b41 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-6-spells.png
 983c6df24ac3e473 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-7-emote-spells.png
 b23d879c42242dd5 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-7-loot-tt.png
+268fd26ef063932d plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-7-spells.png
 1f2d4448027f51e7 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-8-loot-runes.png
 7fa96045a98fed09 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-9-loot-spells.png
 ae3cc428ee18a5a8 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-calendar-images/reward-major-level-9-spells.png
@@ -36561,6 +36571,7 @@ baef7de9fb5c488e plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-cir
 391f1d286f631021 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-6-spells.png
 8f2f953ed2ad9c04 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-7-emote-spells.png
 aba29e5e799ab0d1 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-7-loot-tt.png
+56cc69fe8f8ca22e plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-7-spells.png
 5bfd1bf793db0b58 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-8-loot-runes.png
 d5507dd62b4afd18 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-9-loot-spells.png
 57af9cf272d48f09 plugins/rcp-fe-lol-npe-rewards/global/default/images/reward-circle-icons/reward-circle-level-9-spells.png
@@ -36803,6 +36814,7 @@ d37c126357a47698 plugins/rcp-fe-lol-npe-who-to-play/global/th_th/trans.json
 9b16b9268bb604c7 plugins/rcp-fe-lol-npe-who-to-play/global/zh_tw/trans.json
 e65ae0a4ce9b04fa plugins/rcp-fe-lol-parties/description.json
 7d62948ab0c3670a plugins/rcp-fe-lol-parties/global/ar_ae/rcp-fe-lol-parties.css
+d15ab56336b9daac plugins/rcp-fe-lol-parties/global/ar_ae/trans.json
 0e46fc57fd6728a8 plugins/rcp-fe-lol-parties/global/cs_cz/trans.json
 35423f34a385577b plugins/rcp-fe-lol-parties/global/de_de/trans.json
 fc5c190584b4d3d4 plugins/rcp-fe-lol-parties/global/default/0142132d31124a75d8cf3f5a076d7382.png
@@ -41184,6 +41196,10 @@ a6de950e032ef897 plugins/rcp-fe-lol-splash/global/default/splash-assets/honor/im
 d1a8cff3785480ee plugins/rcp-fe-lol-splash/global/default/splash-assets/honor/intro-video-splash-honor.webm
 3f47fc751ce26ef4 plugins/rcp-fe-lol-splash/global/default/splash-assets/honor/music-splash-honor.ogg
 884caad70eee20c8 plugins/rcp-fe-lol-splash/global/default/splash-assets/honor/video-splash-honor.webm
+345084c93a6e899e plugins/rcp-fe-lol-splash/global/default/splash-assets/houses2019/config.json
+8486f860d3443a0a plugins/rcp-fe-lol-splash/global/default/splash-assets/houses2019/image-splash-houses2019.jpg
+d970726754ac2f65 plugins/rcp-fe-lol-splash/global/default/splash-assets/houses2019/music-splash-houses2019.ogg
+0f1424d58dc0dc8e plugins/rcp-fe-lol-splash/global/default/splash-assets/houses2019/video-splash-houses2019.webm
 bbb3068a5de9a8e8 plugins/rcp-fe-lol-splash/global/default/splash-assets/irelia/config.json
 c03cbdd5bc351a7d plugins/rcp-fe-lol-splash/global/default/splash-assets/irelia/image-splash-irelia.jpg
 fbd87d5933be44ac plugins/rcp-fe-lol-splash/global/default/splash-assets/irelia/music-splash-irelia.ogg
@@ -41232,6 +41248,10 @@ c3df1db2aeced2c2 plugins/rcp-fe-lol-splash/global/default/splash-assets/msi2018/
 5ec07f2459c6c555 plugins/rcp-fe-lol-splash/global/default/splash-assets/msi2018/intro-video-splash-msi2018.webm
 d1ae2e639fd17f61 plugins/rcp-fe-lol-splash/global/default/splash-assets/msi2018/music-splash-msi2018.ogg
 3a679b37c071a5d4 plugins/rcp-fe-lol-splash/global/default/splash-assets/msi2018/video-splash-msi2018.webm
+4588049372037dca plugins/rcp-fe-lol-splash/global/default/splash-assets/msi2019/config.json
+6f8c4e550a81f284 plugins/rcp-fe-lol-splash/global/default/splash-assets/msi2019/image-splash-msi2019.jpg
+7b5a185b291c3064 plugins/rcp-fe-lol-splash/global/default/splash-assets/msi2019/music-splash-msi2019.ogg
+2b8bba79e90adcc4 plugins/rcp-fe-lol-splash/global/default/splash-assets/msi2019/video-splash-msi2019.webm
 593ef485cd453473 plugins/rcp-fe-lol-splash/global/default/splash-assets/nacollegechamp2018/config.json
 cd033517d601e0b0 plugins/rcp-fe-lol-splash/global/default/splash-assets/nacollegechamp2018/image-splash-collegechampna.jpg
 cc0b71b5cb45a7bc plugins/rcp-fe-lol-splash/global/default/splash-assets/nacollegechamp2018/music-splash-collegechampna.ogg
