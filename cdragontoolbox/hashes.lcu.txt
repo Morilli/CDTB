@@ -746,6 +746,7 @@ d4b2beffde4c3b7d plugins/rcp-be-lol-game-data/global/cs_cz/v1/champions/32.json
 1f9a947d30c8560b plugins/rcp-be-lol-game-data/global/cs_cz/v1/champions/33.json
 edf1fd5b781cde5b plugins/rcp-be-lol-game-data/global/cs_cz/v1/champions/34.json
 828f0dbdc716531b plugins/rcp-be-lol-game-data/global/cs_cz/v1/champions/35.json
+4c2d380a2698f663 plugins/rcp-be-lol-game-data/global/cs_cz/v1/champions/350.json
 529e24ec8f461ba5 plugins/rcp-be-lol-game-data/global/cs_cz/v1/champions/36.json
 d645de1b8b43e211 plugins/rcp-be-lol-game-data/global/cs_cz/v1/champions/37.json
 e80f11e9740ad19e plugins/rcp-be-lol-game-data/global/cs_cz/v1/champions/38.json
@@ -1215,6 +1216,7 @@ a2c2e13e09db80bb plugins/rcp-be-lol-game-data/global/de_de/v1/champions/30.json
 7fbd09fecf5207f5 plugins/rcp-be-lol-game-data/global/de_de/v1/champions/33.json
 c7042215f8206079 plugins/rcp-be-lol-game-data/global/de_de/v1/champions/34.json
 df7bae382f9102c1 plugins/rcp-be-lol-game-data/global/de_de/v1/champions/35.json
+3489841f2c6e194c plugins/rcp-be-lol-game-data/global/de_de/v1/champions/350.json
 9ebe1e8046e05441 plugins/rcp-be-lol-game-data/global/de_de/v1/champions/36.json
 88e8949cb8ddaf2e plugins/rcp-be-lol-game-data/global/de_de/v1/champions/37.json
 50779057e9d6bd51 plugins/rcp-be-lol-game-data/global/de_de/v1/champions/38.json
@@ -19983,6 +19985,7 @@ df5d03a323158f80 plugins/rcp-be-lol-game-data/global/el_gr/v1/champions/32.json
 716687886be71b58 plugins/rcp-be-lol-game-data/global/el_gr/v1/champions/33.json
 9ee14b2c939f0c56 plugins/rcp-be-lol-game-data/global/el_gr/v1/champions/34.json
 5e54604c1f57ab9b plugins/rcp-be-lol-game-data/global/el_gr/v1/champions/35.json
+66f08bbcdbc325f3 plugins/rcp-be-lol-game-data/global/el_gr/v1/champions/350.json
 918675f94c9a67c3 plugins/rcp-be-lol-game-data/global/el_gr/v1/champions/36.json
 dfe6b300f2ef2c3c plugins/rcp-be-lol-game-data/global/el_gr/v1/champions/37.json
 697c9447e2fd3a25 plugins/rcp-be-lol-game-data/global/el_gr/v1/champions/38.json
@@ -20160,6 +20163,7 @@ ba51453bf7d5b9ca plugins/rcp-be-lol-game-data/global/en_au/v1/champions/32.json
 d7d62ead09309509 plugins/rcp-be-lol-game-data/global/en_au/v1/champions/33.json
 f941f8f47ac03a87 plugins/rcp-be-lol-game-data/global/en_au/v1/champions/34.json
 28cae5b884e8c3f1 plugins/rcp-be-lol-game-data/global/en_au/v1/champions/35.json
+4a3bc645ec0a2f1c plugins/rcp-be-lol-game-data/global/en_au/v1/champions/350.json
 1081d4648bf302f4 plugins/rcp-be-lol-game-data/global/en_au/v1/champions/36.json
 06cd4c1b75710670 plugins/rcp-be-lol-game-data/global/en_au/v1/champions/37.json
 66c55acd53e7a671 plugins/rcp-be-lol-game-data/global/en_au/v1/champions/38.json
@@ -20337,6 +20341,7 @@ b949542aacdff2a5 plugins/rcp-be-lol-game-data/global/en_gb/v1/champions/32.json
 6f883def8a1ce72b plugins/rcp-be-lol-game-data/global/en_gb/v1/champions/33.json
 11f06cf810048837 plugins/rcp-be-lol-game-data/global/en_gb/v1/champions/34.json
 035c9ba3e80d8472 plugins/rcp-be-lol-game-data/global/en_gb/v1/champions/35.json
+82fcac8c66c0668d plugins/rcp-be-lol-game-data/global/en_gb/v1/champions/350.json
 0ca9ac0dd9877a40 plugins/rcp-be-lol-game-data/global/en_gb/v1/champions/36.json
 00b934238d33804a plugins/rcp-be-lol-game-data/global/en_gb/v1/champions/37.json
 44db5a8addf69ac8 plugins/rcp-be-lol-game-data/global/en_gb/v1/champions/38.json
@@ -21136,6 +21141,7 @@ f1fbc20309edeb2b plugins/rcp-be-lol-game-data/global/es_ar/v1/champions/3.json
 e13fc45d27c800ba plugins/rcp-be-lol-game-data/global/es_ar/v1/champions/33.json
 73a3e81c66f5ddc9 plugins/rcp-be-lol-game-data/global/es_ar/v1/champions/34.json
 b332c73e7e13c618 plugins/rcp-be-lol-game-data/global/es_ar/v1/champions/35.json
+c0680cfbaed3d67c plugins/rcp-be-lol-game-data/global/es_ar/v1/champions/350.json
 7049e831483e77de plugins/rcp-be-lol-game-data/global/es_ar/v1/champions/36.json
 c3ce1338bf0d0a04 plugins/rcp-be-lol-game-data/global/es_ar/v1/champions/37.json
 6d28d2c05217398a plugins/rcp-be-lol-game-data/global/es_ar/v1/champions/38.json
@@ -21602,6 +21608,7 @@ f530fb848aa18bf8 plugins/rcp-be-lol-game-data/global/es_es/v1/champions/3.json
 ae653d8998e88920 plugins/rcp-be-lol-game-data/global/es_es/v1/champions/33.json
 93991cd970b2fe86 plugins/rcp-be-lol-game-data/global/es_es/v1/champions/34.json
 1303f0363cf7afc6 plugins/rcp-be-lol-game-data/global/es_es/v1/champions/35.json
+d8c4283d3fb4dee9 plugins/rcp-be-lol-game-data/global/es_es/v1/champions/350.json
 7be8bc7dce3b53cd plugins/rcp-be-lol-game-data/global/es_es/v1/champions/36.json
 0f7ddd7512ea742a plugins/rcp-be-lol-game-data/global/es_es/v1/champions/37.json
 92f0e24e4bf3e0f7 plugins/rcp-be-lol-game-data/global/es_es/v1/champions/38.json
@@ -22071,6 +22078,7 @@ c07529e1756b0275 plugins/rcp-be-lol-game-data/global/es_mx/v1/champions/32.json
 74a6943ac83b2554 plugins/rcp-be-lol-game-data/global/es_mx/v1/champions/33.json
 b2bb1e8d55431694 plugins/rcp-be-lol-game-data/global/es_mx/v1/champions/34.json
 2b211a8e7b7fe4f1 plugins/rcp-be-lol-game-data/global/es_mx/v1/champions/35.json
+3f765f4ccb17de8b plugins/rcp-be-lol-game-data/global/es_mx/v1/champions/350.json
 61b82c753465e727 plugins/rcp-be-lol-game-data/global/es_mx/v1/champions/36.json
 79a7841354d4af03 plugins/rcp-be-lol-game-data/global/es_mx/v1/champions/37.json
 ecd2df576cf69890 plugins/rcp-be-lol-game-data/global/es_mx/v1/champions/38.json
@@ -22540,6 +22548,7 @@ ff897b4e0200c3e4 plugins/rcp-be-lol-game-data/global/fr_fr/v1/champions/32.json
 b6bb2bbf4560c6a6 plugins/rcp-be-lol-game-data/global/fr_fr/v1/champions/33.json
 54347d2511c42851 plugins/rcp-be-lol-game-data/global/fr_fr/v1/champions/34.json
 7b2a89dd84ee93f9 plugins/rcp-be-lol-game-data/global/fr_fr/v1/champions/35.json
+eabaedf5b3caa0c8 plugins/rcp-be-lol-game-data/global/fr_fr/v1/champions/350.json
 7ccf8e502593c855 plugins/rcp-be-lol-game-data/global/fr_fr/v1/champions/36.json
 7ba9187df9e5151d plugins/rcp-be-lol-game-data/global/fr_fr/v1/champions/37.json
 894a376d2749b2d8 plugins/rcp-be-lol-game-data/global/fr_fr/v1/champions/38.json
@@ -23009,6 +23018,7 @@ c7bc169e77abd70d plugins/rcp-be-lol-game-data/global/hu_hu/v1/champions/27.json
 1d30b93333b62b8b plugins/rcp-be-lol-game-data/global/hu_hu/v1/champions/33.json
 d209492731966a62 plugins/rcp-be-lol-game-data/global/hu_hu/v1/champions/34.json
 135b3fcf0909b12e plugins/rcp-be-lol-game-data/global/hu_hu/v1/champions/35.json
+18c12b97473b6f0f plugins/rcp-be-lol-game-data/global/hu_hu/v1/champions/350.json
 6f4ec146d1b1d838 plugins/rcp-be-lol-game-data/global/hu_hu/v1/champions/36.json
 cf2e0f06233757f1 plugins/rcp-be-lol-game-data/global/hu_hu/v1/champions/37.json
 a40040bdc9843330 plugins/rcp-be-lol-game-data/global/hu_hu/v1/champions/38.json
@@ -23646,6 +23656,7 @@ a1264479f7f06a67 plugins/rcp-be-lol-game-data/global/it_it/v1/champions/3.json
 7eeae2656db29afa plugins/rcp-be-lol-game-data/global/it_it/v1/champions/33.json
 464118cbb8f59f0a plugins/rcp-be-lol-game-data/global/it_it/v1/champions/34.json
 e86d1d59e27832dc plugins/rcp-be-lol-game-data/global/it_it/v1/champions/35.json
+b5c694e44ab538b4 plugins/rcp-be-lol-game-data/global/it_it/v1/champions/350.json
 05f2fb1925239709 plugins/rcp-be-lol-game-data/global/it_it/v1/champions/36.json
 763b6dea6dbced2c plugins/rcp-be-lol-game-data/global/it_it/v1/champions/37.json
 9be7bd8fb4536d24 plugins/rcp-be-lol-game-data/global/it_it/v1/champions/38.json
@@ -24115,6 +24126,7 @@ b43393e3c2fca100 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champions/28.json
 5f9678e0187c893c plugins/rcp-be-lol-game-data/global/ja_jp/v1/champions/33.json
 a1a8dc2fcb27fbeb plugins/rcp-be-lol-game-data/global/ja_jp/v1/champions/34.json
 4582c892e22dd565 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champions/35.json
+88165fbf9eab48a2 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champions/350.json
 02b5dfc0fd2aa827 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champions/36.json
 c57fbeb6b43981f8 plugins/rcp-be-lol-game-data/global/ja_jp/v1/champions/37.json
 b642fc966feb286f plugins/rcp-be-lol-game-data/global/ja_jp/v1/champions/38.json
@@ -24578,6 +24590,7 @@ be39b8eaf21fe8c8 plugins/rcp-be-lol-game-data/global/ko_kr/v1/champions/32.json
 cdc2ad33d7e97cb6 plugins/rcp-be-lol-game-data/global/ko_kr/v1/champions/33.json
 e04d568d255d20be plugins/rcp-be-lol-game-data/global/ko_kr/v1/champions/34.json
 baa8cbbe7b18284e plugins/rcp-be-lol-game-data/global/ko_kr/v1/champions/35.json
+326e19987a1fcd04 plugins/rcp-be-lol-game-data/global/ko_kr/v1/champions/350.json
 cc41fb5e4a85f6dc plugins/rcp-be-lol-game-data/global/ko_kr/v1/champions/36.json
 895005cdf1ddb837 plugins/rcp-be-lol-game-data/global/ko_kr/v1/champions/37.json
 af67006da3729ce7 plugins/rcp-be-lol-game-data/global/ko_kr/v1/champions/38.json
@@ -25044,6 +25057,7 @@ b350b400ad6d0822 plugins/rcp-be-lol-game-data/global/pl_pl/v1/champions/32.json
 ed159427a2efa79a plugins/rcp-be-lol-game-data/global/pl_pl/v1/champions/33.json
 55d83041cb9de0d2 plugins/rcp-be-lol-game-data/global/pl_pl/v1/champions/34.json
 743cc8e52b64d3ad plugins/rcp-be-lol-game-data/global/pl_pl/v1/champions/35.json
+9e4174a2c332fe94 plugins/rcp-be-lol-game-data/global/pl_pl/v1/champions/350.json
 87d169e606d6b030 plugins/rcp-be-lol-game-data/global/pl_pl/v1/champions/36.json
 8158d4515e2287ae plugins/rcp-be-lol-game-data/global/pl_pl/v1/champions/37.json
 0469d35295d2d150 plugins/rcp-be-lol-game-data/global/pl_pl/v1/champions/38.json
@@ -25513,6 +25527,7 @@ affe4610e02918d9 plugins/rcp-be-lol-game-data/global/pt_br/v1/champions/31.json
 f0f4e1a94c4d0c8f plugins/rcp-be-lol-game-data/global/pt_br/v1/champions/33.json
 e5da8084c9b14cbc plugins/rcp-be-lol-game-data/global/pt_br/v1/champions/34.json
 711dad7d2c9d4a8c plugins/rcp-be-lol-game-data/global/pt_br/v1/champions/35.json
+a1a765357caa4d71 plugins/rcp-be-lol-game-data/global/pt_br/v1/champions/350.json
 b429020aaf45ade1 plugins/rcp-be-lol-game-data/global/pt_br/v1/champions/36.json
 60d3f40104ef233f plugins/rcp-be-lol-game-data/global/pt_br/v1/champions/37.json
 649931b133ebf483 plugins/rcp-be-lol-game-data/global/pt_br/v1/champions/38.json
@@ -25982,6 +25997,7 @@ b8d336e160d917c7 plugins/rcp-be-lol-game-data/global/ro_ro/v1/champions/30.json
 ebf97eedbb353d1b plugins/rcp-be-lol-game-data/global/ro_ro/v1/champions/33.json
 b47074ad57062f34 plugins/rcp-be-lol-game-data/global/ro_ro/v1/champions/34.json
 d620c2dd4278e686 plugins/rcp-be-lol-game-data/global/ro_ro/v1/champions/35.json
+4378dbb1ae3a9e67 plugins/rcp-be-lol-game-data/global/ro_ro/v1/champions/350.json
 f019f6f57964572c plugins/rcp-be-lol-game-data/global/ro_ro/v1/champions/36.json
 e05354199c5f1769 plugins/rcp-be-lol-game-data/global/ro_ro/v1/champions/37.json
 755c650866328f7d plugins/rcp-be-lol-game-data/global/ro_ro/v1/champions/38.json
@@ -26451,6 +26467,7 @@ b19c07a8c5643c3f plugins/rcp-be-lol-game-data/global/ru_ru/v1/champions/31.json
 c2c5f617bfc356d8 plugins/rcp-be-lol-game-data/global/ru_ru/v1/champions/33.json
 5c14ef733441c12e plugins/rcp-be-lol-game-data/global/ru_ru/v1/champions/34.json
 2a9ae1e7d2fe77e1 plugins/rcp-be-lol-game-data/global/ru_ru/v1/champions/35.json
+8b4a26d7d5084eac plugins/rcp-be-lol-game-data/global/ru_ru/v1/champions/350.json
 1ee5a6395816c2ca plugins/rcp-be-lol-game-data/global/ru_ru/v1/champions/36.json
 7c5721123b5cf948 plugins/rcp-be-lol-game-data/global/ru_ru/v1/champions/37.json
 852464557fb70090 plugins/rcp-be-lol-game-data/global/ru_ru/v1/champions/38.json
@@ -27093,6 +27110,7 @@ e44d426258363444 plugins/rcp-be-lol-game-data/global/tr_tr/v1/champions/30.json
 c91232506a7d1cc6 plugins/rcp-be-lol-game-data/global/tr_tr/v1/champions/33.json
 90db2a3b9dbb0e76 plugins/rcp-be-lol-game-data/global/tr_tr/v1/champions/34.json
 b533547da3a53cc6 plugins/rcp-be-lol-game-data/global/tr_tr/v1/champions/35.json
+613e78fbf4286492 plugins/rcp-be-lol-game-data/global/tr_tr/v1/champions/350.json
 d78a870119a76204 plugins/rcp-be-lol-game-data/global/tr_tr/v1/champions/36.json
 9c1ddaaef0ed9430 plugins/rcp-be-lol-game-data/global/tr_tr/v1/champions/37.json
 abd7d3c30af8b712 plugins/rcp-be-lol-game-data/global/tr_tr/v1/champions/38.json
@@ -33155,6 +33173,7 @@ f9b4cb59bbf25a57 plugins/rcp-fe-lol-honor/global/zh_my/trans.json
 7dd1723d6bc6e022 plugins/rcp-fe-lol-honor/global/zh_tw/trans.json
 8a0038f572c89052 plugins/rcp-fe-lol-hover-card/description.json
 86fe8e88b13bc477 plugins/rcp-fe-lol-hover-card/global/ar_ae/rcp-fe-lol-hover-card.css
+8119d4c180c02290 plugins/rcp-fe-lol-hover-card/global/ar_ae/trans.json
 e5357bf16af9b9e8 plugins/rcp-fe-lol-hover-card/global/cs_cz/trans.json
 8c8db93b7368065b plugins/rcp-fe-lol-hover-card/global/de_de/trans.json
 f86a7225de732749 plugins/rcp-fe-lol-hover-card/global/default/bronze.png
