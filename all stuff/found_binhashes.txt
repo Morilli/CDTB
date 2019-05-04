@@ -1,4 +1,0 @@
-mUVLayerName
-mRectSourcePSDFilename
-mRectLayerName
-mRectLayerName

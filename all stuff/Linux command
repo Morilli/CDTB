@@ -1,7 +1,0 @@
-Slow and therefore deprecated, use "grep_wads.py" instead
-
-find "/mnt/g/Riot Games/PBE/Game/DATA/FINAL/Maps/Shipping/" -name '*.*_*.wad.client' -exec python3 -m cdragontoolbox wad-extract {} -o "/mnt/g/Bilder/Lol Files/VO/" \;
-
-find "/mnt/g/Riot Games/PBE/Plugins/" -name '*.wad' -exec python3 -m cdragontoolbox hashes-guess -m grep {} \;
-
-find "/mnt/g/Riot Games/PBE/Game/" -name '*.wad.client' -exec python3 -m cdragontoolbox hashes-guess -m grep {} \;
