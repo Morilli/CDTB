@@ -151,7 +151,7 @@ def storage_conf_from_path(path):
         return load_storage_conf(path)
     elif ':' in path:
         storage_type, storage_path = path.split(':', 1)
-        conf = {'type': storage_type, 'path': storage_path}
+        return {'type': storage_type, 'path': storage_path}
     else:
         raise ValueError(f"invalid storage path: {path}")
 
@@ -462,14 +462,13 @@ def parse_storage_component(storage: Storage, component: str) -> Union[None, Pat
     else:
         latest = False
 
-    patch = storage.patch(version)
-    if patch is None:
-        return None
-    if latest:
-        patch = patch.latest()
-
     if name == 'patch':
+        patch = storage.patch(version)
+        if patch is None:
+            return None
+        if latest:
+            patch = patch.latest()
         return patch
     else:
-        return patch.element(name)
+        return storage.patch_element(name, version, stored=True)
 
