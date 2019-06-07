@@ -1,4 +1,5 @@
 import os
+import shutil
 import struct
 from contextlib import contextmanager
 
@@ -28,8 +29,22 @@ def write_file_or_remove(path, binary=True):
             pass
         raise
 
+@contextmanager
+def write_dir_or_remove(path):
+    """Create a directory for writing, and its parent directory if needed
 
-class BinParser:
+    If the writing fails, the directory and its content is removed.
+    """
+    try:
+        os.makedirs(path, exist_ok=True)
+        yield
+    except:
+        # remove directory
+        shutil.rmtree(path, ignore_errors=True)
+        raise
+
+
+class BinaryParser:
     """Helper class to read from binary file object"""
 
     def __init__(self, f):
