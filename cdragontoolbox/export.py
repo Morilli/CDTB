@@ -141,9 +141,7 @@ class Exporter:
 
         # add files to export
         for elem in patch.latest().elements:
-            #XXX for now, exclude game language-specific files
-            langs = elem.name != 'game'
-            for src, dst in elem.paths(langs=langs):
+            for src, dst in elem.paths(langs=True):
                 self.add_path(src, dst)
 
     def filter_path(self, source_path, export_path):
@@ -437,9 +435,10 @@ class CdragonRawPatchExporter:
         exporter.plain_files = {k: v for k, v in exporter.plain_files.items() if not k.endswith('/description.json')}
 
         # game WADs:
-        # - keep only images, champion 'bin' and 'skin' files
+        # - keep images, champion 'bin' and 'skin' files
+        # - keep .txt files (some contain useful data)
         # - add 'game/' prefix to export path
-        re_game_paths = re.compile(r'(?:\.dds|\.tga|\.skn|^data/characters/[^/.]*/(?:skins/)?[^/.]*\.bin)$')
+        re_game_paths = re.compile(r'(?:\.dds|\.tga|\.skn|\.txt|^data/characters/[^/.]*/(?:skins/)?[^/.]*\.bin)$')
         for path, wad in exporter.wads.items():
             if path.endswith('.wad.client'):
                 wad.files = [wf for wf in wad.files if re_game_paths.search(wf.path)]
