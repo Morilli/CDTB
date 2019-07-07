@@ -8,7 +8,7 @@ import logging
 
 from .hashes import default_hashfile
 from .tools import (
-    BinParser,
+    BinaryParser,
     write_file_or_remove,
     zstd_decompress,
 )
@@ -55,7 +55,8 @@ class WadFileHeader:
         b'\x1bLuaQ\x00\x01\x04\x04': 'luabin',
         b'\x1bLuaQ\x00\x01\x04\x08': 'luabin64',
         bytes.fromhex('023d0028'): 'troybin',
-        b'[ObjectBegin]': 'sco'
+        b'[ObjectBegin]': 'sco',
+        b'OEGM': 'mapgeo'
     }
 
     def __init__(self, path_hash, offset, compressed_size, size, type, duplicate=None, unk0=None, unk1=None, sha256=None):
@@ -159,7 +160,7 @@ class Wad:
 
         logger.debug(f"parse headers of {self.path}")
         with open(self.path, 'rb') as f:
-            parser = BinParser(f)
+            parser = BinaryParser(f)
             magic, version_major, version_minor = parser.unpack("<2sBB")
             if magic != b'RW':
                 raise ValueError("invalid magic code")
@@ -240,4 +241,3 @@ class Wad:
                     continue
                 logger.debug(f"extracting {wadfile.path_hash:016x} {wadfile.path}")
                 wadfile.extract(fwad, output_path)
-

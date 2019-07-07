@@ -1,8 +1,10 @@
 e4460934 AFKDetection2
 7e668ce7 AORadius
 06942b7c AOStrength
+fb33f2f3 AbilityObject
 c88c6b61 AbilityPowerIncPerLevel
 dcc344a6 AbilityResetUI
+ce31c975 AbilityResourceSlotInfo
 8be259f9 Absorbed
 e453a5c6 ActiveSpellFix
 ee172090 AdditionalCharacters
@@ -14,6 +16,7 @@ df73f8e2 AlwaysSnapFacing
 9a4b299d AnimationResourceData
 da11ad7b ArmorPerLevel
 06ad3499 AttackSlotData
+7a209a48 AttackSpeed
 1bdbaedf AttackSpeedPerLevel
 60c51c2b AttackSpeedRatio
 f68eb447 AutoBuffActivateAttachBoneNames
@@ -66,6 +69,7 @@ d212fabe Condition
 b3e7c1fb CooldownSpellQueueing
 9ecac3a1 CooldownTime
 bc7fb120 Countdown
+34c4353e CritMultiplier
 3ff62242 CritPerLevel
 2226ab34 CriticalAttack
 a3fa11d8 CursorScaling
@@ -75,6 +79,7 @@ bb429484 CustomSequences
 fb910cc2 CustomTable
 cc60e6a2 CycleBasedScaleAddition
 e70c8908 CycleTime
+59e94c40 Damage
 ae5fa9b7 DamagePerLevel
 d17c71e5 DamageProperties
 397db5c1 DamageTagDefinition
@@ -122,6 +127,7 @@ cf8231fa EnemyPhysicalDamageCritical
 6419f82d FirstAcquisitionRange
 ddf13ae6 FixedLoadScreenPosition
 06302899 FixedSpeedMovement
+f7318865 FixedTimeMovement
 9c677a2c Flags
 9fdc5a73 FlatMPPoolMod
 d5f6c8c8 FlatMPRegenMod
@@ -132,6 +138,7 @@ ff72f56a FramesPerSecond
 ed7c7d0c FunctionDefinition
 0f7352bb GlobalProperties
 ec66d793 Gold
+96ccf33d GravityHeightSolver
 9e4fbdcb GridCheckFirstCell
 0fd6a4da HPPerLevel
 643cb399 HPPerTick
@@ -210,6 +217,7 @@ c4b0866a NewSpellScript
 4830d8fb NonDispellable
 9e17f690 NumberOfFramesPerRowInAtlas
 bc2f6bda OMW
+25210743 ObjectTags
 14c8d3ca Offset
 9445308c OnPreDamagePriority
 533e8106 Operation
@@ -253,6 +261,8 @@ cb9f11d2 PrimaryAbilityResourceBar
 cdbc1b2a QuestComplete
 0b13c31a QuestReceived
 34e71c29 QueuedOrdersTriggerPreIssueOrder
+1be488a9 RBaseDamage
+3ca74b62 RCoefficient
 7eb2af0c Rage
 64806c29 ReconnectScriptsWhilePaused
 92fc4077 ReduceClientCameraReplication
@@ -278,6 +288,7 @@ eb5e3232 SelectionHeight
 49f4b8ca SelectorClipData
 6d8884b8 SelectorPairData
 645ba277 Self
+ea5c9896 SelfAoe
 0708c71e SelfMagicalDamageCounter
 4f561671 SelfPhysicalDamageCounter
 92ac539a SelfTrueDamageCounter
@@ -297,9 +308,11 @@ bca4dce5 SpellBlockPerLevel
 81e35eaf SpellDamageRatio
 f66eee99 SpellData
 43368569 SpellDataResource
+005008a6 SpellDataValue
 92d4987c SpellEffectAmount
 da510d6f SpellFXOverrideSkins
 822e38a2 SpellName
+5e7e5a06 SpellObject
 164a99e3 SpellPreloads
 8b2a728d SpellToggleSlot
 e7fa2b10 SpellVOOverrideSkins
@@ -309,9 +322,13 @@ daf2f7a2 StopAttackVerifiesSpell
 67a830a4 Stunned
 8e38f1e8 SummonerEmotesV2
 087253d7 Suppressed
+304496f1 TFTCharacterRecord
 4a9c9bdf Table
 8799ac14 TableValue
+e23b3315 TargeterDefinitionAoe
+87f69f01 TargeterDefinitionCone
 3402fe40 TargeterDefinitionLine
+188c3d09 TargeterDefinitionMinimap
 047acadf TargeterDefinitionRange
 832871a2 Taunted
 2d38abc6 TemplateDefinition
@@ -407,6 +424,7 @@ d7590121 arPerLevel
 4d345705 arPreventRegenWhileAtZero
 d5699a50 arRegenPerLevel
 03187eba arType
+9b0f2144 area
 eaac17de areaIndicatorMaxDistance
 0f6e33c8 areaIndicatorMinDistance
 697479ed areaIndicatorMinRadius
@@ -558,6 +576,7 @@ f8f489b1 colors
 91b41045 combinableNumberFormat
 868eb76a complexEmitterDefinitionData
 1bf51169 components
+dd404b6a cone
 fe497a32 coneAngleDegrees
 381c24c1 coneFollowsEnd
 eb34d5d7 coneRange
@@ -585,6 +604,7 @@ edf1840c defaultAnimation
 28da4278 defaultTechnique
 32b374fa defaultTexturePath
 1eb71cc8 defaultWordWrapMargin
+d2c1ea2e defaultvisibility
 27f7a183 defeatBannerSound
 47f3fb40 defeatMusicID
 94db3c09 defenseDownL1Percent
@@ -980,6 +1000,7 @@ bd132bec mBarTextureUvs
 b70ad8f0 mBaseColor
 e40bac02 mBaseExperienceMultiplier
 2c0e2bf7 mBaseItems
+6d3ccfd7 mBaseP
 11fe674c mBaseTexture
 13deb887 mBaseTextureName
 d45614c7 mBeam
@@ -1053,6 +1074,7 @@ dde40707 mChildAnimDelaySwitchTime
 20e6065b mChildCondition
 f21bb0f8 mChildConditions
 82f13684 mChildMissileSpell
+c354d821 mChildSpells
 55d8daee mChooseRandomValidRule
 18a41fd1 mCircleMissileAngularVelocity
 515b8d80 mCircleMissileRadialVelocity
@@ -1113,6 +1135,7 @@ bf1caf91 mDamageType
 0b58883e mDamping
 faf26cff mDampingValue
 7e0dca60 mData
+b386dcf1 mDataValue
 1f4d20a6 mDataValues
 990ee365 mDeathChaosColor
 fa19005e mDeathEnemyTeamColor
@@ -1136,6 +1159,7 @@ ec12a9d5 mDefault
 ae686ed6 mDefaultSplash
 fe66e5ff mDefaultTextureName
 b9b6eb7a mDefaultValue
+2ed0ec97 mDefaultVfxData
 35e84f37 mDelay
 f06f70bd mDeltaBuffCurrencyCost
 48e295f2 mDeltaBuffCurrencyCostPercent
@@ -1276,6 +1300,7 @@ ba715832 mFloatingTextTypes
 8466a4a9 mFontDescription
 7cb6e8bd mFormName
 57b8b11b mFormat
+e7b832f2 mFormula
 312c8ca6 mFrequency
 b9406ead mFrictionMultiplier
 d614c26c mFriendlyChatColor
@@ -1449,6 +1474,7 @@ fb62e683 mLineMissileTargetHeightAugment
 65da75ef mLineTextureWidth
 1a24e25e mLineWidth
 80421706 mLinearVelocity
+1af7caac mLinkedTraits
 ae6437ed mListGridPostfix
 406abd0c mListGridPrefix
 69d8c4f7 mListGridSeparator
@@ -1599,6 +1625,7 @@ c914c010 mNoPixelSnappingY
 ab8e7852 mNumberOfPeriods
 4a3183d0 mOMWPingRangeCutoffs
 62af1617 mOMWPingRanges
+b482c52c mObjectName
 95ac5b3d mObjectSkinFallbacks
 0f422262 mOffValue
 26dbcd4b mOffset
@@ -1680,6 +1707,7 @@ b799904c mPerk
 9ed64df4 mPerkStyleId
 71c6c91a mPerkStyleName
 45be132d mPerks
+dfcc29dc mPersistentVfxs
 393f5dab mPhysicalDamageRatio
 e7852ecf mPhysicalShieldColor
 3032dcc9 mPingChatColor
@@ -1786,6 +1814,7 @@ c0a5d6dd mSelfEventName
 bcc47d7d mShadowChatColor
 76a19ab7 mShieldParams
 4442ed57 mShopCloseCount
+e4e7426c mShopData
 c97373fb mShopOpenCount
 5f2170e9 mShortDescLocalizationKey
 d5cfa227 mShowAsModifiedInUI
@@ -1846,6 +1875,7 @@ d8a4574e mStartLocator
 fa58c885 mStartTime
 66379ea0 mStartingJoint
 c6a8e023 mStartingJointName
+4cec2c8a mStat
 94cfefd7 mStatBoostedColor
 fc56285c mStatNormalColor
 b6217025 mStiffness
@@ -1880,6 +1910,7 @@ be9a41d6 mTargetTextureRadius
 c27f318b mTargeterDefinition
 263ba968 mTargeterDefinitions
 8f73dfe7 mTargetingType
+5d46764f mTargetingTypeData
 388d0d4e mTeamChatColor
 9f2f23b5 mTeamColors
 d51c6887 mTeamCompareOp
@@ -1952,6 +1983,7 @@ cd89877e mTriggerEventAction
 37205660 mTunables
 26c28212 mTurnOffTimeSec
 2f6c7474 mTurnOnTimeSec
+506c0c02 mTurnSpeedScalar
 a58fd26d mTurretPosition
 87edaeb0 mType
 6815a72d mUITexture
@@ -1999,6 +2031,7 @@ d14d2f3b mValueProcessorDataList
 3288d6d8 mVelMultiplier
 bcad5522 mVertical
 1dcc5425 mVerticalOffset
+9f4faebd mVfxSpawnConditions
 84313c65 mVisibleToOwnerTeamOnly
 4a5f2ebc mVisualPriority
 a5ca13e4 mVoiceChatData
@@ -2445,6 +2478,7 @@ aaa9488d uvScrolling
 12804f14 verticalAlignment
 f54aa658 verticalOffset
 2adc883e vfxSystem
+a8eb52f4 vfxspawnconditions
 73f9c3e6 victoryBannerSound
 d25da809 victoryMusicID
 9554002c viscosity
