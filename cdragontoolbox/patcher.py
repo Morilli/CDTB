@@ -290,13 +290,13 @@ class PatcherStorage(Storage):
 
     storage_type = 'patcher'
 
-    URL_BASE = "https://lol.dyn.riotcdn.net/"
+    URL_BASE = "https://ks-foundation.dyn.riotcdn.net/" # edit this if necessary
     DEFAULT_CHANNEL = 'live-euw-win'
 
     def __init__(self, path, channel=DEFAULT_CHANNEL):
         super().__init__(path, self.URL_BASE)
         self.channel = channel
-        self.use_extract_symlinks = True
+        self.use_extract_symlinks = False
 
     @classmethod
     def from_conf_data(cls, conf):
@@ -343,26 +343,30 @@ class PatcherStorage(Storage):
     def download_manifest(self, id_or_url):
         """Download a manifest from its ID or full URL if needed, return its path in the storage"""
 
+        path = "channels/public/releases/86AA3F3BFDE08B80.manifest" # edit this to be the right manifest
+        self.download(f"{self.URL_BASE}{path}", path, None)
+        return path
+
         if isinstance(id_or_url, str):
             id_or_url = id_or_url.replace(".secure.", ".")
-            if not id_or_url.startswith(self.url):
-                raise ValueError(f"unexpected base URL for manifest: {id_or_url}")
-            m = re.match(r"^channels/public/releases/([0-9A-F]{16})\.manifest$", id_or_url[len(self.url):])
+            # if not id_or_url.startswith(self.url):
+                # raise ValueError(f"unexpected base URL for manifest: {id_or_url}")
+            m = re.match(r"^channels/public/releases/([0-9A-F]{16})\.manifest$", id_or_url[len("https://lol.dyn.riotcdn.net/"):])
             if not m:
+                print(id_or_url)
                 raise ValueError(f"unexpected manifest URL format: {id_or_url}")
             manif_id = int(m.group(1), 16)
         else:
             manif_id = id_or_url
 
-        path = f"channels/public/releases/{manif_id:016X}.manifest"
-        self.download(path, None)
+
         return path
 
     def download_bundle(self, bundle_id):
         """Download a bundle from its ID, return its path in the storage"""
 
-        path = f"channels/public/bundles/{bundle_id:016X}.bundle"
-        self.download(path, None)
+        path = f"{self.URL_BASE}channels/public/bundles/{bundle_id:016X}.bundle"
+        self.download(path, f"channels/public/bundles/{bundle_id:016X}.bundle", None)
         return path
 
     def load_chunk(self, chunk: PatcherChunk):
@@ -521,6 +525,7 @@ class PatcherReleaseElement:
 
         This method reads/writes version from/to cache.
         """
+        return None
 
         # for PBE: version is always "main"
         if self.release.storage.channel == "pbe-pbe-win":  #XXX better check
@@ -718,4 +723,3 @@ class MultiPatcherPatchElement(PatchElement):
     def paths(self, langs=True):
         pred = PatcherFile.langs_predicate(langs)
         return ((elem.extract_path(f), f.name.lower()) for elem, f in self.files if pred(f))
-

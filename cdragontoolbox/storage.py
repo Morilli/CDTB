@@ -224,9 +224,9 @@ class Storage(metaclass=StorageRegister):
     def from_conf_data(cls, conf):
         raise NotImplementedError()
 
-    def request_get(self, path, **kwargs) -> requests.Response:
+    def request_get(self, path, test=None, **kwargs) -> requests.Response:
         """Request a path, returns a requests.Response object"""
-        return self.s.get(self.url + path, **kwargs)
+        return self.s.get(test if test else "https://lol.dyn.riotcdn.net/" + path, **kwargs)
 
     def request_text(self, path) -> str:
         """Request a path, return content as text"""
@@ -251,8 +251,9 @@ class Storage(metaclass=StorageRegister):
             return
 
         logger.debug(f"download file: {path}")
-        r = self.request_get(urlpath)
+        r = self.request_get("a", test=urlpath)
         r.raise_for_status()
+        print(fspath)
         with write_file_or_remove(fspath) as f:
             f.write(r.content)
 
@@ -471,4 +472,3 @@ def parse_storage_component(storage: Storage, component: str) -> Union[None, Pat
         return patch
     else:
         return storage.patch_element(name, version, stored=True)
-
