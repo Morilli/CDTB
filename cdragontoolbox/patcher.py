@@ -290,7 +290,7 @@ class PatcherStorage(Storage):
 
     storage_type = 'patcher'
 
-    URL_BASE = "https://ks-foundation.dyn.riotcdn.net/" # edit this if necessary
+    URL_BASE = "https://lol.secure.dyn.riotcdn.net/" # edit this if necessary
     DEFAULT_CHANNEL = 'live-euw-win'
 
     def __init__(self, path, channel=DEFAULT_CHANNEL):
@@ -343,7 +343,7 @@ class PatcherStorage(Storage):
     def download_manifest(self, id_or_url):
         """Download a manifest from its ID or full URL if needed, return its path in the storage"""
 
-        path = "channels/public/releases/86AA3F3BFDE08B80.manifest" # edit this to be the right manifest
+        path = "channels/public/releases/38BC4E77C09B5039.manifest" # edit this to be the right manifest
         self.download(f"{self.URL_BASE}{path}", path, None)
         return path
 
@@ -499,10 +499,13 @@ class PatcherReleaseElement:
 
     def download_bundles(self, langs=True):
         """Download bundles from CDN"""
+        from multiprocessing.pool import ThreadPool
 
         logger.info(f"download bundles for {self}")
-        for bundle_id in sorted(self.bundle_ids(langs=langs)):
-            self.release.storage.download_bundle(bundle_id)
+        r = ThreadPool(5).map_async(self.release.storage.download_bundle, sorted(self.bundle_ids(langs=langs)))
+        r.wait()
+        # for bundle_id in sorted(self.bundle_ids(langs=langs)):
+            # self.release.storage.download_bundle(bundle_id)
 
     def extract(self, langs=True, overwrite=False):
         """Extract files to the storage"""
