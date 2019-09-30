@@ -343,7 +343,7 @@ class PatcherStorage(Storage):
     def download_manifest(self, id_or_url):
         """Download a manifest from its ID or full URL if needed, return its path in the storage"""
 
-        path = "channels/public/releases/38BC4E77C09B5039.manifest" # edit this to be the right manifest
+        path = "channels/public/releases/3A21FB408F854041.manifest" # edit this to be the right manifest
         self.download(f"{self.URL_BASE}{path}", path, None)
         return path
 
@@ -491,27 +491,34 @@ class PatcherReleaseElement:
     def __repr__(self):
         return f"<{self.__class__.__qualname__} {self.release.version} {self.name}>"
 
-    def bundle_ids(self, langs=True) -> set:
+    def bundle_ids(self, langs=True, filter=None) -> set:
         """Return IDs of bundles used by the element as a set"""
 
-        files = [f for f in self.manif.filter_files(langs) if not f.link]
+        if filter is not None:
+            files = [f for f in self.manif.filter_files(langs) if not f.link and re.search(filter, f.name, flags=re.IGNORECASE) is not None]
+        else:
+            files = [f for f in self.manif.filter_files(langs) if not f.link]
         return {chunk.bundle.bundle_id for f in files for chunk in f.chunks}
 
-    def download_bundles(self, langs=True):
+    def download_bundles(self, langs=True, filter=None):
         """Download bundles from CDN"""
         from multiprocessing.pool import ThreadPool
 
         logger.info(f"download bundles for {self}")
-        r = ThreadPool(5).map_async(self.release.storage.download_bundle, sorted(self.bundle_ids(langs=langs)))
-        r.wait()
+        r = ThreadPool(5).imap_unordered(self.release.storage.download_bundle, sorted(self.bundle_ids(langs=langs, filter=filter)))
+        for _ in r:
+            pass
         # for bundle_id in sorted(self.bundle_ids(langs=langs)):
             # self.release.storage.download_bundle(bundle_id)
 
-    def extract(self, langs=True, overwrite=False):
+    def extract(self, langs=True, filter=None, overwrite=False):
         """Extract files to the storage"""
 
         logger.info(f"extract files from {self}")
-        files = [f for f in self.manif.filter_files(langs) if not f.link]
+        if filter is not None:
+            files = [f for f in self.manif.filter_files(langs) if not f.link and re.search(filter, f.name, flags=re.IGNORECASE) is not None]
+        else:
+            files = [f for f in self.manif.filter_files(langs) if not f.link]
         for file in sorted(files, key=lambda f: f.name):
             self.extract_file(file, overwrite=overwrite)
 
@@ -584,9 +591,9 @@ class PatcherPatchElement(PatchElement):
         version = elem.patch_version()
         super().__init__(elem.name, version)
 
-    def download(self, langs=True):
-        self.elem.download_bundles(langs=langs)
-        self.elem.extract(langs=langs)
+    def download(self, langs=True, filter=None):
+        self.elem.download_bundles(langs=langs, filter=filter)
+        self.elem.extract(langs=langs, filter=filter)
 
     def fspaths(self, langs=True):
         return (self.elem.extract_path(f) for f in self.elem.manif.filter_files(langs=langs))

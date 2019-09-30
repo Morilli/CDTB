@@ -253,7 +253,6 @@ class Storage(metaclass=StorageRegister):
         logger.debug(f"download file: {path}")
         r = self.request_get("a", test=urlpath)
         r.raise_for_status()
-        print(fspath)
         with write_file_or_remove(fspath) as f:
             f.write(r.content)
 

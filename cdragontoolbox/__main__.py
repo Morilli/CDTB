@@ -79,7 +79,7 @@ def parse_storage_args(parser, args) -> Storage:
 
 def command_download(parser, args):
     for component in parse_component_args(parser, args.storage, args.component):
-        component.download(langs=args.langs)
+        component.download(langs=args.langs, filter=args.filter)
 
 
 def command_files(parser, args):
@@ -358,6 +358,8 @@ def create_parser():
                                   help="ignore language projects from solutions")
     component_parser.add_argument('--lang', dest='langs', nargs='*',
                                   help="use projects from solutions in given languages (default: all)")
+    component_parser.add_argument('--filter', dest='filter',
+                                  help="filters downloaded bundles / extracted files based on the provided regex")
 
     subparser = subparsers.add_parser('download', parents=[component_parser],
                                       help="download components to the storage")
