@@ -5,6 +5,8 @@ import json
 import hashlib
 import logging
 from typing import List, Optional, Generator
+from multiprocessing.pool import ThreadPool
+from requests import get
 
 from .storage import (
     Storage,
@@ -297,6 +299,7 @@ class PatcherStorage(Storage):
         super().__init__(path, self.URL_BASE)
         self.channel = channel
         self.use_extract_symlinks = False
+        self.chunks = {}
 
     @classmethod
     def from_conf_data(cls, conf):
@@ -343,7 +346,7 @@ class PatcherStorage(Storage):
     def download_manifest(self, id_or_url):
         """Download a manifest from its ID or full URL if needed, return its path in the storage"""
 
-        path = "channels/public/releases/3A21FB408F854041.manifest" # edit this to be the right manifest
+        path = "channels/public/releases/799E27920F8AE5CD.manifest" # edit this to be the right manifest
         self.download(f"{self.URL_BASE}{path}", path, None)
         return path
 
@@ -371,11 +374,16 @@ class PatcherStorage(Storage):
 
     def load_chunk(self, chunk: PatcherChunk):
         """Load chunk data from a bundle"""
-        path = f"channels/public/bundles/{chunk.bundle.bundle_id:016X}.bundle"
-        with open(self.fspath(path), "rb") as f:
-            f.seek(chunk.offset)
-            # assume chunk is compressed
-            return zstd_decompress(f.read(chunk.size))
+
+        basepath = f"channels/public/bundles/{chunk.bundle.bundle_id:016X}"
+        # assume chunk is compressed
+        if os.path.exists(self.fspath(f"{basepath}.bundle")):
+            with open(self.fspath(f"{basepath}.bundle"), "rb") as f:
+                f.seek(chunk.offset)
+                return zstd_decompress(f.read(chunk.size))
+        else:
+            with open(self.fspath(f"{basepath}.chunks/{chunk.chunk_id:016X}.chunk"), "rb") as f:
+                return zstd_decompress(f.read())
 
     def extract_file(self, file: PatcherFile, output, overwrite=False):
         """Extract a file from its chunks, which must be available"""
@@ -500,14 +508,104 @@ class PatcherReleaseElement:
             files = [f for f in self.manif.filter_files(langs) if not f.link]
         return {chunk.bundle.bundle_id for f in files for chunk in f.chunks}
 
+    def download_chunks(self, chunks: List[PatcherChunk]):
+        """Downloads the provided chunks and saves them internally."""
+
+        bundle_id = chunks[0].bundle.bundle_id
+        if (os.path.exists(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.bundle")) and (os.path.getsize(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.bundle")) > 0)):
+            return
+        else:
+            chunks[:] = [chunk for chunk in chunks if not (os.path.exists(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk")) and os.path.getsize(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk")) > 0)]
+            if not chunks:
+                return
+
+        print("")
+        print(f"number of chunks: {len(chunks)}")
+
+        ranges = [ [chunks[0].offset, chunks[0].size] ]
+        chunks_to_range_index = {chunks[0].chunk_id: 0}
+        for chunk in chunks[1:]:
+            if ranges[-1][0] + ranges[-1][1] == chunk.offset:
+                ranges[-1][1] += chunk.size
+            else:
+                ranges.append([chunk.offset, chunk.size])
+            chunks_to_range_index[chunk.chunk_id] = len(ranges) - 1
+        download_full_bundle = False
+        if len(ranges) == 1 and ranges[0][0] == 0 and chunks[0].bundle.chunks[-1].offset + chunks[0].bundle.chunks[-1].size == ranges[0][1]:
+            download_full_bundle = True
+
+        print(f"chunks to range index: {chunks_to_range_index}")
+        print(f"ranges: {ranges}")
+
+        url = f"{PatcherStorage.URL_BASE}channels/public/bundles/{bundle_id:016X}.bundle"
+        if download_full_bundle:
+            with open(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.bundle"), "wb") as out_file:
+                out_file.write(get(url).content)
+                return
+        print(f"length of chunk list: {len(chunks)}")
+        bytes_range = "".join([f"{range[0]}-{range[0] + range[1] - 1}," for range in ranges])
+        print(f"bytes_range: {bytes_range}")
+        headers = {"Range": f"bytes={bytes_range}"}
+
+        response = get(url, headers=headers)
+        print(response)
+        data = response.content
+        # print(data)
+
+        os.makedirs(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks"), exist_ok=True)
+        if len(ranges) == 1:
+            for chunk in chunks:
+                with open(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk"), "wb") as out_file:
+                    out_file.write(data[chunk.offset - ranges[0][0] : chunk.size + chunk.offset - ranges[0][0]])
+                # self.release.storage.chunks[chunk.chunk_id] = data[chunk.offset - ranges[0][0] : chunk.size + chunk.offset - ranges[0][0]]
+                # print(self.release.storage.chunks[chunk.chunk_id])
+        else:
+            range_data = []
+            index = 0
+            for range in ranges:
+                count = 0
+                while (count < 5):
+                    if data[index] == 10: # if equal to '\n'
+                        count += 1
+                    index += 1
+                range_data.append(data[index:index + range[1]])
+                index += range[1]
+
+            for chunk in chunks:
+                with open(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk"), "wb") as out_file:
+                    out_file.write(range_data[chunks_to_range_index[chunk.chunk_id]][chunk.offset - ranges[chunks_to_range_index[chunk.chunk_id]][0] : chunk.size + chunk.offset - ranges[chunks_to_range_index[chunk.chunk_id]][0]])
+                    # self.release.storage.chunks[chunk.chunk_id] = range_data[chunks_to_range_index[chunk.chunk_id]][chunk.offset - ranges[chunks_to_range_index[chunk.chunk_id]][0] : chunk.size + chunk.offset - ranges[chunks_to_range_index[chunk.chunk_id]][0]]
+
     def download_bundles(self, langs=True, filter=None):
         """Download bundles from CDN"""
-        from multiprocessing.pool import ThreadPool
 
         logger.info(f"download bundles for {self}")
-        r = ThreadPool(5).imap_unordered(self.release.storage.download_bundle, sorted(self.bundle_ids(langs=langs, filter=filter)))
-        for _ in r:
-            pass
+        if filter is not None:
+            chunks = {chunk for f in self.manif.filter_files(False) for chunk in f.chunks if not f.link and re.search(filter, f.name, flags=re.IGNORECASE) is not None}
+        else:
+            chunks = {chunk for f in self.manif.filter_files(False) for chunk in f.chunks if not f.link}
+        print(f"amount of chunks to download: {len(chunks)}")
+        all_bundles = {chunk.bundle for chunk in chunks}
+        print(f"amount of bundles to download: {len(all_bundles)}")
+        grouped_chunks = [[chunk for chunk in bundle.chunks if chunk in chunks] for bundle in all_bundles]
+
+        os.makedirs(self.release.storage.fspath("channels/public/bundles"), exist_ok=True)
+        r = ThreadPool(10).imap_unordered(self.download_chunks, grouped_chunks)
+        for i, _ in enumerate(r):
+            if (i & 0xff) == 0:
+                print(f"{100*i // len(grouped_chunks)}%")
+        return
+
+        # for chunkchunk in grouped_chunks:
+            # print(i)
+            # i += 1
+            # self.download_chunks(chunkchunk)
+        # exit(0)
+        # return
+
+        # r = ThreadPool(5).imap_unordered(self.release.storage.download_bundle, sorted(self.bundle_ids(langs=langs, filter=filter)))
+        # for _ in r:
+        #     pass
         # for bundle_id in sorted(self.bundle_ids(langs=langs)):
             # self.release.storage.download_bundle(bundle_id)
 
