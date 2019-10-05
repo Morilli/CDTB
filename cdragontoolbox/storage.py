@@ -194,7 +194,7 @@ class Storage(metaclass=StorageRegister):
     def __init__(self, path, url):
         self.path = path
         self.url = url
-        self.s = requests.session()
+        self.s = requests.sessions.Session()
 
     @staticmethod
     def from_path(path):
@@ -338,7 +338,7 @@ class PatchElement:
     """
 
     # valid names
-    names = ('game', 'client')
+    names = ('game', 'client', 'client_app', 'custom')
 
     def __init__(self, name, version: PatchVersion):
         self.name = name

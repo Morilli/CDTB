@@ -78,8 +78,15 @@ def parse_storage_args(parser, args) -> Storage:
 
 
 def command_download(parser, args):
-    for component in parse_component_args(parser, args.storage, args.component):
-        component.download(langs=args.langs, filter=args.filter)
+    import cdragontoolbox.patcher as patcher
+
+    if args.component is not None:
+        for component in parse_component_args(parser, args.storage, args.component):
+            component.download(langs=args.langs, filter=args.filter)
+    else:
+        releaseElement = patcher.PatcherReleaseElement(patcher.PatcherRelease(args.storage, "unknown"), "custom", args.manifest)
+        patchElement = patcher.PatcherPatchElement(releaseElement)
+        patchElement.download(langs=args.langs, filter=args.filter)
 
 
 def command_files(parser, args):
@@ -358,13 +365,16 @@ def create_parser():
                                   help="ignore language projects from solutions")
     component_parser.add_argument('--lang', dest='langs', nargs='*',
                                   help="use projects from solutions in given languages (default: all)")
-    component_parser.add_argument('--filter', dest='filter',
-                                  help="filters downloaded bundles / extracted files based on the provided regex")
 
     subparser = subparsers.add_parser('download', parents=[component_parser],
                                       help="download components to the storage")
-    subparser.add_argument('component', nargs='+',
+    group = subparser.add_mutually_exclusive_group(required=True)
+    group.add_argument('--component', nargs='+',
                            help="components to download")
+    group.add_argument('--manifest', dest='manifest',
+                           help="Specify a custom manifest to download and parse")
+    subparser.add_argument('--filter', dest='filter',
+                           help="filters downloaded bundles / extracted files based on the provided regex")
 
     subparser = subparsers.add_parser('files', parents=[component_parser],
                                       help="list files of a component")

@@ -292,7 +292,7 @@ class PatcherStorage(Storage):
 
     storage_type = 'patcher'
 
-    URL_BASE = "https://lol.secure.dyn.riotcdn.net/" # edit this if necessary
+    URL_BASE = "https://lol.secure.dyn.riotcdn.net/"
     DEFAULT_CHANNEL = 'live-euw-win'
 
     def __init__(self, path, channel=DEFAULT_CHANNEL):
@@ -344,24 +344,26 @@ class PatcherStorage(Storage):
         return r.json()
 
     def download_manifest(self, id_or_url):
-        """Download a manifest from its ID or full URL if needed, return its path in the storage"""
+        """Download a manifest from its ID or full URL if needed, return its path in the storage
+        id is now no longer supported. idc"""
 
-        path = "channels/public/releases/799E27920F8AE5CD.manifest" # edit this to be the right manifest
+        from urllib.parse import urlparse
+
+        # if isinstance(id_or_url, str):
+        #     id_or_url = id_or_url.replace(".secure.", ".")
+        #     # if not id_or_url.startswith(self.url):
+        #         # raise ValueError(f"unexpected base URL for manifest: {id_or_url}")
+        #     m = re.match(r"^channels/public/releases/([0-9A-F]{16})\.manifest$", id_or_url[len("https://lol.dyn.riotcdn.net/"):])
+        #     if not m:
+        #         raise ValueError(f"unexpected manifest URL format: {id_or_url}")
+        #     manif_id = int(m.group(1), 16)
+        # else:
+        #     manif_id = id_or_url
+
+        parsed_url = urlparse(id_or_url)
+        self.URL_BASE = f"{parsed_url[0]}://{parsed_url[1]}/"
+        path = parsed_url[2][1:]
         self.download(f"{self.URL_BASE}{path}", path, None)
-        return path
-
-        if isinstance(id_or_url, str):
-            id_or_url = id_or_url.replace(".secure.", ".")
-            # if not id_or_url.startswith(self.url):
-                # raise ValueError(f"unexpected base URL for manifest: {id_or_url}")
-            m = re.match(r"^channels/public/releases/([0-9A-F]{16})\.manifest$", id_or_url[len("https://lol.dyn.riotcdn.net/"):])
-            if not m:
-                print(id_or_url)
-                raise ValueError(f"unexpected manifest URL format: {id_or_url}")
-            manif_id = int(m.group(1), 16)
-        else:
-            manif_id = id_or_url
-
 
         return path
 
@@ -423,8 +425,13 @@ class PatcherRelease:
         self.storage = storage
         self.version = version
         self.storage_dir = f"cdtb/channels/{storage.channel}/{version}"
-        with open(self.storage.fspath(f"{self.storage_dir}/release.json")) as f:
-            self.data = json.load(f)
+
+    @property
+    def data(self):
+        if self.data is None:
+            with open(self.storage.fspath(f"{self.storage_dir}/release.json")) as f:
+                self.data = json.load(f)
+        return self.data
 
     def __str__(self):
         return f"patcher:v{self.version}"
@@ -478,11 +485,11 @@ class PatcherReleaseElement:
     Element of a release (game or client)
     """
 
-    def __init__(self, release: PatcherRelease, name):
+    def __init__(self, release: PatcherRelease, name, url=None):
         self.release = release
         self.name = name
         self._manif = None
-        self.manif_url = self.release.data.get(f"{self.name}_patch_url")
+        self.manif_url = url if url is not None else self.release.data.get(f"{self.name}_patch_url")
 
     @property
     def manif(self):
@@ -511,15 +518,15 @@ class PatcherReleaseElement:
     def download_chunks(self, chunks: List[PatcherChunk]):
         """Downloads the provided chunks and saves them internally."""
 
-        bundle_id = chunks[0].bundle.bundle_id
-        if (os.path.exists(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.bundle")) and (os.path.getsize(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.bundle")) > 0)):
+        bundle = chunks[0].bundle
+        bundle_id = bundle.bundle_id
+        if (os.path.exists(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.bundle")) and os.path.getsize(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.bundle")) > 0):
             return
         else:
             chunks[:] = [chunk for chunk in chunks if not (os.path.exists(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk")) and os.path.getsize(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk")) > 0)]
             if not chunks:
                 return
 
-        print("")
         print(f"number of chunks: {len(chunks)}")
 
         ranges = [ [chunks[0].offset, chunks[0].size] ]
@@ -531,7 +538,7 @@ class PatcherReleaseElement:
                 ranges.append([chunk.offset, chunk.size])
             chunks_to_range_index[chunk.chunk_id] = len(ranges) - 1
         download_full_bundle = False
-        if len(ranges) == 1 and ranges[0][0] == 0 and chunks[0].bundle.chunks[-1].offset + chunks[0].bundle.chunks[-1].size == ranges[0][1]:
+        if len(ranges) == 1 and ranges[0][0] == 0 and bundle.chunks[-1].offset + bundle.chunks[-1].size == ranges[0][1]:
             download_full_bundle = True
 
         print(f"chunks to range index: {chunks_to_range_index}")
@@ -549,8 +556,10 @@ class PatcherReleaseElement:
 
         response = get(url, headers=headers)
         print(response)
+        response.raise_for_status()
         data = response.content
         # print(data)
+        print("")
 
         os.makedirs(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks"), exist_ok=True)
         if len(ranges) == 1:
@@ -576,14 +585,22 @@ class PatcherReleaseElement:
                     out_file.write(range_data[chunks_to_range_index[chunk.chunk_id]][chunk.offset - ranges[chunks_to_range_index[chunk.chunk_id]][0] : chunk.size + chunk.offset - ranges[chunks_to_range_index[chunk.chunk_id]][0]])
                     # self.release.storage.chunks[chunk.chunk_id] = range_data[chunks_to_range_index[chunk.chunk_id]][chunk.offset - ranges[chunks_to_range_index[chunk.chunk_id]][0] : chunk.size + chunk.offset - ranges[chunks_to_range_index[chunk.chunk_id]][0]]
 
+        if all(os.path.exists(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk")) and os.path.getsize(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk")) > 0 for chunk in bundle.chunks):
+            with open(self.release.storage.fspath/f"channels/public/bundles/{bundle_id:016X}.bundle", "wb") as out_file:
+                for chunk in bundle.chunks:
+                    with open(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk"), "rb") as in_file:
+                        out_file.write(in_file.read())
+                    os.remove(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks/{chunk.chunk_id:016X}.chunk"))
+                os.rmdir(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.chunks"))
+
     def download_bundles(self, langs=True, filter=None):
         """Download bundles from CDN"""
 
         logger.info(f"download bundles for {self}")
         if filter is not None:
-            chunks = {chunk for f in self.manif.filter_files(False) for chunk in f.chunks if not f.link and re.search(filter, f.name, flags=re.IGNORECASE) is not None}
+            chunks = {chunk for f in self.manif.filter_files(langs) for chunk in f.chunks if not f.link and re.search(filter, f.name, flags=re.IGNORECASE) is not None}
         else:
-            chunks = {chunk for f in self.manif.filter_files(False) for chunk in f.chunks if not f.link}
+            chunks = {chunk for f in self.manif.filter_files(langs) for chunk in f.chunks if not f.link}
         print(f"amount of chunks to download: {len(chunks)}")
         all_bundles = {chunk.bundle for chunk in chunks}
         print(f"amount of bundles to download: {len(all_bundles)}")
@@ -591,9 +608,8 @@ class PatcherReleaseElement:
 
         os.makedirs(self.release.storage.fspath("channels/public/bundles"), exist_ok=True)
         r = ThreadPool(10).imap_unordered(self.download_chunks, grouped_chunks)
-        for i, _ in enumerate(r):
-            if (i & 0xff) == 0:
-                print(f"{100*i // len(grouped_chunks)}%")
+        for _ in r:
+            pass
         return
 
         # for chunkchunk in grouped_chunks:
