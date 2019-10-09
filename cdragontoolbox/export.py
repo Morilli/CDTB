@@ -127,6 +127,7 @@ class Exporter:
             # remove file redirections
             wad.files = [wf for wf in wad.files if wf.type != 2]
             wad.guess_extensions()
+            wad.sanitize_paths()
             self.wads[export_path] = wad
         else:
             self.plain_files[export_path] = source_path
@@ -326,7 +327,7 @@ class Exporter:
                 except OSError as e:
                     # Windows does not support path components longer than 255
                     # ignore such files
-                    if e.errno == errno.EINVAL:
+                    if e.errno in (errno.EINVAL, errno.ENAMETOOLONG):
                         logger.warning(f"ignore file with invalid path: {wad.path}")
                     else:
                         raise
@@ -379,6 +380,8 @@ class CdragonRawPatchExporter:
                 # A new version of any duplicate will override any unmodified one.
                 symlinked_paths = reduce_common_paths(new_paths - changed_paths, prev_paths, changed_paths)
 
+        # exclude generated "cdragon" files
+        changed_paths.add("cdragon")
         exporter.clean_output_dir(changed_paths, set(symlinked_paths or []))
 
         # extract files, create symlinks if needed
@@ -387,16 +390,18 @@ class CdragonRawPatchExporter:
             self._create_symlinks(symlinked_paths)
 
         # write additional txt files
+        os.makedirs(os.path.join(self.output, "cdragon"), exist_ok=True)
+
         if symlinked_paths:
-            with open(self.output + ".links.txt", 'w', newline='\n') as f:
+            with open(os.path.join(self.output, "cdragon/files.links.txt"), 'w', newline='\n') as f:
                 for link in sorted(symlinked_paths):
                     print(link, file=f)
 
-        with open(self.output + ".unknown.txt", 'w', newline='\n') as f:
+        with open(os.path.join(self.output, "cdragon/files.unknown.txt"), 'w', newline='\n') as f:
             for h in unknown_hashes:
                 print(f"{h:016x}", file=f)
 
-        with open(self.output + ".filelist.txt", 'w', newline='\n') as f:
+        with open(os.path.join(self.output, "cdragon/files.exported.txt"), 'w', newline='\n') as f:
             for path in sorted(new_paths):
                 print(path, file=f)
 
@@ -605,4 +610,3 @@ class SknConverter(FileConverter):
             name = os.path.join(path, entry["name"] + ".obj")
             with open(name, "w") as f:
                 f.write(sknfile.to_obj(entry))
-

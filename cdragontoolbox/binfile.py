@@ -1,20 +1,22 @@
 import os
 from enum import IntEnum
 import struct
-import textwrap
-from typing import Dict
 from .hashes import HashFile
 
-HashMap = Dict[int, str]
 
+def _repr_indent(v):
+    return repr(v).replace('\n', '\n  ')
 
 def _repr_indent_list(values):
     if not values:
         return '[]'
-    return "[\n%s]" % ''.join("%s\n" % textwrap.indent(repr(v), '  ') for v in values)
+    return "[\n%s]" % ''.join(f"  {_repr_indent(v)}\n" for v in values)
 
 
-hashfile_bin = HashFile(os.path.join(os.path.dirname(__file__), "hashes.bin.txt"), hash_size=8)
+hashfile_binentries = HashFile(os.path.join(os.path.dirname(__file__), "hashes.binentries.txt"), hash_size=8)
+hashfile_binhashes = HashFile(os.path.join(os.path.dirname(__file__), "hashes.binhashes.txt"), hash_size=8)
+hashfile_binfields = HashFile(os.path.join(os.path.dirname(__file__), "hashes.binfields.txt"), hash_size=8)
+hashfile_bintypes = HashFile(os.path.join(os.path.dirname(__file__), "hashes.bintypes.txt"), hash_size=8)
 
 def compute_binhash(s):
     """Compute a hash used in BIN files
@@ -26,38 +28,118 @@ def compute_binhash(s):
         h = ((h ^ b) * 0x01000193) % 0x100000000
     return h
 
+class BinHashBase:
+    """Base class for hashed value"""
 
-class BinHash:
-    """Hash value in bin files"""
-
-    def __init__(self, h):
-        self.h = h
-        self.s = hashfile_bin.load().get(h)
-
-    def __repr__(self):
-        if self.s is not None:
-            return self.s
-        return f"{{{self.h:08x}}}"
-
-    to_serializable = __repr__
-
-class BinEntity:
-    """Entity in bin files"""
+    hashfile = None  # to be defined in subclasses
 
     def __init__(self, h):
         self.h = h
-        self.s = hashfile_bin.load().get(h)
+        self.s = self.hashfile.load().get(h)
+
+    def __eq__(self, other):
+        if isinstance(other, BinHashBase):
+            return self.h == other.h
+        elif isinstance(other, str):
+            if self.s is None:
+                return self.h == compute_binhash(other)
+            else:
+                return self.s == other
+        else:
+            return self.h == other
+
+    def __str__(self):
+        if self.s is not None:
+            return self.s
+        return f"{{{self.hex()}}}"
+
+    __repr__ = __str__
+    to_serializable = __str__
+
+    def __hash__(self):
+        return self.h
+
+    def hex(self):
+        return f"{self.h:08x}"
+
+class BinHashValue(BinHashBase):
+    """Hashed name in bin files (hash type)"""
+
+    hashfile = hashfile_binhashes
 
     def __repr__(self):
         if self.s is not None:
-            return self.s
-        return f"[{self.h:08x}]"
+            return repr(self.s)
+        return f"{{{self.hex()}}}"
 
-    to_serializable = __repr__
+class BinEntryPath(BinHashBase):
+    """Path of a bin entry (top level element)"""
+
+    hashfile = hashfile_binentries
+
+    def __repr__(self):
+        if self.s is not None:
+            return repr(self.s)
+        return f"{{{self.hex()}}}"
+
+class BinFieldName(BinHashBase):
+    """Name of a struct field"""
+
+    hashfile = hashfile_binfields
+
+class BinTypeName(BinHashBase):
+    """Name of a type"""
+
+    hashfile = hashfile_bintypes
+
+
+def key_to_hash(key):
+    if isinstance(key, BinHashBase):
+        return key.h
+    elif isinstance(key, str):
+        return compute_binhash(key)
+    else:
+        return key
+
+class BinObjectWithFields:
+    """Base class for bin object with fields"""
+
+    def __init__(self, htype, fields):
+        self.type = BinTypeName(htype)
+        self.fields = fields
+
+    def __getitem__(self, key):
+        h = key_to_hash(key)
+        for v in self.fields:
+            if v.name.h == h:
+                return v
+        raise KeyError(key)
+
+    def __contains__(self, key):
+        h = key_to_hash(key)
+        for v in self.fields:
+            if v.name.h == h:
+                return True
+        return False
+
+    def get(self, key, default=None):
+        try:
+            return self[key]
+        except KeyError:
+            return default
+
+    def getv(self, key, default=None):
+        try:
+            return self[key].value
+        except KeyError:
+            return default
+
+    def to_serializable(self):
+        return dict(f.to_serializable() for f in self.fields)
 
 
 class BinType(IntEnum):
-    VEC3_U16 = 0
+    EMPTY = 0
     BOOL = 1
     S8 = 2
     U8 = 3
@@ -79,152 +161,138 @@ class BinType(IntEnum):
     STRUCT = 19
     EMBEDDED = 20
     LINK = 21
-    ARRAY = 22
+    OPTION = 22
     MAP = 23
-    PADDING = 24
+    FLAG = 24
 
-class BinStruct:
+class BinStruct(BinObjectWithFields):
     """Structured binary value"""
 
-    def __init__(self, ehash, fields):
-        self.ehash = ehash
-        self.fields = fields
-
     def __repr__(self):
         sfields = _repr_indent_list(self.fields)
-        return f"<STRUCT {self.ehash} {sfields}>"
+        return f"<STRUCT {self.type!r} {sfields}>"
 
-    def to_serializable(self):
-        return dict(f.to_serializable() for f in self.fields)
-
-
-class BinEmbedded:
+class BinEmbedded(BinObjectWithFields):
     """Embedded binary value"""
 
-    def __init__(self, ehash, fields):
-        self.ehash = ehash
-        self.fields = fields
-
     def __repr__(self):
         sfields = _repr_indent_list(self.fields)
-        return f"<EMBEDDED {self.ehash} {sfields}>"
-
-    def to_serializable(self):
-        return dict(f.to_serializable() for f in self.fields)
+        return f"<EMBEDDED {self.type!r} {sfields}>"
 
 class BinField:
     """Base class for binary fields
 
     A field is a value (possibly nested) associated to a hash.
     """
-    def __init__(self, fhash):
-        self.fhash = fhash
+    def __init__(self, hname):
+        self.name = BinFieldName(hname)
 
 class BinBasicField(BinField):
     """Binary field for fixed-width, non-nested values"""
 
-    def __init__(self, fhash, vtype, value):
-        super().__init__(fhash)
-        self.vtype = vtype
+    def __init__(self, hname, btype, value):
+        super().__init__(hname)
+        self.type = btype
         self.value = value
 
     def __repr__(self):
-        return f"<{self.fhash} {self.vtype.name} {self.value!r}>"
+        return f"<{self.name!r} {self.type.name} {self.value!r}>"
 
     def to_serializable(self):
-        return (self.fhash.to_serializable(), _to_serializable(self.value))
+        return (self.name.to_serializable(), _to_serializable(self.value))
 
 class BinContainerField(BinField):
-    def __init__(self, fhash, vtype, values):
-        super().__init__(fhash)
-        self.vtype = vtype
-        self.values = values
+    def __init__(self, hname, btype, values):
+        super().__init__(hname)
+        self.type = btype
+        self.value = values
 
     def __repr__(self):
-        svalues = _repr_indent_list(self.values)
-        return f"<{self.fhash} CONTAINER({self.vtype.name}) {svalues}>"
+        svalues = _repr_indent_list(self.value)
+        return f"<{self.name!r} CONTAINER({self.type.name}) {svalues}>"
 
     def to_serializable(self):
-        return (self.fhash.to_serializable(), [_to_serializable(v) for v in self.values])
+        return (self.name.to_serializable(), [_to_serializable(v) for v in self.value])
 
 class BinStructField(BinField):
-    def __init__(self, fhash, value):
-        super().__init__(fhash)
+    def __init__(self, hname, value):
+        super().__init__(hname)
         self.value = value
 
     def __repr__(self):
         sfields = _repr_indent_list(self.value.fields)
-        return f"<{self.fhash} STRUCT {self.value.ehash} {sfields}>"
+        return f"<{self.name!r} STRUCT {self.value.type!r} {sfields}>"
 
     def to_serializable(self):
-        return (self.fhash.to_serializable(), self.value.to_serializable())
+        return (self.name.to_serializable(), self.value.to_serializable())
 
 class BinEmbeddedField(BinField):
-    def __init__(self, fhash, value):
-        super().__init__(fhash)
+    def __init__(self, hname, value):
+        super().__init__(hname)
         self.value = value
 
     def __repr__(self):
         sfields = _repr_indent_list(self.value.fields)
-        return f"<{self.fhash} EMBEDDED {self.value.ehash} {sfields}>"
+        return f"<{self.name!r} EMBEDDED {self.value.type!r} {sfields}>"
 
     def to_serializable(self):
-        return (self.fhash.to_serializable(), self.value.to_serializable())
+        return (self.name.to_serializable(), self.value.to_serializable())
 
-class BinArrayField(BinField):
-    def __init__(self, fhash, vtype, values):
-        super().__init__(fhash)
+class BinOptionField(BinField):
+    def __init__(self, hname, vtype, value):
+        super().__init__(hname)
         self.vtype = vtype
-        self.values = values
+        self.value = value
 
     def __repr__(self):
-        svalues = _repr_indent_list(self.values)
-        return f"<{self.fhash} ARRAY({self.vtype.name}) {svalues}>"
+        svalue = '-' if self.value is None else f'(\n  {_repr_indent(self.value)}\n)'
+        return f"<{self.name!r} OPTION({self.vtype.name}) {svalue}>"
 
     def to_serializable(self):
-        return (self.fhash.to_serializable(), [_to_serializable(v) for v in self.values])
+        return (self.name.to_serializable(), None if self.value is None else _to_serializable(self.value))
 
 class BinMapField(BinField):
-    def __init__(self, fhash, ktype, vtype, values):
-        super().__init__(fhash)
+    def __init__(self, hname, ktype, vtype, values):
+        super().__init__(hname)
         self.ktype = ktype
         self.vtype = vtype
-        self.values = values
+        self.value = values
 
     def __repr__(self):
-        svalues = ''.join(f"{k} => {v!r}\n" for k, v in self.values.items())
-        svalues = textwrap.indent(svalues, '  ')
-        return f"<{self.fhash} MAP({self.ktype.name},{self.vtype.name}) {{\n{svalues}}}>"
+        svalues = ''.join(f"  {k} => {_repr_indent(v)}\n" for k, v in self.value.items())
+        return f"<{self.name!r} MAP({self.ktype.name},{self.vtype.name}) {{\n{svalues}}}>"
 
     def to_serializable(self):
-        return (self.fhash.to_serializable(), {_to_serializable(k): _to_serializable(v) for k,v in self.values.items()})
+        return (self.name.to_serializable(), {_to_serializable(k): _to_serializable(v) for k,v in self.value.items()})
 
 
-class BinFileEntry:
-    def __init__(self, entity, etype, values):
-        self.entity = entity
-        self.etype = etype
-        self.values = values
+class BinEntry(BinObjectWithFields):
+    def __init__(self, hpath, htype, fields):
+        self.path = BinEntryPath(hpath)
+        super().__init__(htype, fields)
 
     def __repr__(self):
-        svalues = _repr_indent_list(self.values)
-        return f"<BinFileEntry {self.entity} {self.etype} {svalues}>"
-
-    def to_serializable(self):
-        return [v.to_serializable() for v in self.values]
+        sfields = _repr_indent_list(self.fields)
+        return f"<BinEntry {self.path!r} {self.type!r} {sfields}>"
 
 class BinFile:
     def __init__(self, f):
         if isinstance(f, str):
             f = open(f, 'rb')
-        if f.read(4) != b'PROP':
+        magic = f.read(4)
+        self.is_patch = magic == b'PTCH'
+        if self.is_patch:
+            patch_header = struct.unpack('<2L', f.read(8))
+            assert patch_header == (1, 0)
+            magic = f.read(4)
+        if magic != b'PROP':
             raise ValueError("missing magic code")
         reader = BinReader(f)
         self.version, self.linked_files, entry_types = reader.read_binfile_header()
-        self.entries = [reader.read_binfile_entry(BinHash(etype)) for etype in entry_types]
+        self.entries = [reader.read_binfile_entry(htype) for htype in entry_types]
 
     def to_serializable(self):
-        return {entry.entity.to_serializable(): entry.to_serializable() for entry in self.entries}
+        return {entry.path.to_serializable(): entry.to_serializable() for entry in self.entries}
 
 
 class BinReader:
@@ -247,13 +315,13 @@ class BinReader:
         entry_types = list(self.read_fmt(f"<{entry_count}L"))
         return version, linked_files, entry_types
 
-    def read_binfile_entry(self, etype):
+    def read_binfile_entry(self, htype):
         """Read a single binfile entry"""
 
         pos = self.f.tell() + 4  # skip 'length' size
-        length, entity, count = self.read_fmt('<LLH')
+        length, hpath, count = self.read_fmt('<LLH')
         values = [self.read_field() for _ in range(count)]
-        entry = BinFileEntry(BinEntity(entity), etype, values)
+        entry = BinEntry(hpath, htype, values)
         assert self.f.tell() - pos == length
         return entry
 
@@ -261,7 +329,7 @@ class BinReader:
     def read_bvalue(self, vtype):
         return self._vtype_to_bvalue_reader[vtype](self)
 
-    def read_vec3_u16(self):
+    def read_empty(self):
         return self.read_fmt('<3H')
 
     def read_bool(self):
@@ -313,61 +381,62 @@ class BinReader:
         return self.f.read(self.read_fmt('<H')[0]).decode('utf-8')
 
     def read_hash(self):
-        return BinHash(self.read_fmt('<L')[0])
+        return BinHashValue(self.read_fmt('<L')[0])
 
     def read_link(self):
-        return BinEntity(self.read_fmt('<L')[0])
+        return BinEntryPath(self.read_fmt('<L')[0])
 
-    def read_padding(self):
+    def read_flag(self):
         return self.read_fmt('<B')[0]
 
     def read_struct(self):
-        ehash, = self.read_fmt('<L')
-        if ehash == 0:
+        htype, = self.read_fmt('<L')
+        if htype == 0:
             return None
         _, count = self.read_fmt('<LH')
-        return BinStruct(BinHash(ehash), [self.read_field() for _ in range(count)])
+        return BinStruct(htype, [self.read_field() for _ in range(count)])
 
     def read_embedded(self):
-        ehash, = self.read_fmt('<L')
-        if ehash == 0:
+        htype, = self.read_fmt('<L')
+        if htype == 0:
             return None
         _, count = self.read_fmt('<LH')
-        return BinEmbedded(BinHash(ehash), [self.read_field() for _ in range(count)])
+        return BinEmbedded(htype, [self.read_field() for _ in range(count)])
 
     def read_field(self):
-        fhash, ftype = self.read_fmt('<LB')
+        hname, ftype = self.read_fmt('<LB')
         ftype = BinType(ftype)
-        return self._vtype_to_field_reader[ftype](self, BinHash(fhash), ftype)
+        return self._vtype_to_field_reader[ftype](self, hname, ftype)
 
-    def read_field_basic(self, fhash, ftype):
-        return BinBasicField(fhash, ftype, self.read_bvalue(ftype))
+    def read_field_basic(self, hname, btype):
+        return BinBasicField(hname, btype, self.read_bvalue(btype))
 
-    def read_field_container(self, fhash, ftype):
+    def read_field_container(self, hname, btype):
         vtype, _, count = self.read_fmt('<BLL')
         vtype = BinType(vtype)
-        return BinContainerField(fhash, vtype, [self.read_bvalue(vtype) for _ in range(count)])
+        return BinContainerField(hname, vtype, [self.read_bvalue(vtype) for _ in range(count)])
 
-    def read_field_struct(self, fhash, ftype):
-        return BinStructField(fhash, self.read_bvalue(ftype))
+    def read_field_struct(self, hname, btype):
+        return BinStructField(hname, self.read_bvalue(btype))
 
-    def read_field_embedded(self, fhash, ftype):
-        return BinEmbeddedField(fhash, self.read_bvalue(ftype))
+    def read_field_embedded(self, hname, btype):
+        return BinEmbeddedField(hname, self.read_bvalue(btype))
 
-    def read_field_array(self, fhash, ftype):
+    def read_field_option(self, hname, btype):
         vtype, count = self.read_fmt('<BB')
+        assert count in (0, 1)
         vtype = BinType(vtype)
-        return BinArrayField(fhash, vtype, [self.read_bvalue(vtype) for _ in range(count)])
+        return BinOptionField(hname, vtype, None if count == 0 else self.read_bvalue(vtype))
 
-    def read_field_map(self, fhash, ftype):
+    def read_field_map(self, hname, btype):
         ktype, vtype, _, count = self.read_fmt('<BBLL')
         ktype, vtype = BinType(ktype), BinType(vtype)
         # assume key type is hashable
         values = dict((self.read_bvalue(ktype), self.read_bvalue(vtype)) for _ in range(count))
-        return BinMapField(fhash, ktype, vtype, values)
+        return BinMapField(hname, ktype, vtype, values)
 
     _vtype_to_bvalue_reader = {
-        BinType.VEC3_U16: read_vec3_u16,
+        BinType.EMPTY: read_empty,
         BinType.BOOL: read_bool,
         BinType.S8: read_s8,
         BinType.U8: read_u8,
@@ -388,11 +457,11 @@ class BinReader:
         BinType.STRUCT: read_struct,
         BinType.EMBEDDED: read_embedded,
         BinType.LINK: read_link,
-        BinType.PADDING: read_padding,
+        BinType.FLAG: read_flag,
     }
 
     _vtype_to_field_reader = {
-        BinType.VEC3_U16: read_field_basic,
+        BinType.EMPTY: read_field_basic,
         BinType.BOOL: read_field_basic,
         BinType.S8: read_field_basic,
         BinType.U8: read_field_basic,
@@ -414,9 +483,9 @@ class BinReader:
         BinType.STRUCT: read_field_struct,
         BinType.EMBEDDED: read_field_embedded,
         BinType.LINK: read_field_basic,
-        BinType.ARRAY: read_field_array,
+        BinType.OPTION: read_field_option,
         BinType.MAP: read_field_map,
-        BinType.PADDING: read_field_basic,
+        BinType.FLAG: read_field_basic,
     }
 
 

@@ -44,6 +44,7 @@ class WadFileHeader:
         b'DDS ': 'dds',
         b'<svg': 'svg',
         b'PROP': 'bin',
+        b'PTCH': 'bin',
         b'BKHD': 'bnk',
         b'r3d2Mesh': 'scb',
         b'r3d2anmd': 'anm',
@@ -109,7 +110,7 @@ class WadFileHeader:
             # Windows does not support path components longer than 255
             # ignore such files
             # TODO: Find a better way of handling these files
-            if e.errno == errno.EINVAL:
+            if e.errno in (errno.EINVAL, errno.ENAMETOOLONG):
                 logger.warning(f"ignore file with invalid path: {self.path}")
             else:
                 raise
@@ -222,6 +223,18 @@ class Wad:
                 else:
                     wadfile.path = f"{path}/{wadfile.path_hash:016x}"
 
+    def sanitize_paths(self):
+        """Truncate files whose basename has a length of at least 255"""
+
+        for wadfile in self.files:
+            if wadfile.path:
+                path, filename = os.path.split(wadfile.path)
+                if len(filename) < 255:
+                    continue
+
+                basename, ext = os.path.splitext(filename)
+                wadfile.path = os.path.join(path, f"{basename[:255-17-len(ext)]}.{wadfile.path_hash:016x}{ext}")
+
     def extract(self, output, overwrite=True):
         """Extract WAD file
 
@@ -231,6 +244,7 @@ class Wad:
         logger.info(f"extracting {self.path} to {output}")
 
         self.set_unknown_paths("unknown")
+        self.sanitize_paths()
 
         with open(self.path, 'rb') as fwad:
             for wadfile in self.files:
