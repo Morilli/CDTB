@@ -544,7 +544,7 @@ class PatcherReleaseElement:
         print(f"chunks to range index: {chunks_to_range_index}")
         print(f"ranges: {ranges}")
 
-        url = f"{PatcherStorage.URL_BASE}channels/public/bundles/{bundle_id:016X}.bundle"
+        url = f"{self.release.storage.URL_BASE}channels/public/bundles/{bundle_id:016X}.bundle"
         if download_full_bundle:
             with open(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.bundle"), "wb") as out_file:
                 out_file.write(get(url).content)
