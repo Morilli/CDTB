@@ -6,7 +6,7 @@ import hashlib
 import logging
 from typing import List, Optional, Generator
 from multiprocessing.pool import ThreadPool
-from requests import get
+import requests
 
 from .storage import (
     Storage,
@@ -424,14 +424,15 @@ class PatcherRelease:
     def __init__(self, storage: PatcherStorage, version):
         self.storage = storage
         self.version = version
+        self._data = None
         self.storage_dir = f"cdtb/channels/{storage.channel}/{version}"
 
     @property
     def data(self):
-        if self.data is None:
+        if self._data is None:
             with open(self.storage.fspath(f"{self.storage_dir}/release.json")) as f:
-                self.data = json.load(f)
-        return self.data
+                self._data = json.load(f)
+        return self._data
 
     def __str__(self):
         return f"patcher:v{self.version}"
@@ -515,7 +516,7 @@ class PatcherReleaseElement:
             files = [f for f in self.manif.filter_files(langs) if not f.link]
         return {chunk.bundle.bundle_id for f in files for chunk in f.chunks}
 
-    def download_chunks(self, chunks: List[PatcherChunk]):
+    def download_chunks(self, chunks: List[PatcherChunk], session=None):
         """Downloads the provided chunks and saves them internally."""
 
         bundle = chunks[0].bundle
@@ -547,14 +548,14 @@ class PatcherReleaseElement:
         url = f"{self.release.storage.URL_BASE}channels/public/bundles/{bundle_id:016X}.bundle"
         if download_full_bundle:
             with open(self.release.storage.fspath(f"channels/public/bundles/{bundle_id:016X}.bundle"), "wb") as out_file:
-                out_file.write(get(url).content)
+                out_file.write(get(url).content if session is None else session.get(url).content)
                 return
         print(f"length of chunk list: {len(chunks)}")
         bytes_range = "".join([f"{range[0]}-{range[0] + range[1] - 1}," for range in ranges])
         print(f"bytes_range: {bytes_range}")
         headers = {"Range": f"bytes={bytes_range}"}
 
-        response = get(url, headers=headers)
+        response = get(url, headers=headers) if session is None else session.get(url, headers=headers)
         print(response)
         response.raise_for_status()
         data = response.content
@@ -606,8 +607,10 @@ class PatcherReleaseElement:
         print(f"amount of bundles to download: {len(all_bundles)}")
         grouped_chunks = [[chunk for chunk in bundle.chunks if chunk in chunks] for bundle in all_bundles]
 
+        session = requests.sessions.Session()
+
         os.makedirs(self.release.storage.fspath("channels/public/bundles"), exist_ok=True)
-        r = ThreadPool(10).imap_unordered(self.download_chunks, grouped_chunks)
+        r = ThreadPool(8).imap_unordered(lambda chunks: self.download_chunks(chunks, session=session), grouped_chunks)
         for _ in r:
             pass
         return
