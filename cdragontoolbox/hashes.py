@@ -10,7 +10,7 @@ import struct
 import logging
 from contextlib import contextmanager
 from typing import Dict
-from xxhash import xxh64
+from xxhash import xxh64_intdigest
 from .data import REGIONS, Language
 
 logger = logging.getLogger(__name__)
@@ -151,14 +151,14 @@ class HashGuesser:
     def check(self, p):
         """Check a single hash, print and add to known on match"""
 
-        h = xxh64(p).intdigest()
+        h = xxh64_intdigest(p)
         if h in self.unknown:
             self._add_known(h, p)
 
     def is_known(self, p):
         """Check a path, return True if it is known"""
 
-        h = xxh64(p).intdigest()
+        h = xxh64_intdigest(p)
         if h in self.unknown:
             self._add_known(h, p)
             return True
@@ -172,7 +172,7 @@ class HashGuesser:
             raise TypeError("expected iterable of strings, got a string")
         unknown = self.unknown
         for p in paths:
-            h = xxh64(p).intdigest()
+            h = xxh64_intdigest(p)
             if h in unknown:
                 self._add_known(h, p)
 
@@ -742,7 +742,7 @@ class GameHashGuesser(HashGuesser):
                 data = wadfile.read_data(f)
                 if wadfile.ext in ('bin', 'inibin'):
                     # bin files: find strings based on prefix, then parse the length
-                    for m in re.finditer(br'(?:ASSETS|DATA|Characters|Shaders)/', data):
+                    for m in re.finditer(br'(?:ASSETS|DATA|Characters|Shaders|Maps/MapGeometry)/', data):
                         i = m.start()
                         n = data[i-2] + (data[i-1] << 8)
                         try:
@@ -758,8 +758,13 @@ class GameHashGuesser(HashGuesser):
                         elif path.startswith('shaders'):
                             self.check(f"assets/shaders/generated/{path}.ps_2_0")
                             self.check(f"assets/shaders/generated/{path}.vs_2_0")
+                        elif path.startswith('maps'):
+                            self.check(f"data/{path}.mapgeo")
+                            self.check(f"data/{path}.materials.bin")
                         else:
                             self.check(path)
+                            if path.endswith(".png"):
+                                self.check(path[:-4] + ".dds")
 
                 elif wadfile.ext == 'preload':
                     # preload files
@@ -797,7 +802,7 @@ class GameHashGuesser(HashGuesser):
 
         # find path-like strings, then try to parse the length
         paths = set()
-        for m in re.finditer(br'(?:ASSETS|DATA|DATA_SOON|LEVELS)/[0-9a-zA-Z_. /-]+', data):
+        for m in re.finditer(br'(?:ASSETS|DATA|DATA_SOON|Global|LEVELS|UX)/[0-9a-zA-Z_. /-]+', data):
             path = m.group(0).lower().decode('ascii')
             paths.add(path.replace("data_soon/", "data/"))
             pos = m.start()
