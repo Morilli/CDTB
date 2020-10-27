@@ -20,7 +20,7 @@ def load_translations(path):
             f.seek(0)
             return RstFile(f)
         else:
-            translations = []
+            translations = {}
             for line in f:
                 if line.startswith(b'tr "'):
                     line = line.decode()
@@ -102,7 +102,7 @@ class TftTransformer:
             set_traits_paths = {h for p in set_champs_pairs for h in p[1]}
             set_map[set_number] = {
                 "name": set_name,
-                "traits": [traits[h] for h in set_traits_paths],
+                "traits": [traits[h] for h in set_traits_paths if h in traits],
                 "champions": [p[0] for p in set_champs_pairs],
             }
         return set_map
@@ -128,9 +128,11 @@ class TftTransformer:
         for item in set_collection:
             char_list = item.getv("characterLists")[0]
             set_info = item[0xD2538E5A].value
-            set_number = set_info["SetNumber"]["mValue"].value
-            set_name = set_info["SetName"]["mValue"].value
+            set_number = set_info["SetNumber"].getv("mValue")
+            set_name = set_info["SetName"].getv("mValue")
 
+            if set_number is None or set_name is None:
+                continue
             if char_list not in character_lists:
                 continue
 
@@ -188,6 +190,8 @@ class TftTransformer:
 
             tft_bin = BinFile(self_path)
             record = next(x for x in tft_bin.entries if x.type == "TFTCharacterRecord")
+            if "spellNames" not in record:
+                continue
 
             champ_traits = []  # trait paths, as hashes
             for trait in record.getv("mLinkedTraits", []):
@@ -199,7 +203,7 @@ class TftTransformer:
             spell_name = record.getv("spellNames")[0]
             spell_name = spell_name.rsplit("/", 1)[-1]
             ability = next(x.getv("mSpell") for x in tft_bin.entries if x.type == "SpellObject" and x.getv("mScriptName") == spell_name)
-            ability_variables = [{"name": value.getv("mName"), "value": value.getv("mValues")} for value in ability["mDataValues"].value]
+            ability_variables = [{"name": value.getv("mName"), "value": value.getv("mValues")} for value in ability.getv("mDataValues", [])]
             rarity = champ.getv("mRarity", 0) + 1
 
             champs[name] = ({
@@ -207,7 +211,7 @@ class TftTransformer:
                 "name": champ.getv(0xC3143D66),
                 "cost": rarity + int(rarity / 6),
                 "icon": champ.getv("mIconPath"),
-                "traits": [traits[h]["name"] for h in champ_traits],
+                "traits": [traits[h]["name"] for h in champ_traits if h in traits],
                 "stats": {
                     "hp": record.getv("baseHP"),
                     "mana": record["primaryAbilityResource"].value.getv("arBase", 100),
@@ -218,7 +222,7 @@ class TftTransformer:
                     "critMultiplier": record.getv("critDamageMultiplier"),
                     "critChance": record.getv("baseCritChance"),
                     "attackSpeed": record.getv("attackSpeed"),
-                    "range": record["attackRange"].value // 180,
+                    "range": record.getv("attackRange", 0) // 180,
                 },
                 "ability": {
                     "name": champ.getv(0x87A69A5E),
@@ -249,6 +253,7 @@ class TftTransformer:
                 effects.append({
                     "minUnits": trait_set.getv("mMinUnits"),
                     "maxUnits": trait_set.getv("mMaxUnits") or 25000,
+                    "style": trait_set.getv("mStyle", 1),
                     "variables": variables,
                 })
 

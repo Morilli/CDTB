@@ -1,7 +1,8 @@
 import os
 from enum import IntEnum
 import struct
-from .hashes import HashFile
+from .hashes import HashFile, hashfile_game
+from xxhash import xxh64_intdigest
 
 
 def _repr_indent(v):
@@ -17,6 +18,7 @@ hashfile_binentries = HashFile(os.path.join(os.path.dirname(__file__), "hashes.b
 hashfile_binhashes = HashFile(os.path.join(os.path.dirname(__file__), "hashes.binhashes.txt"), hash_size=8)
 hashfile_binfields = HashFile(os.path.join(os.path.dirname(__file__), "hashes.binfields.txt"), hash_size=8)
 hashfile_bintypes = HashFile(os.path.join(os.path.dirname(__file__), "hashes.bintypes.txt"), hash_size=8)
+hashfile_binpaths = hashfile_game
 
 def compute_binhash(s):
     """Compute a hash used in BIN files
@@ -42,7 +44,7 @@ class BinHashBase:
             return self.h == other.h
         elif isinstance(other, str):
             if self.s is None:
-                return self.h == compute_binhash(other)
+                return self.h == self.compute_hash(other)
             else:
                 return self.s == other
         else:
@@ -58,6 +60,10 @@ class BinHashBase:
 
     def __hash__(self):
         return self.h
+
+    @classmethod
+    def compute_hash(cls, s):
+        return compute_binhash(s)
 
     def hex(self):
         return f"{self.h:08x}"
@@ -91,6 +97,23 @@ class BinTypeName(BinHashBase):
     """Name of a type"""
 
     hashfile = hashfile_bintypes
+
+class BinPathValue(BinHashBase):
+    """Hashed WAD path in bin files"""
+
+    hashfile = hashfile_binpaths
+
+    def hex(self):
+        return f"{self.h:16x}"
+
+    @classmethod
+    def compute_hash(cls, s):
+        return xxh64_intdigest(s.lower())
+
+    def __repr__(self):
+        if self.s is not None:
+            return repr(self.s)
+        return f"{{{self.hex()}}}"
 
 
 def key_to_hash(key):
@@ -139,6 +162,7 @@ class BinObjectWithFields:
 
 
 class BinType(IntEnum):
+    # See parse_bintype() for remapping depending on version
     EMPTY = 0
     BOOL = 1
     S8 = 2
@@ -157,19 +181,16 @@ class BinType(IntEnum):
     RGBA = 15
     STRING = 16
     HASH = 17
-    CONTAINER = 18
-    STRUCT = 19
-    EMBEDDED = 20
-    LINK = 21
-    OPTION = 22
-    MAP = 23
-    FLAG = 24
-
-    @classmethod
-    def from_byte(cls, v):
-        if v >= 0x80:
-            v = v - 0x80 + 18
-        return cls(v)
+    PATH = 18  # introduced in 10.23
+    # Complex types (0x80 flag introduced in 9.23)
+    CONTAINER = 0x80
+    CONTAINER2 = 0x81  # introduced in 10.8
+    STRUCT = 0x82
+    EMBEDDED = 0x83
+    LINK = 0x84
+    OPTION = 0x85
+    MAP = 0x86
+    FLAG = 0x87
 
 
 class BinStruct(BinObjectWithFields):
@@ -283,7 +304,7 @@ class BinEntry(BinObjectWithFields):
         return f"<BinEntry {self.path!r} {self.type!r} {sfields}>"
 
 class BinFile:
-    def __init__(self, f):
+    def __init__(self, f, btype_version=None):
         if isinstance(f, str):
             f = open(f, 'rb')
         magic = f.read(4)
@@ -294,7 +315,7 @@ class BinFile:
             magic = f.read(4)
         if magic != b'PROP':
             raise ValueError("missing magic code")
-        reader = BinReader(f)
+        reader = BinReader(f, btype_version=btype_version)
         self.version, self.linked_files, entry_types = reader.read_binfile_header()
         self.entries = [reader.read_binfile_entry(htype) for htype in entry_types]
 
@@ -303,8 +324,15 @@ class BinFile:
 
 
 class BinReader:
-    def __init__(self, f):
+    def __init__(self, f, btype_version=None):
+        """
+        Initialize a reader for bin files and values
+
+        `btype_version` is a workaround to parse bin types differently
+        depending on patch version. Value is based on the patch version.
+        """
         self.f = f
+        self.btype_version = btype_version or 1008
 
     def read_fmt(self, fmt):
         length = struct.calcsize(fmt)
@@ -390,6 +418,9 @@ class BinReader:
     def read_hash(self):
         return BinHashValue(self.read_fmt('<L')[0])
 
+    def read_path(self):
+        return BinPathValue(self.read_fmt('<Q')[0])
+
     def read_link(self):
         return BinEntryPath(self.read_fmt('<L')[0])
 
@@ -399,20 +430,22 @@ class BinReader:
     def read_struct(self):
         htype, = self.read_fmt('<L')
         if htype == 0:
-            return None
-        _, count = self.read_fmt('<LH')
+            count = 0
+        else:
+            _, count = self.read_fmt('<LH')
         return BinStruct(htype, [self.read_field() for _ in range(count)])
 
     def read_embedded(self):
         htype, = self.read_fmt('<L')
         if htype == 0:
-            return None
-        _, count = self.read_fmt('<LH')
+            count = 0
+        else:
+            _, count = self.read_fmt('<LH')
         return BinEmbedded(htype, [self.read_field() for _ in range(count)])
 
     def read_field(self):
         hname, ftype = self.read_fmt('<LB')
-        ftype = BinType.from_byte(ftype)
+        ftype = self.parse_bintype(ftype)
         return self._vtype_to_field_reader[ftype](self, hname, ftype)
 
     def read_field_basic(self, hname, btype):
@@ -420,7 +453,7 @@ class BinReader:
 
     def read_field_container(self, hname, btype):
         vtype, _, count = self.read_fmt('<BLL')
-        vtype = BinType.from_byte(vtype)
+        vtype = self.parse_bintype(vtype)
         return BinContainerField(hname, vtype, [self.read_bvalue(vtype) for _ in range(count)])
 
     def read_field_struct(self, hname, btype):
@@ -432,15 +465,27 @@ class BinReader:
     def read_field_option(self, hname, btype):
         vtype, count = self.read_fmt('<BB')
         assert count in (0, 1)
-        vtype = BinType.from_byte(vtype)
+        vtype = self.parse_bintype(vtype)
         return BinOptionField(hname, vtype, None if count == 0 else self.read_bvalue(vtype))
 
     def read_field_map(self, hname, btype):
         ktype, vtype, _, count = self.read_fmt('<BBLL')
-        ktype, vtype = BinType.from_byte(ktype), BinType.from_byte(vtype)
+        ktype, vtype = self.parse_bintype(ktype), self.parse_bintype(vtype)
         # assume key type is hashable
         values = dict((self.read_bvalue(ktype), self.read_bvalue(vtype)) for _ in range(count))
         return BinMapField(hname, ktype, vtype, values)
+
+    def parse_bintype(self, v):
+        if self.btype_version < 923:
+            if v == 18:
+                v = 0x80
+            elif v >= 19:
+                v = 0x80 + v - 18
+        elif self.btype_version < 1008:
+            if v >= 0x81:
+                v += 1
+        return BinType(v)
+
 
     _vtype_to_bvalue_reader = {
         BinType.EMPTY: read_empty,
@@ -461,6 +506,7 @@ class BinReader:
         BinType.RGBA: read_rgba,
         BinType.STRING: read_string,
         BinType.HASH: read_hash,
+        BinType.PATH: read_path,
         BinType.STRUCT: read_struct,
         BinType.EMBEDDED: read_embedded,
         BinType.LINK: read_link,
@@ -486,7 +532,9 @@ class BinReader:
         BinType.RGBA: read_field_basic,
         BinType.STRING: read_field_basic,
         BinType.HASH: read_field_basic,
+        BinType.PATH: read_field_basic,
         BinType.CONTAINER: read_field_container,
+        BinType.CONTAINER2: read_field_container,
         BinType.STRUCT: read_field_struct,
         BinType.EMBEDDED: read_field_embedded,
         BinType.LINK: read_field_basic,
