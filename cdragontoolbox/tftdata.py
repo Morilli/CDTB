@@ -180,6 +180,7 @@ class TftTransformer:
             items.append({
                 "id": item.getv("mId"),
                 "name": item.getv(0xC3143D66),
+                "apiName": item.getv("mName"),
                 "desc": item.getv(0x765F18DA),
                 "icon": item.getv("mIconPath"),
                 "unique": item.getv(0x9596A387, False),
@@ -225,8 +226,13 @@ class TftTransformer:
 
             spell_name = record.getv("spellNames")[0]
             spell_name = spell_name.rsplit("/", 1)[-1].lower()
-            ability = next(x.getv("mSpell") for x in tft_bin.entries if x.type == "SpellObject" and x.getv("mScriptName").lower() == spell_name)
-            ability_variables = [{"name": value.getv("mName"), "value": value.getv("mValues")} for value in ability.getv("mDataValues", [])]
+            for entry in tft_bin.entries:
+                if entry.type == "SpellObject" and entry.getv("mScriptName").lower() == spell_name:
+                    ability = entry.getv("mSpell")
+                    ability_variables = [{"name": value.getv("mName"), "value": value.getv("mValues")} for value in ability.getv("mDataValues", [])]
+                    break
+            else:
+                ability_variables = []
 
             cost = record.getv("tier", None)
             if cost is None:
