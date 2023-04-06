@@ -178,9 +178,12 @@ class TftTransformer:
 
     def parse_items(self, map22):
         item_entries = [x for x in map22.entries if x.type == "TftItemData"]
+        trait_entries = [x for x in map22.entries if x.type == "TftTraitData"]
+
+        traits_by_hash = {trait.path.h: trait.getv("mName") for trait in trait_entries}
 
         items = []
-        item_ids = {}  # {item_hash: item_id}
+        items_by_hash = {}  # {item_hash: item}
         for item in item_entries:
             name = item.getv("mName")
             if "Template" in name or name == "TFT_Item_Null":
@@ -191,21 +194,31 @@ class TftTransformer:
                 name = str(effect.getv("name")) if "name" in effect else effect.path.hex()
                 effects[name] = effect.getv("value", "null")
 
-            items.append({
+            item_data = {
                 "id": item.getv("mId"),
                 "name": item.getv(0xC3143D66),
                 "apiName": item.getv("mName"),
                 "desc": item.getv(0x765F18DA),
                 "icon": item.getv("mIconPath"),
                 "unique": item.getv(0x9596A387, False),
-                "from": [x.h for x in item.getv(0x8B83BA8A, [])],
+                "composition": [x.h for x in item.getv(0x8B83BA8A, [])],  # updated below
+                "associatedTraits": [x.h for x in item.getv("AssociatedTraits", [])], # updated below
+                "incompatibleTraits": [x.h for x in item.getv("IncompatibleTraits", [])], # updated below
                 "effects": effects,
-            })
-            item_ids[item.path.h] = item.getv("mId")
+            }
+            items.append(item_data)
+            items_by_hash[item.path.h] = item_data
+
 
         for item in items:
-            item["from"] = [item_ids[x] for x in item["from"]]
-
+            if item["id"] is not None:
+                # patchs < 13.5: mId exist and "from" is a list of those IDs
+                item["from"] = [items_by_hash[h]["id"] for h in item["composition"]]
+            else:
+                item["from"] = None
+            item["composition"] = [items_by_hash[h]["apiName"] for h in item["composition"]]
+            item["incompatibleTraits"] = [traits_by_hash[h] for h in item["incompatibleTraits"]]
+            item["associatedTraits"] = [traits_by_hash[h] for h in item["associatedTraits"]]
         return items
 
     def parse_champs(self, map22, traits, character_folder):
@@ -257,7 +270,7 @@ class TftTransformer:
                 "apiName": record.getv("mCharacterName"),
                 "name": champ.getv(0xC3143D66),
                 "cost": cost,
-                "icon": champ.getv("mIconPath"),
+                "icon": champ.getv(0x466DC3CC) or champ.getv("mIconPath"),
                 "traits": [traits[h]["name"] for h in champ_traits if h in traits],
                 "stats": {
                     "hp": record.getv("baseHP"),
@@ -274,7 +287,7 @@ class TftTransformer:
                 "ability": {
                     "name": champ.getv(0x87A69A5E),
                     "desc": champ.getv(0xBC4F18B3),
-                    "icon": champ.getv("mPortraitIconPath"),
+                    "icon": champ.getv(0xDF0AD83B) or champ.getv("mPortraitIconPath"),
                     "variables": ability_variables,
                 },
             }, champ_traits)
