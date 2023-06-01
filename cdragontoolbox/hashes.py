@@ -606,6 +606,8 @@ class GameHashGuesser(HashGuesser):
         re_suffix = re.compile(r'^(.*?)(\.[^.]+)?(\.[^.]+)$')
         for p in self.known.values():
             m = re_suffix.search(p)
+            if not m:
+                continue
             prefix, suffix, ext = m.groups()
             if suffix:
                 suffixes.add(suffix)
@@ -741,13 +743,15 @@ class GameHashGuesser(HashGuesser):
                 if wadfile.type == 2:
                     continue # softlink; contains no actual content
                 if wadfile.ext in ('dds', 'jpg', 'png', 'tga', 'ttf', 'otf', 'ogg', 'webm', 'anm',
-                                   'skl', 'skn', 'scb', 'sco', 'troybin', 'luabin', 'luabin64', 'bnk', 'wpk'):
+                                   'skl', 'skn', 'scb', 'sco', 'troybin', 'bnk', 'wpk', 'tex'):
                     continue # don't grep filetypes known to not contain full paths
 
-                data = wadfile.read_data(f)
+                data = wad.read_file_data(f, wadfile)
+                if data is None:
+                    continue
                 if wadfile.ext in ('bin', 'inibin'):
                     # bin files: find strings based on prefix, then parse the length
-                    for m in re.finditer(br'(?:ASSETS|DATA|Characters|Shaders|Maps/MapGeometry|Gameplay)/', data):
+                    for m in re.finditer(br'(?:ASSETS|DATA|Characters|Shaders|Maps/MapGeometry|Gameplay|ClientStates)/', data):
                         i = m.start()
                         n = data[i-2] + (data[i-1] << 8)
                         try:
@@ -766,6 +770,9 @@ class GameHashGuesser(HashGuesser):
                         elif path.startswith('maps'):
                             self.check(f"data/{path}.mapgeo")
                             self.check(f"data/{path}.materials.bin")
+                        elif path.startswith('clientstates'):
+                            self.check(path.rsplit('/', 1)[0])
+                            self.check(path.rsplit('/', 2)[0])
                         else:
                             self.check(path)
                             if path.endswith(".png"):
@@ -805,7 +812,7 @@ class GameHashGuesser(HashGuesser):
 
         # find path-like strings, then try to parse the length
         paths = set()
-        for m in re.finditer(br'(?:ASSETS|Common|DATA|DATA_SOON|DATA_Soon|Gameplay|Global|LEVELS|UX)/[0-9a-zA-Z_. /-]+', data):
+        for m in re.finditer(br'(?:ASSETS|Common|DATA|DATA_SOON|DATA_Soon|Gameplay|Global|LEVELS|Loadouts|UX|UIAutoAtlas)/[0-9a-zA-Z_. /-]+', data):
             path = m.group(0).lower().decode('ascii')
             paths.add(path.replace("data_soon/", "data/"))
             pos = m.start()

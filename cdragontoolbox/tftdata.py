@@ -163,16 +163,17 @@ class TftTransformer:
             char_lists = item.getv("characterLists")
             if char_lists is None:
                 continue
-            char_list = char_lists[0]
             set_info = item[0xD2538E5A].value
             set_name = set_info["SetName"].getv("mValue")
 
             if set_number is None or set_name is None:
                 continue
-            if char_list not in character_lists:
-                continue
+            set_characters = []
+            for char_list in char_lists:
+                if char_list not in character_lists:
+                    continue
+                set_characters += [character_names[char] for char in character_lists[char_list].getv("Characters") if char in character_names]
 
-            set_characters = [character_names[char] for char in character_lists[char_list].getv("Characters")]
             sets.append((set_number, set_mutator, set_name, set_characters))
         return sets
 
@@ -267,10 +268,13 @@ class TftTransformer:
                 cost = rarity + int(rarity / 6)
 
             champs[name] = ({
-                "apiName": record.getv("mCharacterName"),
+                "apiName": champ.getv("mName"),
+                "characterName": record.getv("mCharacterName"),
                 "name": champ.getv(0xC3143D66),
                 "cost": cost,
                 "icon": champ.getv(0x466DC3CC) or champ.getv("mIconPath"),
+                "tileIcon": champ.getv(0xDAC11DD4),
+                "squareIcon": champ.getv(0x16071366),
                 "traits": [traits[h]["name"] for h in champ_traits if h in traits],
                 "stats": {
                     "hp": record.getv("baseHP"),
