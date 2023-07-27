@@ -1,6 +1,5 @@
 import os
 import errno
-import json
 import re
 import shutil
 import struct
@@ -9,13 +8,14 @@ from io import BytesIO
 from PIL import Image
 
 from .storage import PatchVersion
-from .wad import Wad, MalformedSubchunkError
+from .wad import Wad
 from .binfile import BinFile
 from .sknfile import SknFile
 from .rstfile import hashfile_rst, RstFile, key_to_hash as key_to_rsthash
 from .tools import (
     write_file_or_remove,
     write_dir_or_remove,
+    json_dumps
 )
 
 logger = logging.getLogger(__name__)
@@ -401,8 +401,10 @@ class CdragonRawPatchExporter:
             for path in sorted(new_paths):
                 print(path, file=f)
 
-        logger.info(f"export TFT data files")
+        logger.info("export TFT data files")
         self.export_tft_data()
+        logger.info("export Arena data files")
+        self.export_arena_data()
 
     def export_tft_data(self):
         if self.patch.version != 'main' and self.patch.version < PatchVersion('9.14'):
@@ -411,6 +413,14 @@ class CdragonRawPatchExporter:
         from .tftdata import TftTransformer
         transformer = TftTransformer(os.path.join(self.output, "game"))
         transformer.export(os.path.join(self.output, "cdragon/tft"), langs=None)
+
+    def export_arena_data(self):
+        if self.patch.version != 'main' and self.patch.version < PatchVersion('13.14'):
+            return  # no supported Arena data before 13.14
+        # don't import in module to be able to execute arenadata module
+        from .arenadata import ArenaTransformer
+        transformer = ArenaTransformer(os.path.join(self.output, "game"))
+        transformer.export(os.path.join(self.output, "cdragon/arena"), langs=None)
 
     def _create_exporter(self, patch):
         if patch.version == 'main':
@@ -710,7 +720,7 @@ class BinConverter(FileConverter):
                 binfile = BinFile(output_path, btype_version=self.btype_version)
             except ValueError as e:
                 raise FileConversionError(f"failed to parse bin file: {e}")
-            fout.write(json.dumps(binfile.to_serializable()).encode('ascii'))
+            fout.write(json_dumps(binfile.to_serializable()).encode('ascii'))
 
 class SknConverter(FileConverter):
     def __init__(self):
@@ -764,4 +774,4 @@ class RstConverter(FileConverter):
             rst_json["entries"][key] = value
 
         with write_file_or_remove(output_path + '.json', False) as fout:
-            fout.write(json.dumps(rst_json, ensure_ascii=False))
+            fout.write(json_dumps(rst_json, ensure_ascii=False))

@@ -13,14 +13,12 @@ from .storage import (
     PatchVersion,
     get_system_yaml_version,
     get_content_metadata_version,
-    get_exe_version,
 )
 from .tools import (
     BinaryParser,
     write_file_or_remove,
     zstd_decompress,
 )
-from .data import Language
 
 logger = logging.getLogger(__name__)
 
@@ -117,7 +115,7 @@ class PatcherManifest:
 
         # offsets to tables (convert to absolute)
         offsets_base = parser.tell()
-        offsets = list(offsets_base + 4*i + v for i, v in enumerate(parser.unpack(f'<6l')))
+        offsets = list(offsets_base + 4*i + v for i, v in enumerate(parser.unpack('<6l')))
 
         parser.seek(offsets[0])
         self.bundles = list(self._parse_table(parser, self._parse_bundle))
@@ -245,7 +243,7 @@ class PatcherManifest:
         parser.seek(fields_pos)
         parser.skip(2) # vtable size
         parser.skip(2) # object size
-        for i, field, offset in zip(range(nfields), fields, parser.unpack(f'<{nfields}H')):
+        for _, field, offset in zip(range(nfields), fields, parser.unpack(f'<{nfields}H')):
             if field is None:
                 continue
             name, fmt = field
@@ -293,10 +291,14 @@ class PatcherStorage(Storage):
     `channels/.../files/` contains symlinks to them.
     This can be disabled by setting the `use_extract_symlinks` option to false.
 
+    Sometimes, HTTPS requests to clientconfig.rpg.riotgames.com are denied.
+    If `clientconfig_data` is set, the provided file (if available) or URL is used.
+
     Configuration options:
       patchline -- the patchline name (`live` or `pbe`)
       region -- region from which use configuration
       use_extract_symlinks -- if false, disable use of symlinks for extracted files
+      clientconfig_data -- file or URL to use as 'clientconfig.rpg.riotgames.com' data
 
     """
 
@@ -311,12 +313,15 @@ class PatcherStorage(Storage):
         super().__init__(path, self.URL_BASE)
         self.patchline = patchline
         self.use_extract_symlinks = True
+        self.clientconfig_data = None
 
     @classmethod
     def from_conf_data(cls, conf):
         storage = cls(conf['path'], conf.get('patchline', cls.DEFAULT_PATCHLINE))
         if conf.get('use_extract_symlinks') is False:
             storage.use_extract_symlinks = False
+        if 'clientconfig_data' in conf:
+            storage.clientconfig_data = conf['clientconfig_data']
         return storage
 
     def base_release_path(self):
@@ -373,9 +378,15 @@ class PatcherStorage(Storage):
             print(f"{timestamp}", file=f)
 
     def get_latest_client_manifest(self):
-        r = self.s.get(f"https://clientconfig.rpg.riotgames.com/api/v1/config/public?namespace=keystone.products.league_of_legends.patchlines")
-        r.raise_for_status()
-        data = r.json()
+        url_or_path = self.clientconfig_data
+        if url_or_path and not url_or_path.startswith('http://') and not url_or_path.startswith('https://') and os.path.exists(url_or_path):
+            with open(url_or_path) as f:
+                data = json.load(f)
+        else:
+            url = url_or_path or "https://clientconfig.rpg.riotgames.com/api/v1/config/public?namespace=keystone.products.league_of_legends.patchlines"
+            r = self.s.get(url)
+            r.raise_for_status()
+            data = r.json()
         region = 'PBE' if self.patchline == 'pbe' else self.CLIENT_LIVE_REGION
         for config in data[f"keystone.products.league_of_legends.patchlines.{self.patchline}"]["platforms"]["win"]["configurations"]:
             if config['id'] == region:

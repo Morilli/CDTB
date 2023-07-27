@@ -2,8 +2,6 @@
 import os
 import sys
 import argparse
-import json
-import re
 import textwrap
 import fnmatch
 import logging
@@ -15,8 +13,6 @@ from cdragontoolbox.storage import (
     parse_storage_component,
     storage_conf_from_path,
 )
-from cdragontoolbox.rads import RadsStorage
-from cdragontoolbox.patcher import PatcherStorage
 from cdragontoolbox.wad import Wad
 from cdragontoolbox.export import CdragonRawPatchExporter
 from cdragontoolbox.binfile import BinFile
@@ -27,6 +23,7 @@ from cdragontoolbox.hashes import (
     LcuHashGuesser,
     GameHashGuesser,
 )
+from cdragontoolbox.tools import json_dump
 
 
 def parse_component_arg(parser, storage: Storage, component: str):
@@ -311,7 +308,7 @@ def command_bin_dump(parser, args):
     with open(args.bin, 'rb') as f:
         binfile = BinFile(f, btype_version=parsed_version)
     if args.json:
-        json.dump(binfile.to_serializable(), sys.stdout)
+        json_dump(binfile.to_serializable(), sys.stdout)
     else:
         for entry in binfile.entries:
             print(entry)
