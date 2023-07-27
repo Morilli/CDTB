@@ -2,8 +2,6 @@
 import os
 import sys
 import argparse
-import json
-import re
 import textwrap
 import fnmatch
 import logging
@@ -15,8 +13,6 @@ from cdragontoolbox.storage import (
     parse_storage_component,
     storage_conf_from_path,
 )
-from cdragontoolbox.rads import RadsStorage
-from cdragontoolbox.patcher import PatcherStorage
 from cdragontoolbox.wad import Wad
 from cdragontoolbox.export import CdragonRawPatchExporter
 from cdragontoolbox.binfile import BinFile
@@ -27,6 +23,7 @@ from cdragontoolbox.hashes import (
     LcuHashGuesser,
     GameHashGuesser,
 )
+from cdragontoolbox.tools import json_dump
 
 
 def parse_component_arg(parser, storage: Storage, component: str):
@@ -74,6 +71,11 @@ def parse_storage_args(parser, args) -> Storage:
             conf['cdn'] = cdn
         elif cdn != 'default':
             parser.error("--cdn is only supported for 'rads' storage")
+        if args.patchline is not None:
+            if conf['type'] == 'patcher':
+                conf['patchline'] = args.patchline
+            else:
+                parser.error("--patchline is only supported for 'patcher' storage")
     return Storage.from_conf(conf)
 
 
@@ -301,13 +303,18 @@ def command_bin_dump(parser, args):
     if not os.path.isfile(args.bin):
         parser.error(f"BIN file not found: {args.bin}")
 
+    parsed_version = sum(int(num) * (100 ** i) for i, num in enumerate(reversed(args.patch_version.split('.'))))
+
     with open(args.bin, 'rb') as f:
-        binfile = BinFile(f)
+        binfile = BinFile(f, btype_version=parsed_version)
     if args.json:
-        json.dump(binfile.to_serializable(), sys.stdout)
+        json_dump(binfile.to_serializable(), sys.stdout)
     else:
         for entry in binfile.entries:
             print(entry)
+        if binfile.patch_entries is not None:
+            for entry in binfile.patch_entries:
+                print(entry)
 
 
 def create_parser():
@@ -350,6 +357,8 @@ def create_parser():
                                 help="path to downloaded files, with an optional storage type prefix (`type:path`)")
     storage_parser.add_argument('--cdn', choices=["default", "pbe", "kr"], default=None,
                                 help="use a different CDN")
+    storage_parser.add_argument('--patchline', choices=["pbe", "live"], default=None,
+                                help="select a patchline")
 
     # component-based commands
 
@@ -441,6 +450,8 @@ def create_parser():
                                       help="dump a BIN file as a text tree")
     subparser.add_argument('-j', '--json', action='store_true',
                            help="extract to JSON")
+    subparser.add_argument('-V', '--patch-version', default="10.8",
+                           help="patch version this BIN file belongs to (default: %(default)s)")
     subparser.add_argument('bin',
                            help="BIN file to extract")
 

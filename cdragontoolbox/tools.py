@@ -3,12 +3,18 @@ import shutil
 import struct
 from contextlib import contextmanager
 
-import zstd
-# support both zstd and zstandard implementations
-if hasattr(zstd, 'decompress'):
-    zstd_decompress = zstd.decompress
-else:
-    zstd_decompress = zstd.ZstdDecompressor().decompress
+import pyzstd
+zstd_decompress = pyzstd.decompress
+try:
+    import ujson
+    def json_dump(obj, fp, **kwargs):
+        return ujson.dump(obj, fp, **kwargs, escape_forward_slashes=False)
+    def json_dumps(obj, **kwargs):
+        return ujson.dumps(obj, **kwargs, escape_forward_slashes=False)
+except ImportError:
+    import json
+    json_dump = json.dump
+    json_dumps = json.dumps
 
 
 @contextmanager
@@ -72,4 +78,3 @@ class BinaryParser:
     def unpack_string(self):
         """Unpack string prefixed by its 32-bit length"""
         return self.f.read(self.unpack('<L')[0]).decode('utf-8')
-

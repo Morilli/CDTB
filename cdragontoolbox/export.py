@@ -1,8 +1,8 @@
 import os
 import errno
-import json
 import re
 import shutil
+import struct
 import logging
 from io import BytesIO
 from PIL import Image
@@ -11,9 +11,11 @@ from .storage import PatchVersion
 from .wad import Wad
 from .binfile import BinFile
 from .sknfile import SknFile
+from .rstfile import hashfile_rst, RstFile, key_to_hash as key_to_rsthash
 from .tools import (
     write_file_or_remove,
     write_dir_or_remove,
+    json_dumps
 )
 
 logger = logging.getLogger(__name__)
@@ -311,17 +313,16 @@ class Exporter:
                 if not overwrite and converter.converted_paths_exist(self.output, wadfile.path):
                     continue
 
-                data = wadfile.read_data(fwad)
+                data = wad.read_file_data(fwad, wadfile)
                 if data is None:
-                    continue  # should not happen, file redirections have been filtered already
+                    continue
 
                 try:
                     converter.convert(BytesIO(data), self.output, wadfile.path)
                 except FileConversionError as e:
                     logger.warning(f"cannot convert file '{wadfile.path}': {e}")
                 except OSError as e:
-                    # Windows does not support path components longer than 255
-                    # ignore such files
+                    # Path components longer than 255 are not supported, ignore such files
                     if e.errno in (errno.EINVAL, errno.ENAMETOOLONG):
                         logger.warning(f"ignore file with invalid path: {wad.path}")
                     else:
@@ -400,8 +401,10 @@ class CdragonRawPatchExporter:
             for path in sorted(new_paths):
                 print(path, file=f)
 
-        logger.info(f"export TFT data files")
+        logger.info("export TFT data files")
         self.export_tft_data()
+        logger.info("export Arena data files")
+        self.export_arena_data()
 
     def export_tft_data(self):
         if self.patch.version != 'main' and self.patch.version < PatchVersion('9.14'):
@@ -410,6 +413,14 @@ class CdragonRawPatchExporter:
         from .tftdata import TftTransformer
         transformer = TftTransformer(os.path.join(self.output, "game"))
         transformer.export(os.path.join(self.output, "cdragon/tft"), langs=None)
+
+    def export_arena_data(self):
+        if self.patch.version != 'main' and self.patch.version < PatchVersion('13.14'):
+            return  # no supported Arena data before 13.14
+        # don't import in module to be able to execute arenadata module
+        from .arenadata import ArenaTransformer
+        transformer = ArenaTransformer(os.path.join(self.output, "game"))
+        transformer.export(os.path.join(self.output, "cdragon/arena"), langs=None)
 
     def _create_exporter(self, patch):
         if patch.version == 'main':
@@ -420,8 +431,10 @@ class CdragonRawPatchExporter:
         exporter = Exporter(self.output)
         exporter.converters = [
             ImageConverter(('.dds', '.tga')),
+            TexConverter(),
             BinConverter(re.compile(r'game/.*\.bin$'), btype_version),
             SknConverter(),
+            RstConverter(re.compile(r'game/data/menu/.*\.(txt|stringtable)$'))
         ]
         exporter.add_patch_files(patch)
         return exporter
@@ -458,7 +471,7 @@ class CdragonRawPatchExporter:
             _, ext = os.path.splitext(path)
             if ext == '.bin':
                 return '_skins_' not in path
-            return ext in ('.dds', '.tga', '.skn', '.txt')
+            return ext in ('.dds', '.tga', '.tex', '.skn', '.txt', '.stringtable')
 
         for path, wad in exporter.wads.items():
             if path.endswith('.wad.client'):
@@ -488,7 +501,14 @@ class CdragonRawPatchExporter:
             os.makedirs(dst_dir, exist_ok=True)
             src = os.path.relpath(os.path.realpath(os.path.join(src_output, link)), os.path.realpath(dst_dir))
             logger.info(f"create symlink {dst}")
-            os.symlink(src, dst)
+            try:
+                os.symlink(src, dst)
+            except OSError as e:
+                # Path components longer than 255 are not supported, ignore such files
+                if e.errno in (errno.EINVAL, errno.ENAMETOOLONG):
+                    logger.warning(f"ignore symlink with invalid path: {dst}")
+                else:
+                    raise
 
     @classmethod
     def from_directory(cls, storage, output: str, first: PatchVersion=None, symlinks=None):
@@ -613,6 +633,72 @@ class ImageConverter(FileConverter):
                 # "OSError: cannot identify image file" happen for some files with a wrong extension
                 raise FileConversionError("cannot convert image to PNG")
 
+class TexConverter(FileConverter):
+    def __init__(self):
+        pass
+
+    def is_handled(self, path):
+        return path.endswith('.tex')
+
+    def converted_paths(self, path):
+        yield os.path.splitext(path)[0] + '.png'
+
+    def convert(self, fin, output, path):
+        output_path = os.path.join(output, os.path.splitext(path)[0] + '.png')
+        fdds = BytesIO(self.tex_to_dds(fin.read()))
+        with write_file_or_remove(output_path) as fout:
+            try:
+                im = Image.open(fdds)
+                im.save(fout)
+            except (OSError, NotImplementedError):
+                raise FileConversionError("cannot convert image to PNG")
+
+    @staticmethod
+    def tex_to_dds(data):
+        # Parse TEX header
+        if len(data) < 12 or data[:4] != b'TEX\0':
+            raise FileConversionError("invalid TEX file")
+        _, width, height, format, has_mipmaps = struct.unpack('<4sHHxBx?', data[:12])
+
+        if format == 0x0a:  # DXT1
+            ddspf = struct.pack('<LL4s20x', 32, 0x4, b'DXT1')
+        elif format == 0x0c:  # DXT5
+            ddspf = struct.pack('<LL4s20x', 32, 0x4, b'DXT5')
+        elif format == 0x14:  # RGBA8
+            ddspf = struct.pack('<LL4x5L', 32, 0x41, 8*4, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000)
+        else:
+            raise FileConversionError(f"unsupported TEX format: {format:x}")
+
+        if has_mipmaps:
+            # Note: only convert the largest mipmap
+
+            if format == 0x0a:  # DXT1
+                block_size = 4
+                bytes_per_block = 8
+            elif format == 0x0c:  # DXT5
+                block_size = 4
+                bytes_per_block = 16
+            elif format == 0x14:  # RGBA8
+                block_size = 4
+                bytes_per_block = 4
+
+            # Find mipmap count
+            n = max(width, height)
+            mipmap_count = 0
+            while n > 0:
+                mipmap_count += 1
+                n >>= 1
+
+            block_width = (width + block_size - 1) // block_size
+            block_height = (height + block_size - 1) // block_size
+            mipmap_size = bytes_per_block * block_width * block_height
+            pixels = data[-mipmap_size:]
+        else:
+            pixels = data[12:]
+
+        dds_header = struct.pack('<4s4L56x32sL16x', b'DDS ', 124, 0x1007, height, width, ddspf, 0x1000)
+        return dds_header + pixels
+
 class BinConverter(FileConverter):
     def __init__(self, regex, btype_version=None):
         self.regex = regex
@@ -634,7 +720,7 @@ class BinConverter(FileConverter):
                 binfile = BinFile(output_path, btype_version=self.btype_version)
             except ValueError as e:
                 raise FileConversionError(f"failed to parse bin file: {e}")
-            fout.write(json.dumps(binfile.to_serializable()).encode('ascii'))
+            fout.write(json_dumps(binfile.to_serializable()).encode('ascii'))
 
 class SknConverter(FileConverter):
     def __init__(self):
@@ -644,14 +730,48 @@ class SknConverter(FileConverter):
         return path.endswith('.skn')
 
     def converted_paths(self, path):
+        yield path
         yield os.path.splitext(path)[0]
 
     def convert(self, fin, output, path):
-        output_path = os.path.join(output, os.path.splitext(path)[0])
-        shutil.rmtree(output_path, ignore_errors=True)
-        with write_dir_or_remove(output_path):
-            sknfile = SknFile(fin)
+        output_path = os.path.join(output, path)
+        with write_file_or_remove(output_path) as fout:
+            shutil.copyfileobj(fin, fout)
+        obj_output_path = os.path.join(output, os.path.splitext(path)[0])
+        shutil.rmtree(obj_output_path, ignore_errors=True)
+        with write_dir_or_remove(obj_output_path):
+            sknfile = SknFile(output_path)
             for entry in sknfile.entries:
-                name = os.path.join(output_path, entry["name"] + ".obj")
+                name = os.path.join(obj_output_path, entry["name"] + ".obj")
                 with open(name, "w") as f:
                     f.write(sknfile.to_obj(entry))
+
+class RstConverter(FileConverter):
+    def __init__(self, regex):
+        self.regex = regex
+        self.hashes = hashfile_rst.load()
+
+    def is_handled(self, path):
+        return self.regex.search(path) is not None
+
+    def converted_paths(self, path):
+        yield path
+        yield path + '.json'
+
+    def convert(self, fin, output, path):
+        output_path = os.path.join(output, path)
+        with write_file_or_remove(output_path) as fout:
+            shutil.copyfileobj(fin, fout)
+
+        rstfile = RstFile(output_path)
+        hashes = {key_to_rsthash(hash, rstfile.hash_bits): value for hash, value in self.hashes.items()}
+        rst_json = {"entries": {}, "version": rstfile.version}
+        for key, value in rstfile.entries.items():
+            if key in hashes:
+                key = hashes[key]
+            else:
+                key = f"{{{key:010x}}}"
+            rst_json["entries"][key] = value
+
+        with write_file_or_remove(output_path + '.json', False) as fout:
+            fout.write(json_dumps(rst_json, ensure_ascii=False))

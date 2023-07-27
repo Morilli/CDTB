@@ -80,7 +80,7 @@ def sigint_callback(callback):
     try:
         yield
     finally:
-        handler_back = signal.signal(signal.SIGINT, previous_handler)
+        _handler_back = signal.signal(signal.SIGINT, previous_handler)
 
 def progress_iterate(sequence, formatter=None):
     """Iterate over sequence, display progress on SIGINT"""
@@ -222,7 +222,7 @@ class HashGuesser:
         words = list(words) # Ensure words is a list
         format_part = "{sep}%%s" * (nnew-1)
         format_part = f"%s%%s{format_part}%s"
-        re_extract = re.compile(f"([^/_.-]+)(?=((?:[-_][^/_.-]+){{{nold-1}}})[^/]*\.[^/]+$)")
+        re_extract = re.compile(rf"([^/_.-]+)(?=((?:[-_][^/_.-]+){{{nold-1}}})[^/]*\.[^/]+$)")
         temp_formats = set()
         for path in paths:
             for m in re_extract.finditer(path):
@@ -267,7 +267,7 @@ class HashGuesser:
         formats = set()
         for path in paths:
             for m in re_extract.finditer(path):
-                formats.add(f'%s%s%s' % (path[:m.start()], fmt, path[m.end():]))
+                formats.add('%s%s%s' % (path[:m.start()], fmt, path[m.end():]))
 
         nrange = range(nmax)
         logger.debug(f"substitute numbers: {len(formats)} formats, nmax = {nmax}")
@@ -330,7 +330,7 @@ class LcuHashGuesser(HashGuesser):
         regex = re.compile(r'^plugins/([^/]+)/[^/]+/[^/]+/')
         region_lang_list = [(r, l) for r in regions for l in langs]
         known = list(self.known.values())
-        logger.debug(f"substitute region and lang")
+        logger.debug("substitute region and lang")
         for region_lang in progress_iterator(region_lang_list, lambda rl: f"{rl[0]}/{rl[1]}"):
             replacement = r'plugins/\1/%s/%s/' % region_lang
             self.check_iter(regex.sub(replacement, p) for p in known)
@@ -528,6 +528,9 @@ class GameHashGuesser(HashGuesser):
                 chars.add(m.group(1))
         return sorted(chars)
 
+    shader_extensions = [".ps_2_0", ".ps_3_0", ".vs_2_0", ".vs_3_0", ".ps", ".vs"]
+    shader_variants = [".dx11", ".dx9", ".dx9sm3", ".glsl", ".metal"]
+
     def substitute_numbers(self, nmax=100, digits=None):
         paths = self.known.values()
         super()._substitute_numbers(paths, nmax, digits)
@@ -574,7 +577,7 @@ class GameHashGuesser(HashGuesser):
             self.check_iter(fmt.replace('{}', s) for s in characters)
 
     def substitute_skin_numbers(self):
-        """Replace skinNN, multiple combinaisons"""
+        """Replace skinNN, multiple combinations"""
 
         characters = {}  # {char: ({skin}, {(format, N})}
         regex = re.compile(r'/characters/([^/]+)/skins/(base|skin\d+)/')
@@ -603,6 +606,8 @@ class GameHashGuesser(HashGuesser):
         re_suffix = re.compile(r'^(.*?)(\.[^.]+)?(\.[^.]+)$')
         for p in self.known.values():
             m = re_suffix.search(p)
+            if not m:
+                continue
             prefix, suffix, ext = m.groups()
             if suffix:
                 suffixes.add(suffix)
@@ -641,7 +646,7 @@ class GameHashGuesser(HashGuesser):
                 group_skin_ids.extend(d['id'] for d in skin_data['chromas'])
             char_to_skin_groups.setdefault(char_name, []).append([int(i) % 1000 for i in group_skin_ids])
 
-        logger.debug(f"find skin groups .bin files using chroma groups")
+        logger.debug("find skin groups .bin files using chroma groups")
         for char, groups in progress_iterator(char_to_skin_groups.items(), lambda v: v[0]):
             str_groups = [[f"_skins_skin{i}" for i in group] for group in groups] + [["_skins_root"]]
             for n in range(len(str_groups)):
@@ -667,7 +672,7 @@ class GameHashGuesser(HashGuesser):
             char_to_skins.setdefault(char, {0}).add(nskin)
 
         # generate all combinations
-        logger.debug(f"find skin groups .bin files")
+        logger.debug("find skin groups .bin files")
         for char, skins in progress_iterator(char_to_skins.items(), lambda v: v[0]):
             # note: skins are in lexicographic order: skin11 is before skin2
             str_skins = sorted(f"_skins_skin{i}" for i in skins)
@@ -722,15 +727,11 @@ class GameHashGuesser(HashGuesser):
     def guess_shader_variants(self):
         """Guess different extension variants for shader files, e.g. ".glsl_100" """
 
-        shader_paths = [path for path in self.known.values() if path.endswith(".ps_2_0") or path.endswith(".vs_2_0")]
-
-        for path in shader_paths:
-            self.check(f"{path}.dx9")
-            self.check(f"{path}.dx11")
-            self.check(f"{path}.glsl")
-            self.check_iter(f"{path}.dx9_{n}" for n in range(0, 100000, 100))
-            self.check_iter(f"{path}.dx11_{n}" for n in range(0, 100000, 100))
-            self.check_iter(f"{path}.glsl_{n}" for n in range(0, 100000, 100))
+        shader_pattern = re.compile(r'.*\.[pv]s(_[23]_0|(?=$|\.))')
+        shader_paths = {match.group(0) for path in self.known.values() if (match := shader_pattern.match(path)) is not None}
+        for path in sorted(shader_paths):
+            self.check_iter(f"{path}{variant}" for variant in self.shader_variants)
+            self.check_iter(f"{path}{variant}_{n}" for variant in self.shader_variants for n in range(0, 20000, 100))
 
     def grep_wad(self, wad):
         """Find hashes from a wad file"""
@@ -742,13 +743,15 @@ class GameHashGuesser(HashGuesser):
                 if wadfile.type == 2:
                     continue # softlink; contains no actual content
                 if wadfile.ext in ('dds', 'jpg', 'png', 'tga', 'ttf', 'otf', 'ogg', 'webm', 'anm',
-                                   'skl', 'skn', 'scb', 'sco', 'troybin', 'luabin', 'luabin64', 'bnk', 'wpk'):
+                                   'skl', 'skn', 'scb', 'sco', 'troybin', 'bnk', 'wpk', 'tex'):
                     continue # don't grep filetypes known to not contain full paths
 
-                data = wadfile.read_data(f)
+                data = wad.read_file_data(f, wadfile)
+                if data is None:
+                    continue
                 if wadfile.ext in ('bin', 'inibin'):
                     # bin files: find strings based on prefix, then parse the length
-                    for m in re.finditer(br'(?:ASSETS|DATA|Characters|Shaders|Maps/MapGeometry)/', data):
+                    for m in re.finditer(br'(?:ASSETS|DATA|Characters|Shaders|Maps/MapGeometry|Gameplay|ClientStates)/', data):
                         i = m.start()
                         n = data[i-2] + (data[i-1] << 8)
                         try:
@@ -762,11 +765,14 @@ class GameHashGuesser(HashGuesser):
                             self.check(path[:-4] + '.luabin')
                             self.check(path[:-4] + '.luabin64')
                         elif path.startswith('shaders'):
-                            self.check(f"assets/shaders/generated/{path}.ps_2_0")
-                            self.check(f"assets/shaders/generated/{path}.vs_2_0")
+                            self.check_iter(f"assets/shaders/generated/{path}{ext}" for ext in self.shader_extensions)
+                            self.check_iter(f"assets/shaders/generated/{path}{ext}{variant}" for ext in self.shader_extensions for variant in self.shader_variants)
                         elif path.startswith('maps'):
                             self.check(f"data/{path}.mapgeo")
                             self.check(f"data/{path}.materials.bin")
+                        elif path.startswith('clientstates'):
+                            self.check(path.rsplit('/', 1)[0])
+                            self.check(path.rsplit('/', 2)[0])
                         else:
                             self.check(path)
                             if path.endswith(".png"):
@@ -784,8 +790,6 @@ class GameHashGuesser(HashGuesser):
                         elif wadfile.path:
                             fmt = os.path.dirname(wadfile.path) + '/%s.preload'
                             self.check(fmt % path)
-                        else: # should this really be done?
-                            self.check_basenames(f"{path}.preload")
 
                 elif wadfile.ext in ('hls', 'ps_2_0', 'ps_3_0', 'vs_2_0', 'vs_3_0'):
                     # shader: search for includes
@@ -808,7 +812,7 @@ class GameHashGuesser(HashGuesser):
 
         # find path-like strings, then try to parse the length
         paths = set()
-        for m in re.finditer(br'(?:ASSETS|DATA|DATA_SOON|Global|LEVELS|UX)/[0-9a-zA-Z_. /-]+', data):
+        for m in re.finditer(br'(?:ASSETS|Common|DATA|DATA_SOON|DATA_Soon|Gameplay|Global|LEVELS|Loadouts|UX|UIAutoAtlas)/[0-9a-zA-Z_. /-]+', data):
             path = m.group(0).lower().decode('ascii')
             paths.add(path.replace("data_soon/", "data/"))
             pos = m.start()

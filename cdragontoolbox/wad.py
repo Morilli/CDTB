@@ -5,6 +5,7 @@ import gzip
 import json
 import imghdr
 import logging
+from xxhash import xxh3_64_intdigest
 
 from .hashes import default_hashfile
 from .tools import (
@@ -27,6 +28,13 @@ logger = logging.getLogger(__name__)
 # Caching is possible because the same hash should always have the same extension. Since guessing extension requires to
 # read file data, caching will reduce I/Os
 _hash_to_guessed_extensions = {}
+
+
+class MalformedSubchunkError(Exception):
+    """Subchunk data is invalid or doesn't match the provided subchunktoc"""
+
+    def __init__(self, data):
+        self.wad_data = data
 
 
 class WadFileHeader:
@@ -57,23 +65,25 @@ class WadFileHeader:
         b'\x1bLuaQ\x00\x01\x04\x08': 'luabin64',
         bytes.fromhex('023d0028'): 'troybin',
         b'[ObjectBegin]': 'sco',
-        b'OEGM': 'mapgeo'
+        b'OEGM': 'mapgeo',
+        b'TEX\0': 'tex'
     }
 
-    def __init__(self, path_hash, offset, compressed_size, size, type, duplicate=None, unk0=None, unk1=None, sha256=None):
+    def __init__(self, path_hash, offset, compressed_size, size, type, duplicate=None, first_subchunk_index=None, sha256=None):
         self.path_hash = path_hash
         self.offset = offset
         self.size = size
-        self.type = type
+        self.subchunk_count = (type & 0xF0) >> 4
+        self.type = type & 0xF
         self.compressed_size = compressed_size
         self.duplicate = bool(duplicate)
-        self.unk0, self.unk1 = unk0, unk1
+        self.first_subchunk_index = first_subchunk_index
         self.sha256 = sha256
         # values that can be guessed
         self.path = None
         self.ext = None
 
-    def read_data(self, f):
+    def read_data(self, f, subchunk_toc=None):
         """Retrieve (uncompressed) data from WAD file object"""
 
         f.seek(self.offset)
@@ -90,16 +100,43 @@ class WadFileHeader:
             return None
         elif self.type == 3:
             return zstd_decompress(data)
+        elif self.type == 4:
+            # Data is split into individual subchunks that may be zstd compressed
+            if subchunk_toc is not None:
+                chunks_data = []
+                offset = 0
+                for index in range(self.first_subchunk_index, self.first_subchunk_index + self.subchunk_count):
+                    compressed_size, uncompressed_size, subchunk_hash = struct.unpack('<IIQ', subchunk_toc[16*index:16*(index+1)])
+                    # ensure wad data matches with the subchunktoc data
+                    subchunk_data = data[offset:offset+compressed_size]
+                    if len(data) < offset + compressed_size or xxh3_64_intdigest(subchunk_data) != subchunk_hash:
+                        raise MalformedSubchunkError(data)
+                    if compressed_size == uncompressed_size:
+                        # assume data is uncompressed
+                        chunks_data.append(subchunk_data)
+                    else:
+                        chunks_data.append(zstd_decompress(subchunk_data))
+                    offset += compressed_size
+                return b"".join(chunks_data)
+            else:
+                # No subchunk TOC, try to decompress
+                try:
+                    return zstd_decompress(data)
+                except:
+                    raise MalformedSubchunkError(data)
         raise ValueError(f"unsupported file type: {self.type}")
 
-    def extract(self, fwad, output_path):
+    def extract(self, fwad, output_path, subchunk_toc=None):
         """Read data, convert it if needed, and write it to a file
 
         On error, partially retrieved files are removed.
         File redirections are skipped.
         """
 
-        data = self.read_data(fwad)
+        try:
+            data = self.read_data(fwad, subchunk_toc)
+        except MalformedSubchunkError:
+            return
         if data is None:
             return
 
@@ -107,8 +144,7 @@ class WadFileHeader:
             with write_file_or_remove(output_path) as fout:
                 fout.write(data)
         except OSError as e:
-            # Windows does not support path components longer than 255
-            # ignore such files
+            # Path components longer than 255 are not supported, ignore such files
             # TODO: Find a better way of handling these files
             if e.errno in (errno.EINVAL, errno.ENAMETOOLONG):
                 logger.warning(f"ignore file with invalid path: {self.path}")
@@ -137,6 +173,7 @@ class WadFileHeader:
         for prefix, ext in WadFileHeader._magic_numbers_ext.items():
             if data.startswith(prefix):
                 return ext
+        return None
 
 
 class Wad:
@@ -155,6 +192,7 @@ class Wad:
         self.files = None
         self.parse_headers()
         self.resolve_paths(hashes)
+        self.load_subchunk_toc()
 
     def parse_headers(self):
         """Parse version and file list"""
@@ -181,7 +219,7 @@ class Wad:
             if version_major == 1:
                 self.files = [WadFileHeader(*parser.unpack("<QIIII")) for _ in range(entry_count)]
             else:
-                self.files = [WadFileHeader(*parser.unpack("<QIIIBBBBQ")) for _ in range(entry_count)]
+                self.files = [WadFileHeader(*parser.unpack("<QIIIB?HQ")) for _ in range(entry_count)]
 
     def resolve_paths(self, hashes=None):
         """Guess path of files"""
@@ -191,13 +229,28 @@ class Wad:
         for wadfile in self.files:
             if wadfile.path_hash in hashes:
                 wadfile.path = hashes[wadfile.path_hash]
-                wadfile.ext = wadfile.path.rsplit('.', 1)[1]
+                wadfile.ext = os.path.splitext(wadfile.path)[1][1:]
+
+    def load_subchunk_toc(self):
+        """Find subchunk TOC if available and parse it"""
+
+        for wadfile in self.files:
+            if wadfile.path is None:
+                continue
+            if not wadfile.path.endswith(".subchunktoc"):
+                continue
+            with open(self.path, 'rb') as fwad:
+                self.subchunk_toc = wadfile.read_data(fwad)
+            break
+        else:
+            # Not found
+            self.subchunk_toc = None
 
     def guess_extensions(self):
         # avoid opening the file if not needed
         unknown_ext = True
         for wadfile in self.files:
-            if not wadfile.path and not wadfile.ext:
+            if not wadfile.ext:
                 wadfile.ext = _hash_to_guessed_extensions.get(wadfile.path_hash)
                 if not wadfile.ext:
                     unknown_ext = True
@@ -206,8 +259,8 @@ class Wad:
 
         with open(self.path, 'rb') as f:
             for wadfile in self.files:
-                if not wadfile.path and not wadfile.ext:
-                    data = wadfile.read_data(f)
+                if not wadfile.ext:
+                    data = self.read_file_data(f, wadfile)
                     if not data:
                         continue
                     wadfile.ext = WadFileHeader.guess_extension(data)
@@ -224,16 +277,26 @@ class Wad:
                     wadfile.path = f"{path}/{wadfile.path_hash:016x}"
 
     def sanitize_paths(self):
-        """Truncate files whose basename has a length of at least 255"""
+        """Sanitize paths for extract purposes; for example truncating files whose basename has a length of at least 250"""
 
         for wadfile in self.files:
             if wadfile.path:
-                path, filename = os.path.split(wadfile.path)
-                if len(filename) < 255:
-                    continue
+                ext = os.path.splitext(wadfile.path)[1]
+                if not ext:
+                    # some extensionless files conflict with folder names
+                    # append a custom suffix to resolve this conflict
+                    ext = ".cdtb"
 
-                basename, ext = os.path.splitext(filename)
-                wadfile.path = os.path.join(path, f"{basename[:255-17-len(ext)]}.{wadfile.path_hash:016x}{ext}")
+                    if wadfile.ext:
+                        # extension was guessed, but the resolved path has no extension
+                        # in this case, append the guessed extension
+                        ext += f".{wadfile.ext}"
+
+                    wadfile.path += ext
+
+                path, filename = os.path.split(wadfile.path)
+                if len(filename) >= 250:
+                    wadfile.path = os.path.join(path, f"{filename[:250-17-len(ext)]}.{wadfile.path_hash:016x}{ext}")
 
     def extract(self, output, overwrite=True):
         """Extract WAD file
@@ -243,8 +306,8 @@ class Wad:
 
         logger.info(f"extracting {self.path} to {output}")
 
-        self.set_unknown_paths("unknown")
         self.sanitize_paths()
+        self.set_unknown_paths("unknown")
 
         with open(self.path, 'rb') as fwad:
             for wadfile in self.files:
@@ -254,4 +317,16 @@ class Wad:
                     logger.debug(f"skipping {wadfile.path_hash:016x} {wadfile.path} (already extracted)")
                     continue
                 logger.debug(f"extracting {wadfile.path_hash:016x} {wadfile.path}")
-                wadfile.extract(fwad, output_path)
+                wadfile.extract(fwad, output_path, self.subchunk_toc)
+
+    def read_file_data(self, fwad, wadfile):
+        """Retrieve (uncompressed) data from WAD file object
+
+        Similar to `WadFileHeader.read_data()` but use wad's subchuk information if available.
+        Subchunk errors are ignored and None is returned if one happens.
+        """
+
+        try:
+            return wadfile.read_data(fwad, self.subchunk_toc)
+        except MalformedSubchunkError:
+            return None

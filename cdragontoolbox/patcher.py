@@ -13,14 +13,12 @@ from .storage import (
     PatchVersion,
     get_system_yaml_version,
     get_content_metadata_version,
-    get_exe_version,
 )
 from .tools import (
     BinaryParser,
     write_file_or_remove,
     zstd_decompress,
 )
-from .data import Language
 
 logger = logging.getLogger(__name__)
 
@@ -47,11 +45,11 @@ class PatcherBundle:
         self.chunks.append(PatcherChunk(chunk_id, self, offset, size, target_size))
 
 class PatcherFile:
-    def __init__(self, name, size, link, langs, chunks):
+    def __init__(self, name, size, link, flags, chunks):
         self.name = name
         self.size = size
         self.link = link
-        self.langs = langs
+        self.flags = flags
         self.chunks = chunks
 
     def hexdigest(self):
@@ -63,22 +61,22 @@ class PatcherFile:
 
     @staticmethod
     def langs_predicate(langs):
-        """Return a predicate function for a `langs` filtering parameter"""
+        """Return a predicate function for a locale filtering parameter"""
         if langs is False:
-            return lambda f: f.langs is None
+            # assume only locales flags follow this pattern
+            return lambda f: f.flags is None or not any('_' in f and len(f) == 5 for f in f.flags)
         elif langs is True:
             return lambda f: True
-        elif isinstance(langs, Language):
-            return lambda f: f.langs == [langs]
         else:
-            return lambda f: f.langs is not None and langs in f.langs
+            lang = langs.lower()  # compare lowercased
+            return lambda f: f.flags is not None and any(f.lower() == lang for f in f.flags)
 
 
 class PatcherManifest:
     def __init__(self, path_or_f=None):
         self.bundles = None
         self.chunks = None
-        self.langs = None
+        self.flags = None
         self.files = None
 
         if path_or_f is not None:
@@ -89,7 +87,7 @@ class PatcherManifest:
                 self.parse_rman(f)
 
     def filter_files(self, langs=True) -> List[PatcherFile]:
-        """Filter files from the manifest with provided language(s)"""
+        """Filter files from the manifest with provided filters"""
         return filter(PatcherFile.langs_predicate(langs), self.files.values())
 
     def parse_rman(self, f):
@@ -117,13 +115,13 @@ class PatcherManifest:
 
         # offsets to tables (convert to absolute)
         offsets_base = parser.tell()
-        offsets = list(offsets_base + 4*i + v for i, v in enumerate(parser.unpack(f'<6l')))
+        offsets = list(offsets_base + 4*i + v for i, v in enumerate(parser.unpack('<6l')))
 
         parser.seek(offsets[0])
         self.bundles = list(self._parse_table(parser, self._parse_bundle))
 
         parser.seek(offsets[1])
-        self.langs = {k: Language(v.lower()) for k, v in self._parse_table(parser, self._parse_lang)}
+        self.flags = dict(self._parse_table(parser, self._parse_flag))
 
         # build a list of chunks, indexed by ID
         self.chunks = {chunk.chunk_id: chunk for bundle in self.bundles for chunk in bundle.chunks}
@@ -135,16 +133,16 @@ class PatcherManifest:
 
         # merge files and directory data
         self.files = {}
-        for name, link, lang_ids, dir_id, filesize, chunk_ids in file_entries:
+        for name, link, flag_ids, dir_id, filesize, chunk_ids in file_entries:
             while dir_id is not None:
                 dir_name, dir_id = directories[dir_id]
                 name = f"{dir_name}/{name}"
-            if lang_ids is not None:
-                langs = [self.langs[i] for i in lang_ids]
+            if flag_ids is not None:
+                flags = [self.flags[i] for i in flag_ids]
             else:
-                langs = None
+                flags = None
             file_chunks = [self.chunks[chunk_id] for chunk_id in chunk_ids]
-            self.files[name] = PatcherFile(name, filesize, link, langs, file_chunks)
+            self.files[name] = PatcherFile(name, filesize, link, flags, file_chunks)
 
         # note: last two tables are unresolved
 
@@ -160,49 +158,51 @@ class PatcherManifest:
             yield entry_parser(parser)
             parser.seek(pos + 4)
 
-    @staticmethod
-    def _parse_bundle(parser):
+    @classmethod
+    def _parse_bundle(cls, parser):
         """Parse a bundle entry"""
-        _, n, bundle_id = parser.unpack('<llQ')
-        # skip remaining header part, if any
-        parser.skip(n - 12)
 
-        bundle = PatcherBundle(bundle_id)
-        n, = parser.unpack('<l')
-        for _ in range(n):
-            pos = parser.tell()
-            offset, = parser.unpack('<l')
-            parser.seek(pos + offset)
-            parser.skip(4)  # skip offset table offset
-            compressed_size, uncompressed_size, chunk_id = parser.unpack('<LLQ')
+        def parse_chunklist(parser):
+            fields = cls._parse_field_table(parser, (
+                ('chunk_id', '<Q'),
+                ('compressed_size', '<L'),
+                ('uncompressed_size', '<L'),
+            ))
+            return fields['chunk_id'], fields['compressed_size'], fields['uncompressed_size']
+
+        fields = cls._parse_field_table(parser, (
+            ('bundle_id', '<Q'),
+            ('chunks_offset', 'offset'),
+        ))
+
+        bundle = PatcherBundle(fields['bundle_id'])
+        parser.seek(fields['chunks_offset'])
+        for (chunk_id, compressed_size, uncompressed_size) in cls._parse_table(parser, parse_chunklist):
             bundle.add_chunk(chunk_id, compressed_size, uncompressed_size)
-            parser.seek(pos + 4)
 
         return bundle
 
     @staticmethod
-    def _parse_lang(parser):
+    def _parse_flag(parser):
         parser.skip(4)  # skip offset table offset
-        lang_id, offset, = parser.unpack('<xxxBl')
+        flag_id, offset, = parser.unpack('<xxxBl')
         parser.skip(offset - 4)
-        return (lang_id, parser.unpack_string())
+        return (flag_id, parser.unpack_string())
 
     @classmethod
     def _parse_file_entry(cls, parser):
         """Parse a file entry
-        (name, link, lang_ids, directory_id, filesize, chunk_ids)
+        (name, link, flag_ids, directory_id, filesize, chunk_ids)
         """
         fields = cls._parse_field_table(parser, (
-            None,
-            ('chunks', 'offset'),
             ('file_id', '<Q'),
             ('directory_id', '<Q'),
             ('file_size', '<L'),
             ('name', 'str'),
-            ('locales', '<Q'),
+            ('flags', '<Q'),
             None,
             None,
-            None,
+            ('chunks', 'offset'),
             None,
             ('link', 'str'),
             None,
@@ -210,17 +210,17 @@ class PatcherManifest:
             None,
         ))
 
-        lang_mask = fields['locales']
-        if lang_mask:
-            lang_ids = [i+1 for i in range(64) if lang_mask & (1 << i)]
+        flag_mask = fields['flags']
+        if flag_mask:
+            flag_ids = [i+1 for i in range(64) if flag_mask & (1 << i)]
         else:
-            lang_ids = None
+            flag_ids = None
 
         parser.seek(fields['chunks'])
         chunk_count, = parser.unpack('<L')  # _ == 0
         chunk_ids = list(parser.unpack(f'<{chunk_count}Q'))
 
-        return (fields['name'], fields['link'], lang_ids, fields['directory_id'], fields['file_size'], chunk_ids)
+        return (fields['name'], fields['link'], flag_ids, fields['directory_id'], fields['file_size'], chunk_ids)
 
     @classmethod
     def _parse_directory(cls, parser):
@@ -228,8 +228,6 @@ class PatcherManifest:
         (name, directory_id, parent_id)
         """
         fields = cls._parse_field_table(parser, (
-            None,
-            None,
             ('directory_id', '<Q'),
             ('parent_id', '<Q'),
             ('name', 'str'),
@@ -243,7 +241,9 @@ class PatcherManifest:
         nfields = len(fields)
         output = {}
         parser.seek(fields_pos)
-        for i, field, offset in zip(range(nfields), fields, parser.unpack(f'<{nfields}H')):
+        parser.skip(2) # vtable size
+        parser.skip(2) # object size
+        for _, field, offset in zip(range(nfields), fields, parser.unpack(f'<{nfields}H')):
             if field is None:
                 continue
             name, fmt = field
@@ -251,15 +251,14 @@ class PatcherManifest:
                 value = None
             else:
                 pos = entry_pos + offset
+                parser.seek(pos)
                 if fmt == 'offset':
-                    value = pos
+                    value = pos + parser.unpack('<l')[0]
                 elif fmt == 'str':
-                    parser.seek(pos)
                     value = parser.unpack('<l')[0]
                     parser.seek(pos + value)
                     value = parser.unpack_string()
                 else:
-                    parser.seek(pos)
                     value = parser.unpack(fmt)[0]
             output[name] = value
         return output
@@ -292,10 +291,14 @@ class PatcherStorage(Storage):
     `channels/.../files/` contains symlinks to them.
     This can be disabled by setting the `use_extract_symlinks` option to false.
 
+    Sometimes, HTTPS requests to clientconfig.rpg.riotgames.com are denied.
+    If `clientconfig_data` is set, the provided file (if available) or URL is used.
+
     Configuration options:
       patchline -- the patchline name (`live` or `pbe`)
       region -- region from which use configuration
       use_extract_symlinks -- if false, disable use of symlinks for extracted files
+      clientconfig_data -- file or URL to use as 'clientconfig.rpg.riotgames.com' data
 
     """
 
@@ -310,12 +313,15 @@ class PatcherStorage(Storage):
         super().__init__(path, self.URL_BASE)
         self.patchline = patchline
         self.use_extract_symlinks = True
+        self.clientconfig_data = None
 
     @classmethod
     def from_conf_data(cls, conf):
         storage = cls(conf['path'], conf.get('patchline', cls.DEFAULT_PATCHLINE))
         if conf.get('use_extract_symlinks') is False:
             storage.use_extract_symlinks = False
+        if 'clientconfig_data' in conf:
+            storage.clientconfig_data = conf['clientconfig_data']
         return storage
 
     def base_release_path(self):
@@ -372,9 +378,15 @@ class PatcherStorage(Storage):
             print(f"{timestamp}", file=f)
 
     def get_latest_client_manifest(self):
-        r = self.s.get(f"https://clientconfig.rpg.riotgames.com/api/v1/config/public?namespace=keystone.products.league_of_legends.patchlines")
-        r.raise_for_status()
-        data = r.json()
+        url_or_path = self.clientconfig_data
+        if url_or_path and not url_or_path.startswith('http://') and not url_or_path.startswith('https://') and os.path.exists(url_or_path):
+            with open(url_or_path) as f:
+                data = json.load(f)
+        else:
+            url = url_or_path or "https://clientconfig.rpg.riotgames.com/api/v1/config/public?namespace=keystone.products.league_of_legends.patchlines"
+            r = self.s.get(url)
+            r.raise_for_status()
+            data = r.json()
         region = 'PBE' if self.patchline == 'pbe' else self.CLIENT_LIVE_REGION
         for config in data[f"keystone.products.league_of_legends.patchlines.{self.patchline}"]["platforms"]["win"]["configurations"]:
             if config['id'] == region:
@@ -764,4 +776,3 @@ class MultiPatcherPatchElement(PatchElement):
     def paths(self, langs=True):
         pred = PatcherFile.langs_predicate(langs)
         return ((elem.extract_path(f), f.name.lower()) for elem, f in self.files if pred(f))
-
