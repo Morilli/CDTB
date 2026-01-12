@@ -47,6 +47,8 @@ class WadFileHeader:
         (b'"use strict";', 'min.js'),
         (b'<template ', 'template.html'),
         (b'<!-- Elements -->', 'template.html'),
+        (b'<!DOCTYPE html>', 'html'),
+        (b'<html', 'html'),
         (b'DDS ', 'dds'),
         (b'<svg', 'svg'),
         (b'PROP', 'bin'),
@@ -65,6 +67,9 @@ class WadFileHeader:
         (b'[ObjectBegin]', 'sco'),
         (b'OEGM', 'mapgeo'),
         (b'TEX\0', 'tex'),
+        (b'\0asm', 'wasm'),
+        (b'UnityFS', 'bundle'),
+        (b'UnityWebData1.0', 'data'),
     ]
 
     def __init__(self, path_hash, offset, compressed_size, size, type, duplicate=None, first_subchunk_index=None, sha256=None):
