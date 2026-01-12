@@ -646,6 +646,7 @@ class TexConverter(FileConverter):
         if len(data) < 12 or data[:4] != b'TEX\0':
             raise FileConversionError("invalid TEX file")
         _, width, height, format, has_mipmaps = struct.unpack('<4sHHxBx?', data[:12])
+        has_dx10 = False
 
         if format == 0x0a:  # DXT1
             ddspf = struct.pack('<LL4s20x', 32, 0x4, b'DXT1')
@@ -653,6 +654,10 @@ class TexConverter(FileConverter):
             ddspf = struct.pack('<LL4s20x', 32, 0x4, b'DXT5')
         elif format == 0x14:  # BGRA8
             ddspf = struct.pack('<LL4x5L', 32, 0x41, 8*4, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000)
+        elif format == 0x15: # RGBA16
+            ddspf = struct.pack('<LL4s20x', 32, 0x4, b'DX10')
+            dx10 = struct.pack('<LL4xLL', 13, 3, 1, 1)
+            has_dx10 = True
         else:
             raise FileConversionError(f"unsupported TEX format: {format:x}")
 
@@ -687,6 +692,8 @@ class TexConverter(FileConverter):
             pixels = data[12:]
 
         dds_header = struct.pack('<4s4L56x32sL16x', b'DDS ', 124, 0x1007, height, width, ddspf, 0x1000)
+        if has_dx10:
+            dds_header += dx10
         return dds_header + pixels
 
 class BinConverter(FileConverter):
