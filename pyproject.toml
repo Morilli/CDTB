@@ -10,7 +10,7 @@ authors = [
 ]
 description = "A toolbox to work with League of Legends game files"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = [
   "requests",
   "hachoir",
