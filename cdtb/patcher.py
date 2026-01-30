@@ -97,7 +97,7 @@ class PatcherManifest:
         magic, version_major, version_minor = parser.unpack("<4sBB")
         if magic != b'RMAN':
             raise ValueError("invalid magic code")
-        if (version_major, version_minor) != (2, 0):
+        if (version_major, version_minor) not in ((2, 0), (2, 1)):
             raise ValueError(f"unsupported RMAN version: {version_major}.{version_minor}")
 
         flags, offset, length, _manifest_id, _body_length = parser.unpack("<HLLQL")
@@ -656,4 +656,3 @@ class PatcherPatchElement(PatchElement):
     def paths(self, langs=True):
         for f in self.elem.manif.filter_files(langs=langs):
             yield (self.elem.extract_path(f), f.name.lower())
-
