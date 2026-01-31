@@ -239,16 +239,17 @@ class PatcherManifest:
     def _parse_field_table(parser, fields):
         entry_pos = parser.tell()
         fields_pos = entry_pos - parser.unpack('<l')[0]
-        nfields = len(fields)
         output = {}
         parser.seek(fields_pos)
-        parser.skip(2) # vtable size
+        vtable_size = parser.unpack(f'<H')[0]
         parser.skip(2) # object size
-        for _, field, offset in zip(range(nfields), fields, parser.unpack(f'<{nfields}H')):
+        noffsets = (vtable_size - 4) // 2
+        offsets = parser.unpack(f'<{noffsets}H')
+        for i, field in enumerate(fields):
             if field is None:
                 continue
             name, fmt = field
-            if offset == 0 or fmt is None:
+            if i >= noffsets or (offset := offsets[i]) == 0 or fmt is None:
                 value = None
             else:
                 pos = entry_pos + offset
