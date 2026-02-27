@@ -295,8 +295,10 @@ class TftTransformer:
 
             role_key = record.getv("CharacterRole")
             role = role_entries[role_key].getv("name") if role_key is not None else None
-            ability_resource_info = record.getv("primaryAbilityResource")
-            mana = ability_resource_info.getv("arBase", 100) if ability_resource_info is not None else 100
+            if (ability_resource_info := record.getv("primaryAbilityResource")) is not None:
+                mana = mana_struct.getv("BaseValue", 100) if (mana_struct := ability_resource_info.getv(0x726ee5cd)) is not None else ability_resource_info.getv("arBase", 100)
+            else:
+                mana = 100
 
             champs[name] = ({
                 "apiName": champ.getv("mName"),
@@ -309,16 +311,16 @@ class TftTransformer:
                 "traits": [traits[h]["name"] for h in champ_traits if h in traits],
                 "role": role,
                 "stats": {
-                    "hp": record.getv("baseHP"),
+                    "hp": hp_struct.getv("BaseValue") if (hp_struct := record.getv(0x8662cf12)) is not None else record.getv("baseHP"),
                     "mana": mana,
                     "initialMana": record.getv("mInitialMana", 0),
-                    "damage": record.getv("BaseDamage"),
-                    "armor": record.getv("baseArmor"),
-                    "magicResist": record.getv("baseSpellBlock"),
+                    "damage": damage_struct.getv("BaseValue") if (damage_struct := record.getv(0x4af40dc3)) is not None else record.getv("BaseDamage"),
+                    "armor": armor_struct.getv("BaseValue") if (armor_struct := record.getv(0xea6100d5)) is not None else record.getv("baseArmor"),
+                    "magicResist": mr_struct.getv("BaseValue") if (mr_struct := record.getv(0x33c0bf27)) is not None else record.getv("baseSpellBlock"),
                     "critMultiplier": record.getv("critDamageMultiplier"),
                     "critChance": record.getv("baseCritChance"),
-                    "attackSpeed": record.getv("attackSpeed"),
-                    "range": record.getv("attackRange", 0) // 180,
+                    "attackSpeed": attackspeed_struct.getv("BaseValue") if (attackspeed_struct := record.getv(0x836cc82a)) is not None else record.getv("attackSpeed"),
+                    "range": (range_struct.getv("BaseValue", 0) if (range_struct := record.getv(0x7bd4b298)) is not None else record.getv("attackRange", 0)) // 180,
                 },
                 "ability": {
                     "name": champ.getv(0x87A69A5E) or spell_key_name,
