@@ -653,6 +653,14 @@ class TexConverter(FileConverter):
             ddspf = struct.pack('<LL4s20x', 32, 0x4, b'DXT1')
         elif format == 0x0c:  # DXT5
             ddspf = struct.pack('<LL4s20x', 32, 0x4, b'DXT5')
+        elif format == 0x0d:  # BC7
+            ddspf = struct.pack('<LL4s20x', 32, 0x4, b'DX10')
+            dx10 = struct.pack('<LL4xLL', 99, 3, 1, 1)
+            has_dx10 = True
+        elif format == 0x0e:  # BC5
+            ddspf = struct.pack('<LL4s20x', 32, 0x4, b'DX10')
+            dx10 = struct.pack('<LL4xLL', 84, 3, 1, 1)
+            has_dx10 = True
         elif format == 0x14:  # BGRA8
             ddspf = struct.pack('<LL4x5L', 32, 0x41, 8*4, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000)
         elif format == 0x15: # RGBA16
