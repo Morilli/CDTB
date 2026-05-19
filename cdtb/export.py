@@ -676,7 +676,7 @@ class TexConverter(FileConverter):
             if format == 0x0a:  # DXT1
                 block_size = 4
                 bytes_per_block = 8
-            elif format == 0x0c:  # DXT5
+            elif format in (0x0c, 0x0d, 0x0e):  # DXT5, BC7 or BC5
                 block_size = 4
                 bytes_per_block = 16
             elif format == 0x14:  # BGRA8
