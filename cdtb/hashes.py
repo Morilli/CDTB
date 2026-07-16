@@ -592,7 +592,7 @@ class GameHashGuesser(HashGuesser):
         return sorted(chars)
 
     shader_extensions = [".ps_2_0", ".ps_3_0", ".vs_2_0", ".vs_3_0", ".ps", ".vs"]
-    shader_variants = [".dx11", ".dx9", ".dx9sm3", ".glsl", ".metal"]
+    shader_variants = [".dx11", ".dx9", ".dx9sm3", ".glsl", ".metal", "-dx11", "-metal"]
 
     def substitute_numbers(self, nmax=100, digits=None):
         paths = self.known.values()
