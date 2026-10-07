@@ -1,6 +1,6 @@
 from enum import IntEnum
 import struct
-from xxhash import xxh64_intdigest
+from xxhash import xxh64_intdigest, xxh3_64_intdigest
 from .hashes import HashFile, default_hash_dir, hashfile_game
 
 
@@ -15,6 +15,7 @@ def _repr_indent_list(values):
 
 hashfile_binentries = HashFile(default_hash_dir / "hashes.binentries.txt", hash_size=8)
 hashfile_binhashes = HashFile(default_hash_dir / "hashes.binhashes.txt", hash_size=8)
+hashfile_binhashes_xxh3 = HashFile(default_hash_dir / "hashes.binhashes.xxh3.txt", hash_size=16)
 hashfile_binfields = HashFile(default_hash_dir / "hashes.binfields.txt", hash_size=8)
 hashfile_bintypes = HashFile(default_hash_dir / "hashes.bintypes.txt", hash_size=8)
 hashfile_binpaths = hashfile_game
@@ -67,8 +68,8 @@ class BinHashBase:
     def hex(self):
         return f"{self.h:08x}"
 
-class BinHashValue(BinHashBase):
-    """Hashed name in bin files (hash type)"""
+class BinHashValue32(BinHashBase):
+    """Hashed name in bin files (hash type, 32-bit)"""
 
     hashfile = hashfile_binhashes
 
@@ -76,6 +77,23 @@ class BinHashValue(BinHashBase):
         if self.s is not None:
             return repr(self.s)
         return f"{{{self.hex()}}}"
+
+class BinHashValue64(BinHashBase):
+    """Hashed name in bin files (hash type, 64-bit)"""
+
+    hashfile = hashfile_binhashes_xxh3
+
+    def __repr__(self):
+        if self.s is not None:
+            return repr(self.s)
+        return f"{{{self.hex()}}}"
+
+    @classmethod
+    def compute_hash(cls, s):
+        return xxh3_64_intdigest(s)
+
+    def hex(self):
+        return f"{self.h:016x}"
 
 class BinEntryPath(BinHashBase):
     """Path of a bin entry (top level element)"""
@@ -389,7 +407,7 @@ class BinReader:
         depending on patch version. Value is based on the patch version.
         """
         self.f = f
-        self.btype_version = btype_version or 1008
+        self.btype_version = btype_version or 1621
 
     def read_fmt(self, fmt):
         length = struct.calcsize(fmt)
@@ -412,7 +430,7 @@ class BinReader:
 
         pos = self.f.tell() + 4  # skip 'length' size
         length, hpath, count = self.read_fmt('<LLH')
-        values = [self.read_field() for _ in range(count)]
+        values = [self.read_field(htype) for _ in range(count)]
         entry = BinEntry(hpath, htype, values)
         assert self.f.tell() - pos == length
         return entry
@@ -437,8 +455,35 @@ class BinReader:
         return list(patch_entries.values())
 
 
-    def read_bvalue(self, vtype):
-        return self._vtype_to_bvalue_reader[vtype](self)
+    def read_bvalue(self, vtype, is_64_bit=False):
+        match vtype:
+            case BinType.EMPTY: return self.read_empty()
+            case BinType.BOOL: return self.read_bool()
+            case BinType.S8: return self.read_s8()
+            case BinType.U8: return self.read_u8()
+            case BinType.S16: return self.read_s16()
+            case BinType.U16: return self.read_u16()
+            case BinType.S32: return self.read_s32()
+            case BinType.U32: return self.read_u32()
+            case BinType.S64: return self.read_s64()
+            case BinType.U64: return self.read_u64()
+            case BinType.FLOAT: return self.read_float()
+            case BinType.VEC2_FLOAT: return self.read_vec2_float()
+            case BinType.VEC3_FLOAT: return self.read_vec3_float()
+            case BinType.VEC4_FLOAT: return self.read_vec4_float()
+            case BinType.MATRIX4X4: return self.read_matrix4x4()
+            case BinType.RGBA: return self.read_rgba()
+            case BinType.STRING: return self.read_string()
+            case BinType.HASH: return self.read_hash(is_64_bit)
+            case BinType.PATH: return self.read_path()
+            case BinType.LIST: return self.read_list()
+            case BinType.LIST2: return self.read_list()
+            case BinType.STRUCT: return self.read_struct()
+            case BinType.EMBEDDED: return self.read_embedded()
+            case BinType.LINK: return self.read_link()
+            case BinType.OPTION: return self.read_option()
+            case BinType.MAP: return self.read_map()
+            case BinType.FLAG: return self.read_flag()
 
     def read_empty(self):
         return self.read_fmt('<3H')
@@ -491,8 +536,12 @@ class BinReader:
     def read_string(self):
         return self.f.read(self.read_fmt('<H')[0]).decode('utf-8')
 
-    def read_hash(self):
-        return BinHashValue(self.read_fmt('<L')[0])
+    def read_hash(self, is_64_bit=False):
+        # Starting with patch 16.21, certain fields of certain types use 64-bit hashes instead of 32-bit
+        if is_64_bit:
+            return BinHashValue64(self.read_fmt('<Q')[0])
+        else:
+            return BinHashValue32(self.read_fmt('<L')[0])
 
     def read_path(self):
         return BinPathValue(self.read_fmt('<Q')[0])
@@ -514,11 +563,11 @@ class BinReader:
             count = 0
         else:
             _, count = self.read_fmt('<LH')
-        return BinStruct(htype, [self.read_field() for _ in range(count)])
+        return BinStruct(htype, [self.read_field(htype) for _ in range(count)])
 
     def read_embedded(self):
         htype, _, count = self.read_fmt('<LLH')
-        return BinEmbedded(htype, [self.read_field() for _ in range(count)])
+        return BinEmbedded(htype, [self.read_field(htype) for _ in range(count)])
 
     def read_option(self):
         vtype, has_value = self.read_fmt('<B?')
@@ -531,10 +580,12 @@ class BinReader:
         # assume key type is hashable
         return BinMap(ktype, vtype, dict((self.read_bvalue(ktype), self.read_bvalue(vtype)) for _ in range(count)))
 
-    def read_field(self):
+    def read_field(self, htype=0):
         hname, ftype = self.read_fmt('<LB')
         ftype = self.parse_bintype(ftype)
-        return BinField(hname, ftype, self.read_bvalue(ftype))
+
+        is_64_bit = True if self.btype_version >= 1621 and htype == 0xff9d3409 else False
+        return BinField(hname, ftype, self.read_bvalue(ftype, is_64_bit))
 
     def parse_bintype(self, v):
         if self.btype_version < 923:
@@ -546,37 +597,6 @@ class BinReader:
             if v >= 0x81:
                 v += 1
         return BinType(v)
-
-
-    _vtype_to_bvalue_reader = {
-        BinType.EMPTY: read_empty,
-        BinType.BOOL: read_bool,
-        BinType.S8: read_s8,
-        BinType.U8: read_u8,
-        BinType.S16: read_s16,
-        BinType.U16: read_u16,
-        BinType.S32: read_s32,
-        BinType.U32: read_u32,
-        BinType.S64: read_s64,
-        BinType.U64: read_u64,
-        BinType.FLOAT: read_float,
-        BinType.VEC2_FLOAT: read_vec2_float,
-        BinType.VEC3_FLOAT: read_vec3_float,
-        BinType.VEC4_FLOAT: read_vec4_float,
-        BinType.MATRIX4X4: read_matrix4x4,
-        BinType.RGBA: read_rgba,
-        BinType.STRING: read_string,
-        BinType.HASH: read_hash,
-        BinType.PATH: read_path,
-        BinType.LIST: read_list,
-        BinType.LIST2: read_list,
-        BinType.STRUCT: read_struct,
-        BinType.EMBEDDED: read_embedded,
-        BinType.LINK: read_link,
-        BinType.OPTION: read_option,
-        BinType.MAP: read_map,
-        BinType.FLAG: read_flag,
-    }
 
 
 def _to_serializable(v):
