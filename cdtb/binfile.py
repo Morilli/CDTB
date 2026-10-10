@@ -536,7 +536,7 @@ class BinReader:
     def read_string(self):
         return self.f.read(self.read_fmt('<H')[0]).decode('utf-8')
 
-    def read_hash(self, is_64_bit=False):
+    def read_hash(self, is_64_bit):
         # Starting with patch 16.21, certain fields of certain types use 64-bit hashes instead of 32-bit
         if is_64_bit:
             return BinHashValue64(self.read_fmt('<Q')[0])
@@ -580,7 +580,7 @@ class BinReader:
         # assume key type is hashable
         return BinMap(ktype, vtype, dict((self.read_bvalue(ktype), self.read_bvalue(vtype)) for _ in range(count)))
 
-    def read_field(self, htype=0):
+    def read_field(self, htype):
         hname, ftype = self.read_fmt('<LB')
         ftype = self.parse_bintype(ftype)
 
